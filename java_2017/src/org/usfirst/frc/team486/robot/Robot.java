@@ -2,6 +2,7 @@
 package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.camera.Display;
+import org.usfirst.frc.team486.robot.camera.Prep;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -59,27 +60,28 @@ public class Robot extends IterativeRobot {
 			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
 			
 			Mat source = new Mat();
-			Mat source_rgb = new Mat();
+			Mat hsv = new Mat();
 			Mat output = new Mat();
 			
-			//opencv uses ranges (H: 0-180, S: 0-255, V:0-255)
-			Scalar lower_hsv = new Scalar(50,100,100);
-			Scalar upper_hsv = new Scalar(100,255,255);
-			
 			Display display = new Display();
+			Prep prep = new Prep();
 			
 			while(true) {
 				cvSink.grabFrame(source);
 				
 				//CONVERTING IMAGE TYPES (source is BGR)
+				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
+				
+				//Filter through color ranges
+				prep.filter_hsv(hsv);
 				
 				//DRAW RECTANGLE
-				Point pt1 = new Point(340,280);
-				Point pt2 = new Point(300,200);
-				display.draw_rectangle(source, pt1, pt2, "red");
+				//Point pt1 = new Point(340,280);
+				//Point pt2 = new Point(300,200);
+				//display.draw_rectangle(hsv, pt1, pt2, "red");
 				
 				//DISPLAY IMAGE
-				outputStream.putFrame(source);
+				outputStream.putFrame(hsv);
 			}
 		}).start();
 	}
