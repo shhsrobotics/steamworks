@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.commands.ExampleCommand;
+import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
 
 import java.lang.reflect.Array;
@@ -36,6 +37,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static final DriveSubsystem drivechain = new DriveSubsystem();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
