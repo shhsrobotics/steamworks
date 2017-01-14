@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team486.robot;
 
+import org.usfirst.frc.team486.robot.camera.Display;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -64,15 +66,17 @@ public class Robot extends IterativeRobot {
 			Scalar lower_hsv = new Scalar(50,100,100);
 			Scalar upper_hsv = new Scalar(100,255,255);
 			
+			Display display = new Display();
+			
 			while(true) {
 				cvSink.grabFrame(source);
 				
-				//CONVERTING IMAGE TYPES
-				//source is BGR
-				//DRAW CIRCLE
+				//CONVERTING IMAGE TYPES (source is BGR)
+				
+				//DRAW RECTANGLE
 				Point pt1 = new Point(340,280);
 				Point pt2 = new Point(300,200);
-				draw_rectangle(source, pt1, pt2);
+				display.draw_rectangle(source, pt1, pt2, "red");
 				
 				//DISPLAY IMAGE
 				outputStream.putFrame(source);
@@ -80,11 +84,6 @@ public class Robot extends IterativeRobot {
 		}).start();
 	}
 
-	private void draw_rectangle(Mat img, Point pt1, Point pt2){
-		//color in BGR
-		Scalar red = new Scalar(0,0,255);
-		Imgproc.rectangle(img, pt1, pt2, red);
-	}
 	
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
