@@ -58,30 +58,34 @@ public class Robot extends IterativeRobot {
 			
 			Mat source = new Mat();
 			Mat source_rgb = new Mat();
-			Mat source_hsv = new Mat();
 			Mat output = new Mat();
 			
-			Scalar lower_hsv = new Scalar(0,0,0);
-			Scalar upper_hsv = new Scalar(1,1,1);
+			//opencv uses ranges (H: 0-180, S: 0-255, V:0-255)
+			Scalar lower_hsv = new Scalar(50,100,100);
+			Scalar upper_hsv = new Scalar(100,255,255);
 			
 			while(true) {
 				cvSink.grabFrame(source);
 				
 				//CONVERTING IMAGE TYPES
-				//convert source to RGB and save as source_rgb
-				Imgproc.cvtColor(source, source_rgb, Imgproc.COLOR_BayerGR2RGB);
-				//convert source_rgb to HSV and save as source_hsv
-				Imgproc.cvtColor(source_rgb, source_hsv, Imgproc.COLOR_RGB2HSV);
-				//TODO: can I do source to hsv right away??
+				//source is BGR
+				//DRAW CIRCLE
+				Point pt1 = new Point(340,280);
+				Point pt2 = new Point(300,200);
+				draw_rectangle(source, pt1, pt2);
 				
-				//APPLY THRESHOLDS
-				//apply threshold on source_hsv and save as output
-				Core.inRange(source_hsv, lower_hsv, upper_hsv, output);
-				outputStream.putFrame(output);
+				//DISPLAY IMAGE
+				outputStream.putFrame(source);
 			}
 		}).start();
 	}
 
+	private void draw_rectangle(Mat img, Point pt1, Point pt2){
+		//color in BGR
+		Scalar red = new Scalar(0,0,255);
+		Imgproc.rectangle(img, pt1, pt2, red);
+	}
+	
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
