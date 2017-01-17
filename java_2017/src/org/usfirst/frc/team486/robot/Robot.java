@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.camera.Display;
 import org.usfirst.frc.team486.robot.camera.Prep;
+import org.usfirst.frc.team486.robot.camera.Track;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -69,6 +70,7 @@ public class Robot extends IterativeRobot {
 			
 			Display display = new Display();
 			Prep prep = new Prep();
+			Track track = new Track();
 			
 			while(true) {
 				cvSink.grabFrame(source);
@@ -79,10 +81,12 @@ public class Robot extends IterativeRobot {
 				//Filter through color ranges
 				prep.filter_hsv(hsv);
 				
+				track.track(hsv);
+				
 				//DRAW RECTANGLE
-				//Point pt1 = new Point(340,280);
-				//Point pt2 = new Point(300,200);
-				//display.draw_rectangle(hsv, pt1, pt2, "red");
+				Point pt1 = track.pt1;
+				Point pt2 = track.pt2;
+				display.draw_rectangle(hsv, pt1, pt2, "red");
 				
 				//DISPLAY IMAGE
 				outputStream.putFrame(hsv);
