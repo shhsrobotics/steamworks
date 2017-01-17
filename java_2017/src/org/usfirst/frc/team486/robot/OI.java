@@ -1,5 +1,6 @@
 package org.usfirst.frc.team486.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.usfirst.frc.team486.robot.commands.ExampleCommand;
@@ -16,6 +17,11 @@ public class OI {
 	// number it is.
 	// Joystick stick = new Joystick(port);
 	// Button button = new JoystickButton(stick, buttonNumber);
+	
+	public Joystick leftstick = new Joystick(0);
+	public Joystick rightstick = new Joystick(1);
+	public Joystick opstick = new Joystick(2);
+	
 
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
