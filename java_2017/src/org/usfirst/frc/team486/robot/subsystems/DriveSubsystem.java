@@ -16,11 +16,11 @@ public class DriveSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
-	Talon left_1 = new Talon(RobotMap.LEFT_DRIVE_1);
-	Talon left_2 = new Talon(RobotMap.LEFT_DRIVE_2);
-	Talon right_1 = new Talon(RobotMap.RIGHT_DRIVE_1);
-	Talon right_2 = new Talon(RobotMap.RIGHT_DRIVE_2);
-	RobotDrive drive = new RobotDrive(left_1, left_2, right_1, right_2);
+	private Talon left_1 = new Talon(RobotMap.LEFT_DRIVE_1);
+	private Talon left_2 = new Talon(RobotMap.LEFT_DRIVE_2);
+	private Talon right_1 = new Talon(RobotMap.RIGHT_DRIVE_1);
+	private Talon right_2 = new Talon(RobotMap.RIGHT_DRIVE_2);
+	private RobotDrive drive = new RobotDrive(left_1, left_2, right_1, right_2);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

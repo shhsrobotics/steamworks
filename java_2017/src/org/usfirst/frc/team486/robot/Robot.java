@@ -18,6 +18,7 @@ import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
 
 import java.lang.reflect.Array;
+import java.util.List;
 
 import org.opencv.imgproc.Imgproc;
 import org.opencv.core.*;
@@ -70,11 +71,11 @@ public class Robot extends IterativeRobot {
 			
 			Mat source = new Mat();
 			Mat hsv = new Mat();
-			//Mat output = new Mat();
+			Mat filtered = new Mat();
 			
 			//Display display = new Display();
 			Prep prep = new Prep();
-			//Track track = new Track();
+			Track track = new Track();
 			
 			while(true) {
 				cvSink.grabFrame(source);
@@ -83,8 +84,9 @@ public class Robot extends IterativeRobot {
 				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
 				
 				//Filter through color ranges
-				prep.filter_hsv(hsv);
+				prep.filter_hsv(hsv, filtered);
 				
+				List<MatOfPoint> contours = track.find_blobs(filtered);
 				//track.track(hsv);
 				
 				//DRAW RECTANGLE
@@ -93,7 +95,7 @@ public class Robot extends IterativeRobot {
 				//display.draw_rectangle(hsv, pt1, pt2, "red");
 				
 				//DISPLAY IMAGE
-				outputStream.putFrame(hsv);
+				outputStream.putFrame(filtered);
 			}
 		});
 		

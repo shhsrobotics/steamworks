@@ -10,7 +10,7 @@ public class Prep {
 	Scalar lower_hsv = new Scalar(50,20,240);
 	Scalar upper_hsv = new Scalar(90,255,255);
 	
-	public void filter_hsv(Mat hsv){
-		Core.inRange(hsv, this.lower_hsv, this.upper_hsv, hsv);
+	public void filter_hsv(Mat hsv, Mat destination){
+		Core.inRange(hsv, this.lower_hsv, this.upper_hsv, destination);
 	}
 }
