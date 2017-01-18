@@ -12,12 +12,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriveSubsystem extends Subsystem {
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private Talon left = new Talon(RobotMap.leftController);
-	private Talon right = new Talon(RobotMap.rightController);
-	private RobotDrive drive = new RobotDrive(left,right);
-	
+    
+	Talon left_1 = new Talon(RobotMap.LEFT_DRIVE_1);
+	Talon left_2 = new Talon(RobotMap.LEFT_DRIVE_2);
+	Talon right_1 = new Talon(RobotMap.RIGHT_DRIVE_1);
+	Talon right_2 = new Talon(RobotMap.RIGHT_DRIVE_2);
+	RobotDrive drive = new RobotDrive(left_1, left_2, right_1, right_2);
+
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
@@ -27,6 +31,7 @@ public class DriveSubsystem extends Subsystem {
     	drive.tankDrive(leftStick, rightStick);
     }
     public void initdrive() {
+    	//may need to change inversions
     	drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false);
     	drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
     }

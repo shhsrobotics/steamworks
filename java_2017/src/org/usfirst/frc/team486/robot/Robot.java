@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team486.robot.commands.ExampleCommand;s
+import org.usfirst.frc.team486.robot.commands.ExampleCommand;
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
@@ -44,6 +44,8 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	
+	private Thread camthread;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -58,7 +60,7 @@ public class Robot extends IterativeRobot {
 		
 		Robot.camera.light_on();
 		
-		new Thread(() -> {
+		camthread = new Thread(() -> {
 			
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 			camera.setResolution(640, 480);
@@ -68,11 +70,11 @@ public class Robot extends IterativeRobot {
 			
 			Mat source = new Mat();
 			Mat hsv = new Mat();
-			Mat output = new Mat();
+			//Mat output = new Mat();
 			
-			Display display = new Display();
+			//Display display = new Display();
 			Prep prep = new Prep();
-			Track track = new Track();
+			//Track track = new Track();
 			
 			while(true) {
 				cvSink.grabFrame(source);
@@ -83,17 +85,19 @@ public class Robot extends IterativeRobot {
 				//Filter through color ranges
 				prep.filter_hsv(hsv);
 				
-				track.track(hsv);
+				//track.track(hsv);
 				
 				//DRAW RECTANGLE
-				Point pt1 = track.pt1;
-				Point pt2 = track.pt2;
-				display.draw_rectangle(hsv, pt1, pt2, "red");
+				//Point pt1 = track.pt1;
+				//Point pt2 = track.pt2;
+				//display.draw_rectangle(hsv, pt1, pt2, "red");
 				
 				//DISPLAY IMAGE
 				outputStream.putFrame(hsv);
 			}
-		}).start();
+		});
+		
+		camthread.start();
 	}
 
 	
@@ -105,6 +109,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		Robot.camera.light_off();
+		camthread.interrupt();
 	}
 
 	@Override

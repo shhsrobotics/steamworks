@@ -18,9 +18,9 @@ public class OI {
 	// Joystick stick = new Joystick(port);
 	// Button button = new JoystickButton(stick, buttonNumber);
 	
-	public Joystick leftstick = new Joystick(0);
-	public Joystick rightstick = new Joystick(1);
-	public Joystick opstick = new Joystick(2);
+	public Joystick leftstick = new Joystick(RobotMap.LEFT_STICK_PORT);
+	public Joystick rightstick = new Joystick(RobotMap.RIGHT_STICK_PORT);
+	public Joystick opstick = new Joystick(RobotMap.OP_STICK_PORT);
 	
 
 	// There are a few additional built in buttons you can use. Additionally,
