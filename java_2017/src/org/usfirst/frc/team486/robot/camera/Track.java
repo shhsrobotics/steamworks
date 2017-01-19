@@ -13,16 +13,17 @@ import org.opencv.core.Rect;
 public class Track {
 	
 	private int num_blobs = 0;
-	private Point center;
-	private Point pt1; //specify whether left or right, top or bottom
-	private Point pt2; //specify whether left or right, top or bottom
-	private int width = 0;
-	private int height = 0;
 	
 	private int min_x = -1;
 	private int min_y = -1;
 	private int max_x = -1;
 	private int max_y = -1;
+	
+	private int height = 0;
+	private int width = 0;
+	
+	private static int cut = 1;
+	private boolean found = false;
 	
 	public void track(Mat filtered) {
 		List<MatOfPoint> contours = this.find_blobs(filtered);
@@ -72,37 +73,36 @@ public class Track {
 		    	}
 		    }
 		}
+		this.width = this.max_x - this.min_x;
+		this.height = this.max_y - this.min_y;
+		if (this.num_blobs >= this.cut){
+    		this.found = true;
+    	}
 	}
 	
-	public void construct_points(){
-		this.pt1 = new Point(this.min_x, this.min_y);
-		this.pt2 = new Point(this.max_x, this.max_y);
-		this.width = (int) (this.pt2.x- this.pt1.x);
-		this.height = (int) (this.pt2.y- this.pt1.y);
-		this.center = new Point((int) (this.pt1.x + this.width*0.5), (int) (this.pt1.y + this.height*0.5));
-	}
-	
-	public Point get_pt1(){
-		return this.pt1;
-	}
-	
-	public Point get_pt2(){
-		return this.pt1;
+	public void reset(){
+		this.num_blobs = 0;
+		
+		this.min_x = -1;
+		this.min_y = -1;
+		this.max_x = -1;
+		this.max_y = -1;
+		
+		this.width = 0;
+		this.height = 0;
+		
+		this.found = false;
 	}
 	
 	public Point get_center(){
-		return this.center;
+		return new Point((int) (this.min_x + this.width*0.5), (int) (this.min_y + this.height*0.5));
 	}
 
 	public int get_num_blobs(){
 		return this.num_blobs;
 	}
 	
-	public int get_width(){
-		return this.width;
-	}
-	
-	public int get_height(){
-		return this.height;
+	public boolean get_found(){
+		return this.found;
 	}
 }

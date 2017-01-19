@@ -73,13 +73,13 @@ public class Robot extends IterativeRobot {
 			Mat hsv = new Mat();
 			Mat filtered = new Mat();
 			
-			//Display display = new Display();
+			Display display = new Display();
 			Prep prep = new Prep();
 			Track track = new Track();
 			
-			while(true) {
+			while (!Thread.interrupted()) {
+			
 				cvSink.grabFrame(source);
-				
 				//CONVERTING IMAGE TYPES (source is BGR)
 				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
 				
@@ -87,6 +87,15 @@ public class Robot extends IterativeRobot {
 				prep.filter_hsv(hsv, filtered);
 				
 				List<MatOfPoint> contours = track.find_blobs(filtered);
+				track.find_dimensions(contours);
+				SmartDashboard.putNumber("blobs", track.get_num_blobs());
+				SmartDashboard.putNumber("center_x", track.get_center().x);
+				SmartDashboard.putNumber("center_y", track.get_center().y);
+				
+				if (track.get_found()){
+					display.draw_point(source, track.get_center(), "red");
+				}
+				
 				//track.track(hsv);
 				
 				//DRAW RECTANGLE
@@ -95,8 +104,10 @@ public class Robot extends IterativeRobot {
 				//display.draw_rectangle(hsv, pt1, pt2, "red");
 				
 				//DISPLAY IMAGE
-				outputStream.putFrame(filtered);
-			}
+				outputStream.putFrame(source);
+				
+				track.reset();
+			}	
 		});
 		
 		camthread.start();
@@ -111,7 +122,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		Robot.camera.light_off();
-		camthread.interrupt();
+		//camthread.interrupt();
 	}
 
 	@Override
