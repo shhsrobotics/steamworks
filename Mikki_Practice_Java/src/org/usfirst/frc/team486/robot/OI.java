@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team486.robot.commands.LEDCommand;
+import org.usfirst.frc.team486.robot.commands.RollerCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,6 +23,8 @@ public class OI {
 	public Joystick rightstick = new Joystick(1);
 	public Joystick opstick = new Joystick(2);
 	public Button ledbutton = new JoystickButton(opstick, RobotMap.LED_BUTTON);
+	public Button rollerbutton = new JoystickButton(opstick, RobotMap.ROLLER_BUTTON);
+	
 	
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
@@ -44,5 +47,6 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	public OI() {
 		ledbutton.whileHeld(new LEDCommand());
+		rollerbutton.whileHeld(new RollerCommand());
 	}
 }

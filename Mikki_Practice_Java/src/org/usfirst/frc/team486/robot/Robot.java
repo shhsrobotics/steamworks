@@ -12,6 +12,7 @@ import org.usfirst.frc.team486.robot.commands.ExampleCommand;
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.LEDSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.RollerSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +27,8 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static final DriveSubsystem drivechain = new DriveSubsystem();
 	public static final LEDSubsystem led = new LEDSubsystem();
+	public static final RollerSubsystem roller = new RollerSubsystem();
+	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
