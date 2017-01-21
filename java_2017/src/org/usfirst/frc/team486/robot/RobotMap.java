@@ -31,5 +31,5 @@ public class RobotMap {
 	// ----------------------------------------------------------
 	// RELAYS
 	// ----------------------------------------------------------
-	public static int led_pin = 1;
+	public static int LED_PIN = 1;
 }

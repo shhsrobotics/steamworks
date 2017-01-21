@@ -44,8 +44,6 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		
-		Robot.camera.light_on();
-		
 		camthread = new Thread(() -> {
 			
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
@@ -77,6 +75,7 @@ public class Robot extends IterativeRobot {
 				SmartDashboard.putNumber("center_x", Track.get_center().x);
 				SmartDashboard.putNumber("center_y", Track.get_center().y);
 				SmartDashboard.putNumber("correction", Track.get_correction());
+				SmartDashboard.putNumber("offset", Track.get_offset());
 				
 				if (track.get_found()){
 					display.draw_point(source, Track.get_center(), "red");
@@ -157,6 +156,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		Robot.camera.light_on();
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
