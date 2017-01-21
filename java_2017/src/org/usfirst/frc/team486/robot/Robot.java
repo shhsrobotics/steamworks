@@ -24,13 +24,7 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- */
+
 public class Robot extends IterativeRobot {
 
 	public static final CameraSubsystem camera = new CameraSubsystem();
@@ -49,11 +43,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		// chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		// SmartDashboard.putData("Auto mode", chooser);
-		
-		Robot.camera.light_on();
 		
 		camthread = new Thread(() -> {
 			
@@ -86,6 +75,7 @@ public class Robot extends IterativeRobot {
 				SmartDashboard.putNumber("center_x", Track.get_center().x);
 				SmartDashboard.putNumber("center_y", Track.get_center().y);
 				SmartDashboard.putNumber("correction", Track.get_correction());
+				SmartDashboard.putNumber("offset", Track.get_offset());
 				
 				if (track.get_found()){
 					display.draw_point(source, Track.get_center(), "red");
@@ -166,6 +156,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		Robot.camera.light_on();
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}

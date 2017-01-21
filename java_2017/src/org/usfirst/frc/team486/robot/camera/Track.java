@@ -33,7 +33,12 @@ public class Track {
 	private static final Point IMG_CENTER = new Point(320,220);
 	private static final int IMG_WIDTH = 640;
 	private static final int IMG_HEIGHT = 320;
-	private static final double K_DRIVE = 1.0;
+	private static final double K_DRIVE = 0.2;
+	private static final double K_FLOOR = 0.4;
+	private static final double K_CEILING = 0.5;
+	private static final double K_SLIDE_LEFT = 0.4;
+	private static final double K_SLIDE_RIGHT = 0.37;
+	private static final double K_THRESH = 0.05;
 	private static final int CUT = 1;
 	
 	// ----------------------------------------------------------
@@ -41,6 +46,7 @@ public class Track {
 	// ----------------------------------------------------------
 	private static Point center = new Point(320, 220);
 	private static double correction = 0; //value between -1 and 1 (-1 being 100% left, 100% right)
+	private static double offset = 0;
 	
 	
 	// ----------------------------------------------------------
@@ -140,17 +146,41 @@ public class Track {
 	}
 	
 	// ----------------------------------------------------------
+	// RETURNS THE DRIVE OFFSET (static)
+	// ----------------------------------------------------------
+	public static double get_offset(){
+		return Track.offset;
+	}
+	
+	// ----------------------------------------------------------
 	// UPDATES STATIC VARIABLES
 	// ----------------------------------------------------------
 	public static void update(int x, int y, int width, int height){
 		Track.center.x = (int) (x + width*0.5);
 		Track.center.y = (int) (y + height*0.5);
-		Track.correction = (double) 2*Track.K_DRIVE*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
-		if (Track.correction > 1.0){
-			Track.correction = 1.0;
-		}
-		if (Track.correction < 1.0){
-			Track.correction = -1.0;
+		//Track.correction = (double) 2*Track.K_DRIVE*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
+		Track.offset = (double) 2*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
+//		if (Track.correction > 0){
+//			Track.correction += Track.K_FLOOR;
+//		} else {
+//			Track.correction -= Track.K_FLOOR;
+//		}
+//		if (Track.correction > Track.K_CEILING){
+//			Track.correction = Track.K_CEILING;
+//		}
+//		if (Track.correction < -Track.K_CEILING){
+//			Track.correction = -Track.K_CEILING;
+//		}
+		if ((-Track.K_THRESH <= Track.offset) && (Track.K_THRESH >= Track.offset)){
+			//INSIDE THRESHOLD
+			Track.correction = 0;
+		} else{
+			//OUTSIDE THRESHOLD
+			if (Track.offset > 0){
+				Track.correction = Track.K_SLIDE_RIGHT;
+			} else {
+				Track.correction = -Track.K_SLIDE_LEFT;
+			}
 		}
 	}
 	

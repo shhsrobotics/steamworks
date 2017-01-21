@@ -13,19 +13,19 @@ public class CameraSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	Relay led = new Relay(RobotMap.led_pin);
+	Relay led_switch = new Relay(RobotMap.LED_PIN);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void light_on() {
-    	this.led.set(Relay.Value.kForward);
+    public void light_on(){
+    	led_switch.set(Relay.Value.kOn);
     }
     
-    public void light_off() {
-    	this.led.set(Relay.Value.kForward);
+    public void light_off(){
+    	led_switch.set(Relay.Value.kOff);
     }
 }
 

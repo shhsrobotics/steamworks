@@ -7,10 +7,16 @@ import org.opencv.imgproc.Imgproc;
 
 public class Display {
 	
-	public static Scalar red = new Scalar(0,0,255);
-	public static Scalar green = new Scalar(0,255,0);
-	public static Scalar blue = new Scalar(255,0,0);
+	// ----------------------------------------------------------
+	// DEFAULT COLOR DEFINITIONS
+	// ----------------------------------------------------------
+	private static final Scalar red = new Scalar(0,0,255);
+	private static final Scalar green = new Scalar(0,255,0);
+	private static final Scalar blue = new Scalar(255,0,0);
 	
+	// ----------------------------------------------------------
+	// DEFAULT COLOR SELECTION METHOD
+	// ----------------------------------------------------------
 	private Scalar select_color(String color_key){
 		Scalar color = new Scalar(0,0,0);
 		if (color_key == "red") {
@@ -23,11 +29,17 @@ public class Display {
 		return color;
 	}
 	
+	// ----------------------------------------------------------
+	// RECTANGLE DRAWING METHOD
+	// ----------------------------------------------------------
 	public void draw_rectangle(Mat img, Point pt1, Point pt2, String color_key){
 		Scalar color = this.select_color(color_key);
 		Imgproc.rectangle(img, pt1, pt2, color);
 	}
 	
+	// ----------------------------------------------------------
+	// POINT DRAWING METHOD
+	// ----------------------------------------------------------
 	public void draw_point(Mat img, Point pt, String color_key){
 		Scalar color = this.select_color(color_key);
 		Imgproc.circle(img, pt, 10, color, -1);
