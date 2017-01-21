@@ -12,6 +12,9 @@ import org.opencv.core.Rect;
 
 public class Track {
 	
+	// ----------------------------------------------------------
+	// TRACK INSTANCE COMPUTATION VARIABLES
+	// ----------------------------------------------------------
 	private int num_blobs = 0;
 	
 	private int min_x = -1;
@@ -22,22 +25,35 @@ public class Track {
 	private int height = 0;
 	private int width = 0;
 	
-	private int cut = 1;
 	private boolean found = false;
 	
+	// ----------------------------------------------------------
+	// TRACK INSTANCE COMPUTATION CONSTANTS
+	// ----------------------------------------------------------
 	private static final Point IMG_CENTER = new Point(320,220);
 	private static final int IMG_WIDTH = 640;
-	//private static final int IMG_HEIGHT = 320;
+	private static final int IMG_HEIGHT = 320;
 	private static final double K_DRIVE = 1.0;
+	private static final int CUT = 1;
 	
+	// ----------------------------------------------------------
+	// "GLOBAL" VARIABLES
+	// ----------------------------------------------------------
 	private static Point center = new Point(320, 220);
 	private static double correction = 0; //value between -1 and 1 (-1 being 100% left, 100% right)
 	
+	
+	// ----------------------------------------------------------
+	// GENERAL TRACKING METHOD (finds contours and then filters)
+	// ----------------------------------------------------------
 	public void track(Mat filtered) {
 		List<MatOfPoint> contours = this.find_blobs(filtered);
 		this.find_dimensions(contours);
 	}
 	
+	// ----------------------------------------------------------
+	// CONTOUR FINDING METHOD
+	// ----------------------------------------------------------
 	public List<MatOfPoint> find_blobs(Mat filtered) {
 		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
 		Mat heirarchy = new Mat();
@@ -45,6 +61,9 @@ public class Track {
 		return contours;
 	}
 	
+	// ----------------------------------------------------------
+	// DIMENSION FINDING METHOD (calculates relative positions)
+	// ----------------------------------------------------------
 	public void find_dimensions(List<MatOfPoint> contours){
 		for (Iterator<MatOfPoint> iter = contours.iterator(); iter.hasNext(); ) {
 		    MatOfPoint contour = iter.next();
@@ -83,12 +102,15 @@ public class Track {
 		}
 		this.width = this.max_x - this.min_x;
 		this.height = this.max_y - this.min_y;
-		if (this.num_blobs >= this.cut){
+		if (this.num_blobs >= Track.CUT){
     		this.found = true;
     	}
 		Track.update(this.min_x, this.min_y, this.width, this.height);
 	}
 	
+	// ----------------------------------------------------------
+	// INSTANCE RESETING METHOD
+	// ----------------------------------------------------------
 	public void reset(){
 		this.num_blobs = 0;
 		
@@ -103,25 +125,47 @@ public class Track {
 		this.found = false;
 	}
 	
+	// ----------------------------------------------------------
+	// RETURNS THE CENTER (static)
+	// ----------------------------------------------------------
 	public static Point get_center(){
 		return Track.center;
 	}
 
-	public int get_num_blobs(){
-		return this.num_blobs;
-	}
-	
-	public boolean get_found(){
-		return this.found;
-	}
-	
+	// ----------------------------------------------------------
+	// RETURNS THE DRIVE CORRECTION (static)
+	// ----------------------------------------------------------
 	public static double get_correction(){
 		return Track.correction;
 	}
 	
+	// ----------------------------------------------------------
+	// UPDATES STATIC VARIABLES
+	// ----------------------------------------------------------
 	public static void update(int x, int y, int width, int height){
 		Track.center.x = (int) (x + width*0.5);
 		Track.center.y = (int) (y + height*0.5);
 		Track.correction = (double) 2*Track.K_DRIVE*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
+		if (Track.correction > 1.0){
+			Track.correction = 1.0;
+		}
+		if (Track.correction < 1.0){
+			Track.correction = -1.0;
+		}
 	}
+	
+	// ----------------------------------------------------------
+	// RETURNS THE NUMBER OF BLOBS IN THE INSTANCE
+	// ----------------------------------------------------------
+	public int get_num_blobs(){
+		return this.num_blobs;
+	}
+	
+	// ----------------------------------------------------------
+	// RETURNS THE FOUND BOOLEAN IN THE INSTANCE
+	// ----------------------------------------------------------
+	public boolean get_found(){
+		return this.found;
+	}
+	
 }
