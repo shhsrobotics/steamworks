@@ -33,13 +33,34 @@ public class Track {
 	private static final Point IMG_CENTER = new Point(320,220);
 	private static final int IMG_WIDTH = 640;
 	private static final int IMG_HEIGHT = 320;
-	private static final double K_DRIVE = 0.2;
-	private static final double K_FLOOR = 0.4;
-	private static final double K_CEILING = 0.5;
-	private static final double K_SLIDE_LEFT = 0.4;
-	private static final double K_SLIDE_RIGHT = 0.37;
-	private static final double K_THRESH = 0.05;
 	private static final int CUT = 1;
+	
+	// ----------------------------------------------------------
+	// CORRECTION COMPUTATION CONSTANTS (all)
+	// ----------------------------------------------------------
+	private static final double K_THRESH = 0.05;
+	private static final double K_BOUND = 0.5;
+	private static final double K_DELTA = Track.K_THRESH-Track.K_BOUND;
+	
+	// ----------------------------------------------------------
+	// CORRECTION COMPUTATION CONSTANTS (left)
+	// ----------------------------------------------------------
+	private static final double K_LEFT_CIELING = 0.4;
+	private static final double K_LEFT_FLOOR = 0.37;
+	private static final double K_LEFT_SLOPE = 
+			(Track.K_LEFT_CIELING - Track.K_LEFT_FLOOR)/Track.K_DELTA;
+	private static final double K_LEFT_INTERCEPT = 
+			(Track.K_LEFT_FLOOR) - (Track.K_LEFT_SLOPE * Track.K_THRESH);
+	
+	// ----------------------------------------------------------
+	// CORRECTION COMPUTATION CONSTANTS (right)
+	// ----------------------------------------------------------
+	private static final double K_RIGHT_CIELING = 0.4;
+	private static final double K_RIGHT_FLOOR = 0.37;
+	private static final double K_RIGHT_SLOPE = 
+			(Track.K_RIGHT_CIELING - Track.K_RIGHT_FLOOR)/Track.K_DELTA;
+	private static final double K_RIGHT_INTERCEPT = 
+			(Track.K_RIGHT_FLOOR) - (Track.K_RIGHT_SLOPE * Track.K_THRESH);
 	
 	// ----------------------------------------------------------
 	// "GLOBAL" VARIABLES
@@ -158,30 +179,41 @@ public class Track {
 	public static void update(int x, int y, int width, int height){
 		Track.center.x = (int) (x + width*0.5);
 		Track.center.y = (int) (y + height*0.5);
-		//Track.correction = (double) 2*Track.K_DRIVE*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
 		Track.offset = (double) 2*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
-//		if (Track.correction > 0){
-//			Track.correction += Track.K_FLOOR;
-//		} else {
-//			Track.correction -= Track.K_FLOOR;
-//		}
-//		if (Track.correction > Track.K_CEILING){
-//			Track.correction = Track.K_CEILING;
-//		}
-//		if (Track.correction < -Track.K_CEILING){
-//			Track.correction = -Track.K_CEILING;
-//		}
-		if ((-Track.K_THRESH <= Track.offset) && (Track.K_THRESH >= Track.offset)){
+		Track.correction = Track.calc_correction(Track.offset);
+	}
+	
+	// ----------------------------------------------------------
+	// CALCULATES CORRECTION FROM OFFSET
+	// ----------------------------------------------------------
+	private static double calc_correction(double offset){
+		double correction = 0;
+		if ((-Track.K_THRESH <= offset) && (Track.K_THRESH >= offset)){
 			//INSIDE THRESHOLD
-			Track.correction = 0;
+			correction = 0;
 		} else{
 			//OUTSIDE THRESHOLD
-			if (Track.offset > 0){
-				Track.correction = Track.K_SLIDE_RIGHT;
+			if (offset > 0){
+				//RIGHT
+				if (offset <= Track.K_BOUND){
+					//SLOPED
+					correction = Track.K_RIGHT_SLOPE*offset + Track.K_RIGHT_INTERCEPT;
+				} else {
+					//PLATEUD
+					correction = Track.K_RIGHT_CIELING;
+				}
 			} else {
-				Track.correction = -Track.K_SLIDE_LEFT;
+				//LEFT
+				if (offset >= -Track.K_BOUND){
+					//SLOPED
+					correction = -(Track.K_LEFT_SLOPE*offset + Track.K_LEFT_INTERCEPT);
+				} else {
+					//PLATEUD
+					correction = -(Track.K_LEFT_CIELING);
+				}
 			}
 		}
+		return correction;
 	}
 	
 	// ----------------------------------------------------------
