@@ -2,8 +2,9 @@ package org.usfirst.frc.team486.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team486.robot.commands.ExampleCommand;
+import org.usfirst.frc.team486.robot.commands.LEDCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -19,6 +20,8 @@ public class OI {
 	// Button button = new JoystickButton(stick, buttonNumber);
 	public Joystick leftstick = new Joystick(0);
 	public Joystick rightstick = new Joystick(1);
+	public Joystick opstick = new Joystick(2);
+	public Button ledbutton = new JoystickButton(opstick, RobotMap.LED_BUTTON);
 	
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
@@ -39,4 +42,7 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	public OI() {
+		ledbutton.whileHeld(new LEDCommand());
+	}
 }
