@@ -22,8 +22,16 @@ public class Track {
 	private int height = 0;
 	private int width = 0;
 	
-	private static int cut = 1;
+	private int cut = 1;
 	private boolean found = false;
+	
+	private static final Point IMG_CENTER = new Point(320,220);
+	private static final int IMG_WIDTH = 640;
+	//private static final int IMG_HEIGHT = 320;
+	private static final double K_DRIVE = 1.0;
+	
+	private static Point center = new Point(320, 220);
+	private static double correction = 0; //value between -1 and 1 (-1 being 100% left, 100% right)
 	
 	public void track(Mat filtered) {
 		List<MatOfPoint> contours = this.find_blobs(filtered);
@@ -78,6 +86,7 @@ public class Track {
 		if (this.num_blobs >= this.cut){
     		this.found = true;
     	}
+		Track.update(this.min_x, this.min_y, this.width, this.height);
 	}
 	
 	public void reset(){
@@ -94,8 +103,8 @@ public class Track {
 		this.found = false;
 	}
 	
-	public Point get_center(){
-		return new Point((int) (this.min_x + this.width*0.5), (int) (this.min_y + this.height*0.5));
+	public static Point get_center(){
+		return Track.center;
 	}
 
 	public int get_num_blobs(){
@@ -104,5 +113,15 @@ public class Track {
 	
 	public boolean get_found(){
 		return this.found;
+	}
+	
+	public static double get_correction(){
+		return Track.correction;
+	}
+	
+	public static void update(int x, int y, int width, int height){
+		Track.center.x = (int) (x + width*0.5);
+		Track.center.y = (int) (y + height*0.5);
+		Track.correction = (double) 2*Track.K_DRIVE*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
 	}
 }

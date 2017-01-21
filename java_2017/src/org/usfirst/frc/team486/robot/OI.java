@@ -1,9 +1,7 @@
 package org.usfirst.frc.team486.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-
-import org.usfirst.frc.team486.robot.commands.ExampleCommand;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,6 +20,7 @@ public class OI {
 	public Joystick rightstick = new Joystick(RobotMap.RIGHT_STICK_PORT);
 	public Joystick opstick = new Joystick(RobotMap.OP_STICK_PORT);
 	
+	public JoystickButton trackbutton = new JoystickButton(opstick, RobotMap.TRACK_BUTTON_PORT);
 
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to

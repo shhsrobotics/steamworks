@@ -12,12 +12,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team486.robot.commands.ExampleCommand;
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 import org.opencv.imgproc.Imgproc;
@@ -27,8 +25,6 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.IterativeRobot;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -89,11 +85,12 @@ public class Robot extends IterativeRobot {
 				List<MatOfPoint> contours = track.find_blobs(filtered);
 				track.find_dimensions(contours);
 				SmartDashboard.putNumber("blobs", track.get_num_blobs());
-				SmartDashboard.putNumber("center_x", track.get_center().x);
-				SmartDashboard.putNumber("center_y", track.get_center().y);
+				SmartDashboard.putNumber("center_x", Track.get_center().x);
+				SmartDashboard.putNumber("center_y", Track.get_center().y);
+				SmartDashboard.putNumber("correction", Track.get_correction());
 				
 				if (track.get_found()){
-					display.draw_point(source, track.get_center(), "red");
+					display.draw_point(source, Track.get_center(), "red");
 				}
 				
 				//track.track(hsv);

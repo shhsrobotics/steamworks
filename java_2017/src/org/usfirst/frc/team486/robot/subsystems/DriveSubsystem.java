@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -27,13 +28,18 @@ public class DriveSubsystem extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     	setDefaultCommand(new TeleopCommand());
     }
-    public void drive(Joystick leftStick, Joystick rightStick) {
+    public void drive_joystick(Joystick leftStick, Joystick rightStick) {
     	drive.tankDrive(leftStick, rightStick);
+    }
+    
+    public void drive_value(double left_val, double right_val){
+    	drive.tankDrive(left_val, right_val);
     }
     public void initdrive() {
     	//may need to change inversions
     	drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false);
     	drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
     }
+    
 }
 

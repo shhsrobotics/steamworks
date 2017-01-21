@@ -20,6 +20,7 @@ public class RobotMap {
 	public static int RIGHT_DRIVE_1 = 2;
 	public static int RIGHT_DRIVE_2 = 3;
 	
+	public static int TRACK_BUTTON_PORT = 1;
 	
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
