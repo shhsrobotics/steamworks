@@ -7,10 +7,15 @@ import java.util.List;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.imgproc.Imgproc;
+
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
 
 public class Track {
+	
+	private static PowerDistributionPanel pdp = new PowerDistributionPanel();
 	
 	// ----------------------------------------------------------
 	// TRACK INSTANCE COMPUTATION VARIABLES
@@ -26,6 +31,36 @@ public class Track {
 	private int width = 0;
 	
 	private boolean found = false;
+	
+	// ----------------------------------------------------------
+	// VOLTAGE CONSTANTS (left)
+	// ----------------------------------------------------------
+	private static final double V_LOW_LEFT = 11.9;
+	private static final double V_LOW_K_CIELING_LEFT= 0.4;
+	private static final double V_HIGH_LEFT = 12.7;
+	private static final double V_HIGH_K_CIELING_LEFT = 0.37;
+	private static final double V_SLOPE_LEFT = 
+			(V_HIGH_K_CIELING_LEFT - V_LOW_K_CIELING_LEFT) / (V_HIGH_LEFT - V_LOW_LEFT);
+	private static final double V_INTERCEPT_LEFT = V_LOW_K_CIELING_LEFT - (V_SLOPE_LEFT * V_LOW_LEFT);
+	
+	// ----------------------------------------------------------
+	// VOLTAGE CONSTANTS (right)
+	// ----------------------------------------------------------
+	private static final double V_LOW_RIGHT = 11.9;
+	private static final double V_LOW_K_CIELING_RIGHT = 0.4;
+	private static final double V_HIGH_RIGHT = 12.7;
+	private static final double V_HIGH_K_CIELING_RIGHT = 0.37;
+	private static final double V_SLOPE_RIGHT = 
+			(V_HIGH_K_CIELING_RIGHT - V_LOW_K_CIELING_RIGHT) / (V_HIGH_RIGHT - V_LOW_RIGHT);
+	private static final double V_INTERCEPT_RIGHT = V_LOW_K_CIELING_RIGHT - (V_SLOPE_RIGHT * V_LOW_RIGHT);
+	
+	// ----------------------------------------------------------
+	// "GLOBAL" VARIABLES
+	// ----------------------------------------------------------
+	private static Point center = new Point(320, 220);
+	private static double correction = 0; //value between -1 and 1 (-1 being 100% left, 100% right)
+	private static double offset = 0;
+	private static double voltage = Track.pdp.getVoltage(); //first guess
 	
 	// ----------------------------------------------------------
 	// TRACK INSTANCE COMPUTATION CONSTANTS
@@ -45,29 +80,40 @@ public class Track {
 	// ----------------------------------------------------------
 	// CORRECTION COMPUTATION CONSTANTS (left)
 	// ----------------------------------------------------------
-	private static final double K_LEFT_CIELING = 0.4;
-	private static final double K_LEFT_FLOOR = 0.37;
-	private static final double K_LEFT_SLOPE = 
+	private static double K_LEFT_CIELING = 0.37;
+	private static double K_LEFT_FLOOR = 0.35;
+	private static double K_LEFT_SLOPE = 
 			(Track.K_LEFT_CIELING - Track.K_LEFT_FLOOR)/Track.K_DELTA;
-	private static final double K_LEFT_INTERCEPT = 
+	private static double K_LEFT_INTERCEPT = 
 			(Track.K_LEFT_FLOOR) - (Track.K_LEFT_SLOPE * Track.K_THRESH);
 	
 	// ----------------------------------------------------------
 	// CORRECTION COMPUTATION CONSTANTS (right)
 	// ----------------------------------------------------------
-	private static final double K_RIGHT_CIELING = 0.4;
-	private static final double K_RIGHT_FLOOR = 0.37;
-	private static final double K_RIGHT_SLOPE = 
+	private static double K_RIGHT_CIELING = 0.37;
+	private static double K_RIGHT_FLOOR = 0.35;
+	private static double K_RIGHT_SLOPE = 
 			(Track.K_RIGHT_CIELING - Track.K_RIGHT_FLOOR)/Track.K_DELTA;
-	private static final double K_RIGHT_INTERCEPT = 
+	private static double K_RIGHT_INTERCEPT = 
 			(Track.K_RIGHT_FLOOR) - (Track.K_RIGHT_SLOPE * Track.K_THRESH);
 	
 	// ----------------------------------------------------------
-	// "GLOBAL" VARIABLES
+	// UPDATE CONSTANTS (left)(right)
 	// ----------------------------------------------------------
-	private static Point center = new Point(320, 220);
-	private static double correction = 0; //value between -1 and 1 (-1 being 100% left, 100% right)
-	private static double offset = 0;
+	private static void update_correction_constants(){
+		Track.K_LEFT_CIELING = Track.V_SLOPE_LEFT*(Track.voltage) + Track.V_INTERCEPT_LEFT;
+		Track.K_RIGHT_CIELING = Track.V_SLOPE_RIGHT*(Track.voltage) + Track.V_INTERCEPT_RIGHT;
+		Track.K_LEFT_FLOOR = Track.K_LEFT_FLOOR - 0.02;
+		Track.K_RIGHT_FLOOR = Track.K_RIGHT_FLOOR - 0.02;
+		Track.K_LEFT_SLOPE = 
+				(Track.K_LEFT_CIELING - Track.K_LEFT_FLOOR)/Track.K_DELTA;
+		Track.K_LEFT_INTERCEPT = 
+				(Track.K_LEFT_FLOOR) - (Track.K_LEFT_SLOPE * Track.K_THRESH);
+		Track.K_RIGHT_SLOPE = 
+				(Track.K_RIGHT_CIELING - Track.K_RIGHT_FLOOR)/Track.K_DELTA;
+		Track.K_RIGHT_INTERCEPT = 
+				(Track.K_RIGHT_FLOOR) - (Track.K_RIGHT_SLOPE * Track.K_THRESH);
+	}
 	
 	
 	// ----------------------------------------------------------
@@ -133,6 +179,7 @@ public class Track {
     		this.found = true;
     	}
 		Track.update(this.min_x, this.min_y, this.width, this.height);
+		Track.update_correction_constants();
 	}
 	
 	// ----------------------------------------------------------
@@ -181,6 +228,7 @@ public class Track {
 		Track.center.y = (int) (y + height*0.5);
 		Track.offset = (double) 2*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
 		Track.correction = Track.calc_correction(Track.offset);
+		Track.voltage = Track.pdp.getVoltage();
 	}
 	
 	// ----------------------------------------------------------

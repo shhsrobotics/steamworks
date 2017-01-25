@@ -81,13 +81,6 @@ public class Robot extends IterativeRobot {
 					display.draw_point(source, Track.get_center(), "red");
 				}
 				
-				//track.track(hsv);
-				
-				//DRAW RECTANGLE
-				//Point pt1 = track.pt1;
-				//Point pt2 = track.pt2;
-				//display.draw_rectangle(hsv, pt1, pt2, "red");
-				
 				//DISPLAY IMAGE
 				outputStream.putFrame(source);
 				
@@ -147,6 +140,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		Robot.camera.light_on();
 		Scheduler.getInstance().run();
 	}
 
