@@ -221,6 +221,13 @@ public class Track {
 	}
 	
 	// ----------------------------------------------------------
+	// RETURNS THE VOLTAGE OF THE PDP (static)
+	// ----------------------------------------------------------
+	public static double get_voltage(){
+		return Track.voltage;
+	}
+	
+	// ----------------------------------------------------------
 	// UPDATES STATIC VARIABLES
 	// ----------------------------------------------------------
 	public static void update(int x, int y, int width, int height){
@@ -277,5 +284,4 @@ public class Track {
 	public boolean get_found(){
 		return this.found;
 	}
-	
 }
