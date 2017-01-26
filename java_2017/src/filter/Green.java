@@ -1,4 +1,4 @@
-package org.usfirst.frc.team486.robot.camera;
+package filter;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.*;
@@ -17,7 +17,7 @@ import org.opencv.imgproc.*;
 // Scalar lower_hsv = new Scalar(50,20,240);
 // Scalar upper_hsv = new Scalar(90,255,255);
 
-public class GreenFilter {
+public class Green {
 
 	//Outputs
 	private Mat hsvThresholdOutput = new Mat();
