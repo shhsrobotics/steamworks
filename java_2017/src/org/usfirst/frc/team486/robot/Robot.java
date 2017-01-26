@@ -2,7 +2,7 @@
 package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.camera.Display;
-import org.usfirst.frc.team486.robot.camera.Prep;
+import org.usfirst.frc.team486.robot.camera.GreenFilter;
 import org.usfirst.frc.team486.robot.camera.Track;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	
-	private Thread camthread;
+	private Thread camthread_literal;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		
-		camthread = new Thread(() -> {
+		camthread_literal = new Thread(() -> {
 			
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 			camera.setResolution(640, 480);
@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 			Mat filtered = new Mat();
 			
 			Display display = new Display();
-			Prep prep = new Prep();
+			GreenFilter green_prep = new GreenFilter();
 			Track track = new Track();
 			
 			while (!Thread.interrupted()) {
@@ -67,7 +67,13 @@ public class Robot extends IterativeRobot {
 				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
 				
 				//Filter through color ranges
-				prep.filter_hsv(hsv, filtered);
+				if (CamThread.FILTER_COLOR == "green"){
+					//RED
+					green_prep.process(hsv);
+					filtered = green_prep.hsvThresholdOutput();
+				} else if (CamThread.FILTER_COLOR == "blue") {
+					//BLUE
+				}
 				
 				List<MatOfPoint> contours = track.find_blobs(filtered);
 				track.find_dimensions(contours);
@@ -88,7 +94,7 @@ public class Robot extends IterativeRobot {
 			}	
 		});
 		
-		camthread.start();
+		camthread_literal.start();
 	}
 
 	

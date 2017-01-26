@@ -9,19 +9,19 @@
       <grip:Input step="0" socket="0"/>
       <grip:Input step="0" socket="1">
         <value>
-          <double>83.98633611096734</double>
-          <double>149.30353689579405</double>
+          <double>48.37482531960044</double>
+          <double>91.72777932003646</double>
         </value>
       </grip:Input>
       <grip:Input step="0" socket="2">
         <value>
-          <double>0.0</double>
+          <double>20.638489208633093</double>
           <double>255.0</double>
         </value>
       </grip:Input>
       <grip:Input step="0" socket="3">
         <value>
-          <double>144.46942446043167</double>
+          <double>240.78237410071944</double>
           <double>255.0</double>
         </value>
       </grip:Input>
@@ -45,9 +45,9 @@
   </settings>
   <codeGenerationSettings>
     <language>Java</language>
-    <className>GripPipeline</className>
+    <className>GreenFilter</className>
     <implementWpilibPipeline>false</implementWpilibPipeline>
-    <saveDir>C:\Users\486\GRIP</saveDir>
+    <saveDir>C:\Users\486\Desktop\code\steamworks\GRIP</saveDir>
     <packageName></packageName>
     <moduleName>grip</moduleName>
   </codeGenerationSettings>
