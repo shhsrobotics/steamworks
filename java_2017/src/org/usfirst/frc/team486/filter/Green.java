@@ -1,4 +1,4 @@
-package filter;
+package org.usfirst.frc.team486.filter;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.*;

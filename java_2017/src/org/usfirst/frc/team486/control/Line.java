@@ -1,4 +1,4 @@
-package control;
+package org.usfirst.frc.team486.control;
 
 import org.opencv.core.Point;
 

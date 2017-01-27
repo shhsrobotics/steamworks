@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team486.robot;
 
+import org.usfirst.frc.team486.filter.Green;
 import org.usfirst.frc.team486.robot.camera.Display;
 import org.usfirst.frc.team486.robot.camera.Track;
 
@@ -10,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import filter.Green;
 
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
