@@ -34,7 +34,7 @@ public class Canyon {
 		this.pos = new Line(pos_floor, pos_cieling);
 	}
 	
-	private double evaluate(double x){
+	public double evaluate(double x){
 		double output = 0;
 		if (!((x > - this.K_THRESHOLD) && (x < this.K_THRESHOLD))) {
 			// if x is not in threshold

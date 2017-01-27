@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 
 import java.util.List;
 
@@ -28,8 +29,9 @@ import edu.wpi.first.wpilibj.CameraServer;
 public class Robot extends IterativeRobot {
 
 	public static final CameraSubsystem camera = new CameraSubsystem();
-	public static OI oi;
 	public static final DriveSubsystem drivechain = new DriveSubsystem();
+	public static final CompressorSubsystem compressor = new CompressorSubsystem();
+	public static OI oi;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
