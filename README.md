@@ -13,7 +13,7 @@
 
 [*@Panda5421*](https://github.com/Panda5421)
 
-#### Rocco Vaccone
+![alt](https://avatars0.githubusercontent.com/u/25404382?v=3&s=460) #### Rocco Vaccone
 
 [*@rvaccone*](https://github.com/rvaccone)
 
