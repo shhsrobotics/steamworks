@@ -36,9 +36,9 @@ public class GreenFilter {
 	public void process(Mat source0) {
 		// Step HSV_Threshold0:
 		Mat hsvThresholdInput = source0;
-		double[] hsvThresholdHue = {48.37482531960044, 91.72777932003646};
-		double[] hsvThresholdSaturation = {20.638489208633093, 255.0};
-		double[] hsvThresholdValue = {240.78237410071944, 255.0};
+		double[] hsvThresholdHue = {80.93525179856115, 140.60606060606062};
+		double[] hsvThresholdSaturation = {25.22482014388489, 237.82828282828282};
+		double[] hsvThresholdValue = {229.31654676258995, 255.0};
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
 	}
