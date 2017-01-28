@@ -18,5 +18,7 @@ alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 #### Rocco Vaccone
 [*@rvaccone*](https://github.com/rvaccone)
 
+<img src="https://avatars3.githubusercontent.com/u/21017264?v=3&s=460"
+alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 #### Alexander Koziol
 [*@alekoz47*](https://github.com/alekoz47)
