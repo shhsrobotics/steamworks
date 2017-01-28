@@ -17,7 +17,6 @@ public class Canyon {
 	private Line pos;
 	
 	public Canyon(HashMap<String,Double> val_dict){
-		
 		this.K_BOUND = (double) val_dict.get("bound");
 		this.K_THRESHOLD = (double) val_dict.get("threshold");
 		this.K_NEG_CIELING = (double) val_dict.get("neg_cieling");

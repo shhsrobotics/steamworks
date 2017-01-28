@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.GearGrabSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.GearLiftSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 
@@ -31,6 +33,8 @@ public class Robot extends IterativeRobot {
 	public static final CameraSubsystem camera = new CameraSubsystem();
 	public static final DriveSubsystem drivechain = new DriveSubsystem();
 	public static final CompressorSubsystem compressor = new CompressorSubsystem();
+	public static final GearGrabSubsystem gear_grab = new GearGrabSubsystem();
+	public static final GearLiftSubsystem gear_lift = new GearLiftSubsystem();
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -90,7 +94,7 @@ public class Robot extends IterativeRobot {
 				}
 				
 				//DISPLAY IMAGE
-				outputStream.putFrame(source);
+				outputStream.putFrame(filtered);
 				
 				track.reset();
 			}	

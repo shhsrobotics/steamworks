@@ -19,6 +19,7 @@ public class RobotMap {
 	// BUTTON NUMBERS
 	// ----------------------------------------------------------
 	public static int TRACK_BUTTON_PORT = 1;
+	public static int GRAB_BUTTON_PORT = 2;
 	
 	// ----------------------------------------------------------
 	// PWM PORTS
@@ -37,4 +38,11 @@ public class RobotMap {
 	// PNEUMATICS
 	// ----------------------------------------------------------
 	public static int COMPRESSOR_PIN = 0;
+	public static int LIFT_PIN = 0;
+	public static int GRAB_PIN = 0;
+	
+	// ----------------------------------------------------------
+	// CONTROL VALUES
+	// ----------------------------------------------------------
+	public static double OPSTICK_THRESHOLD = 0.5;
 }
