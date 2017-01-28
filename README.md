@@ -14,7 +14,8 @@
 [*@Panda5421*](https://github.com/Panda5421)
 
 <img src="https://avatars0.githubusercontent.com/u/25404382?v=3&s=460"
-alt="IMAGE ALT TEXT HERE" width="10" height="10" border="1" /></a> #### Rocco Vaccone
+alt="IMAGE ALT TEXT HERE" width="30" height="30" border="1" /></a> 
+#### Rocco Vaccone
 
 [*@rvaccone*](https://github.com/rvaccone)
 
