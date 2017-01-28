@@ -3,7 +3,10 @@
 
 ##Authors:
 
-*Daniel Rostovtsev,
-Mikki Pumarejo,
-Rocco Vaccone,
-Alexander Koziol*
+#### Daniel Rostovtsev
+
+#### Mikki Pumarejo
+
+#### Rocco Vaccone
+
+#### Alexander Koziol
