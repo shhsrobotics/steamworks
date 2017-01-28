@@ -17,6 +17,9 @@ public class RobotMap {
 	public static int SOLENOID_PIN = 0;
 	public static int SOLENOIDOPEN_BUTTON = 3;
 	public static int SOLENOIDCLOSE_BUTTON = 4;
+	
+	public static int SOLENOIDSLIDE_PIN = 1;
+	public static int SOLENOIDSLIDE_BUTTON = 5;
 
 	public static int LED_BUTTON = 1;
 	public static int LED_PIN = 1;

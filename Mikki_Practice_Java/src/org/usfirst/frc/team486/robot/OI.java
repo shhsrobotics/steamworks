@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team486.robot.commands.LEDCommand;
 import org.usfirst.frc.team486.robot.commands.RollerCommand;
 import org.usfirst.frc.team486.robot.commands.SolenoidCommand;
+import org.usfirst.frc.team486.robot.commands.SolenoidSlidesCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -27,6 +28,7 @@ public class OI {
 	public Button rollerbutton = new JoystickButton(opstick, RobotMap.ROLLER_BUTTON);
 	public Button solenoidopenbutton = new JoystickButton(opstick, RobotMap.SOLENOIDOPEN_BUTTON);
 	public Button solenoidclosebutton = new JoystickButton(opstick, RobotMap.SOLENOIDCLOSE_BUTTON);
+	public Button solenoidslidebutton = new JoystickButton(opstick, RobotMap.SOLENOIDSLIDE_BUTTON);
 	
 	
 	// There are a few additional built in buttons you can use. Additionally,
@@ -53,5 +55,6 @@ public class OI {
 		rollerbutton.whileHeld(new RollerCommand());
 		solenoidopenbutton.whileHeld(new SolenoidCommand(true));
 		solenoidclosebutton.whileHeld(new SolenoidCommand(false));
+		solenoidslidebutton.whileHeld(new SolenoidSlidesCommand());
 	}
 }
