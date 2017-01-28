@@ -5,10 +5,16 @@
 
 #### Daniel Rostovtsev
 
-[*danrotsy*](https://github.com/danrotsy)
+[*@danrotsy*](https://github.com/danrotsy)
 
 #### Mikki Pumarejo
 
+[*@Panda5421*](https://github.com/Panda5421)
+
 #### Rocco Vaccone
 
+[*@rvaccone*](https://github.com/rvaccone)
+
 #### Alexander Koziol
+
+[*@alekoz47*](https://github.com/alekoz47)
