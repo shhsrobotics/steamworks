@@ -33,3 +33,4 @@ alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 <img src="https://avatars3.githubusercontent.com/u/21017264?v=3&s=460"
 alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 [*@alekoz47*](https://github.com/alekoz47)
+###### *Never mutate state*
