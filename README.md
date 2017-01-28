@@ -1,4 +1,4 @@
-![IMAGE ALT TEXT HERE](https://i.ytimg.com/vi/EMiNmJW7enI/maxresdefault.jpg)
+[![IMAGE ALT TEXT HERE](https://i.ytimg.com/vi/EMiNmJW7enI/maxresdefault.jpg)](https://www.youtube.com/watch?v=EMiNmJW7enI)
 
 # **steamworks**
 486's 2017 code
@@ -9,7 +9,7 @@
 <img src="https://avatars0.githubusercontent.com/u/5702902?v=3&s=460"
 alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 [*@danrotsy*](https://github.com/danrotsy)
-###### *Thank god opencv was added to wpilib this year*
+###### *National Instruments can eat it.*
 
 ***
 
@@ -17,7 +17,7 @@ alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 <img src="https://avatars3.githubusercontent.com/u/25121645?v=3&s=460"
 alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 [*@Panda5421*](https://github.com/Panda5421)
-###### *Thank god for coding. I don't know where I'd be without it.*
+###### *Saving people. Hunting things. The family business.*
 
 ***
 
@@ -25,7 +25,7 @@ alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 <img src="https://avatars0.githubusercontent.com/u/25404382?v=3&s=460"
 alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 [*@rvaccone*](https://github.com/rvaccone)
-###### *I will bathe you in your children*
+###### *Manbuns should be burned*
 
 ***
 
