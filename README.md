@@ -15,6 +15,9 @@
 
 ![alt](https://avatars0.githubusercontent.com/u/25404382?v=3&s=460) #### Rocco Vaccone
 
+<img src="https://avatars0.githubusercontent.com/u/25404382?v=3&s=460"
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
 [*@rvaccone*](https://github.com/rvaccone)
 
 #### Alexander Koziol
