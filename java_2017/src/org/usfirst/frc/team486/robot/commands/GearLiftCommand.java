@@ -1,35 +1,34 @@
 package org.usfirst.frc.team486.robot.commands;
 
 import org.usfirst.frc.team486.robot.Robot;
-import org.usfirst.frc.team486.robot.camera.Track;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TeleopCommand extends Command {
+public class GearLiftCommand extends Command {
+	
+	private boolean state;
 
-    public TeleopCommand() {
+    public GearLiftCommand(boolean state_in) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivechain);
-    	requires(Robot.compressor);
+    	requires(Robot.gear_lift);
+    	this.state = state_in;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivechain.initdrive();
-    	Robot.compressor.on();
+    	if (this.state == true){
+    		Robot.gear_lift.raise();
+    	} else {
+    		Robot.gear_lift.drop();
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.trackbutton.get()){
-    		Robot.drivechain.drive_value(Track.get_correction(), -Track.get_correction());
-    	} else {
-    		Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,12 +38,10 @@ public class TeleopCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.compressor.off();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.compressor.off();
     }
 }

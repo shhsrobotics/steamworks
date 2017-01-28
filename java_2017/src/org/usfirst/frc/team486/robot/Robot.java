@@ -1,8 +1,8 @@
 
 package org.usfirst.frc.team486.robot;
 
+import org.usfirst.frc.team486.filter.Green;
 import org.usfirst.frc.team486.robot.camera.Display;
-import org.usfirst.frc.team486.robot.camera.Prep;
 import org.usfirst.frc.team486.robot.camera.Track;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -13,7 +13,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.GearGrabSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.GearLiftSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 
 import java.util.List;
 
@@ -28,13 +31,16 @@ import edu.wpi.first.wpilibj.CameraServer;
 public class Robot extends IterativeRobot {
 
 	public static final CameraSubsystem camera = new CameraSubsystem();
-	public static OI oi;
 	public static final DriveSubsystem drivechain = new DriveSubsystem();
+	public static final CompressorSubsystem compressor = new CompressorSubsystem();
+	public static final GearGrabSubsystem gear_grab = new GearGrabSubsystem();
+	public static final GearLiftSubsystem gear_lift = new GearLiftSubsystem();
+	public static OI oi;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	
-	private Thread camthread;
+	private Thread camthread_literal;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -44,7 +50,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		
-		camthread = new Thread(() -> {
+		camthread_literal = new Thread(() -> {
 			
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 			camera.setResolution(640, 480);
@@ -57,7 +63,7 @@ public class Robot extends IterativeRobot {
 			Mat filtered = new Mat();
 			
 			Display display = new Display();
-			Prep prep = new Prep();
+			Green green_prep = new Green();
 			Track track = new Track();
 			
 			while (!Thread.interrupted()) {
@@ -67,7 +73,13 @@ public class Robot extends IterativeRobot {
 				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
 				
 				//Filter through color ranges
-				prep.filter_hsv(hsv, filtered);
+				if (CamThread.FILTER_COLOR == "green"){
+					//RED
+					green_prep.process(hsv);
+					filtered = green_prep.hsvThresholdOutput();
+				} else if (CamThread.FILTER_COLOR == "blue") {
+					//BLUE
+				}
 				
 				List<MatOfPoint> contours = track.find_blobs(filtered);
 				track.find_dimensions(contours);
@@ -81,21 +93,14 @@ public class Robot extends IterativeRobot {
 					display.draw_point(source, Track.get_center(), "red");
 				}
 				
-				//track.track(hsv);
-				
-				//DRAW RECTANGLE
-				//Point pt1 = track.pt1;
-				//Point pt2 = track.pt2;
-				//display.draw_rectangle(hsv, pt1, pt2, "red");
-				
 				//DISPLAY IMAGE
-				outputStream.putFrame(source);
+				outputStream.putFrame(filtered);
 				
 				track.reset();
 			}	
 		});
 		
-		camthread.start();
+		camthread_literal.start();
 	}
 
 	
@@ -147,6 +152,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		Robot.camera.light_on();
 		Scheduler.getInstance().run();
 	}
 
