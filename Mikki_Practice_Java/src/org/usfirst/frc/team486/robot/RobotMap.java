@@ -13,6 +13,10 @@ public class RobotMap {
 	// public static int rightMotor = 2;
 	public static int ROLLER_PIN = 4;
 	public static int ROLLER_BUTTON = 2;
+	
+	public static int SOLENOID_PIN = 0;
+	public static int SOLENOIDOPEN_BUTTON = 3;
+	public static int SOLENOIDCLOSE_BUTTON = 4;
 
 	public static int LED_BUTTON = 1;
 	public static int LED_PIN = 1;

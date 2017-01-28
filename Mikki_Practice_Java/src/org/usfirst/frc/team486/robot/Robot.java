@@ -13,6 +13,7 @@ import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.LEDSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.RollerSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.SolenoidSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
 	public static final DriveSubsystem drivechain = new DriveSubsystem();
 	public static final LEDSubsystem led = new LEDSubsystem();
 	public static final RollerSubsystem roller = new RollerSubsystem();
+	public static final SolenoidSubsystem solenoid = new SolenoidSubsystem();
 	
 
 	Command autonomousCommand;
