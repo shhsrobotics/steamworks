@@ -31,7 +31,7 @@ public class OI {
 	// OI METHOD FOR BUTTON TRIGGERS
 	// ----------------------------------------------------------
 	public OI(){
-		opstickforward.whileActive(new GearLiftCommand(true));
-		opstickback.whenActive(new GearLiftCommand(false));
+		//opstickforward.whileActive(new GearLiftCommand(true));
+		//opstickback.whenActive(new GearLiftCommand(false));
 	}
 }
