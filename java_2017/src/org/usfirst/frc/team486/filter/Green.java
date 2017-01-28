@@ -11,58 +11,30 @@ import org.opencv.imgproc.*;
 * @author GRIP
 */
 
-//----------------------------------------------------------
-// OLD HSV THRESHOLDING VALUES
-// ----------------------------------------------------------
-// Scalar lower_hsv = new Scalar(50,20,240);
-// Scalar upper_hsv = new Scalar(90,255,255);
-
-public class Green {
-
-	//Outputs
-	private Mat hsvThresholdOutput = new Mat();
-
-	static {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	//----------------------------------------------------------
+	// OLD HSV THRESHOLDING VALUES
+	// ----------------------------------------------------------
+	// Scalar lower_hsv = new Scalar(50,20,240);
+	// Scalar upper_hsv = new Scalar(90,255,255);
+	
+	public class Green {
+	
+	// ----------------------------------------------------------
+	// HSV THRESHOLDING VALUES
+	// ----------------------------------------------------------
+	Scalar lower_hsv = new Scalar(50,20,240);
+	Scalar upper_hsv = new Scalar(90,255,255);
+	//opencv uses ranges (H: 0-180, S: 0-255, V:0-255)
+	// ----------------------------------------------------------
+	 
+	 
+	// ----------------------------------------------------------
+	// FILTERING METHOD (applying HSV thresholding values)
+	// ----------------------------------------------------------
+	public void filter_hsv(Mat hsv, Mat destination){
+		Core.inRange(hsv, this.lower_hsv, this.upper_hsv, destination);
 	}
-
-	/**
-	 * This is the primary method that runs the entire pipeline and updates the outputs.
-	 */
-	public void process(Mat source0) {
-		// Step HSV_Threshold0:
-		Mat hsvThresholdInput = source0;
-		double[] hsvThresholdHue = {48.37482531960044, 91.72777932003646};
-		double[] hsvThresholdSaturation = {20.638489208633093, 255.0};
-		double[] hsvThresholdValue = {240.78237410071944, 255.0};
-		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
-
-	}
-
-	/**
-	 * This method is a generated getter for the output of a HSV_Threshold.
-	 * @return Mat output from HSV_Threshold.
-	 */
-	public Mat hsvThresholdOutput() {
-		return hsvThresholdOutput;
-	}
-
-
-	/**
-	 * Segment an image based on hue, saturation, and value ranges.
-	 *
-	 * @param input The image on which to perform the HSL threshold.
-	 * @param hue The min and max hue
-	 * @param sat The min and max saturation
-	 * @param val The min and max value
-	 * @param output The image in which to store the output.
-	 */
-	private void hsvThreshold(Mat input, double[] hue, double[] sat, double[] val,
-	    Mat out) {
-		Imgproc.cvtColor(input, out, Imgproc.COLOR_BGR2HSV);
-		Core.inRange(out, new Scalar(hue[0], sat[0], val[0]),
-			new Scalar(hue[1], sat[1], val[1]), out);
-	}
+	// ----------------------------------------------------------
 
 
 

@@ -28,5 +28,9 @@ public class GearGrabSubsystem extends Subsystem {
     	grab.set(true);
     }
     
+    public boolean get(){
+    	return grab.get();
+    }
+    
 }
 

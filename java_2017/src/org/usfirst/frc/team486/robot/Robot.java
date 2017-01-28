@@ -4,6 +4,7 @@ package org.usfirst.frc.team486.robot;
 import org.usfirst.frc.team486.filter.Green;
 import org.usfirst.frc.team486.robot.camera.Display;
 import org.usfirst.frc.team486.robot.camera.Track;
+import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -15,6 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.GearGrabSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.GearLiftSubsystem;
+import org.usfirst.frc.team486.robot.triggers.OpstickBackTrigger;
+import org.usfirst.frc.team486.robot.triggers.OpstickForwardTrigger;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 
@@ -36,6 +39,9 @@ public class Robot extends IterativeRobot {
 	public static final GearGrabSubsystem gear_grab = new GearGrabSubsystem();
 	public static final GearLiftSubsystem gear_lift = new GearLiftSubsystem();
 	public static OI oi;
+	
+	private final OpstickBackTrigger opstickbacktrigger = new OpstickBackTrigger();
+	private final OpstickForwardTrigger opstickforwardtrigger = new OpstickForwardTrigger();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -49,6 +55,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		
+		opstickbacktrigger.whileActive(new GearLiftCommand(true));
+		opstickforwardtrigger.whileActive(new GearLiftCommand(false));
 		
 		camthread_literal = new Thread(() -> {
 			
@@ -75,8 +84,7 @@ public class Robot extends IterativeRobot {
 				//Filter through color ranges
 				if (CamThread.FILTER_COLOR == "green"){
 					//RED
-					green_prep.process(hsv);
-					filtered = green_prep.hsvThresholdOutput();
+					green_prep.filter_hsv(hsv,filtered);
 				} else if (CamThread.FILTER_COLOR == "blue") {
 					//BLUE
 				}
@@ -94,7 +102,7 @@ public class Robot extends IterativeRobot {
 				}
 				
 				//DISPLAY IMAGE
-				outputStream.putFrame(filtered);
+				outputStream.putFrame(source);
 				
 				track.reset();
 			}	
