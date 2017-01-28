@@ -12,6 +12,7 @@
 [*@Panda5421*](https://github.com/Panda5421)
 
 #### Rocco Vaccone
+![alt text](http://cdn77.sadanduseless.com/wp-content/uploads/2014/05/face-swap5.jpg)
 
 [*@rvaccone*](https://github.com/rvaccone)
 
