@@ -18,7 +18,6 @@ public class GearGrabCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	SmartDashboard.putBoolean("claw", Robot.gear_grab.get());
     	if (Robot.gear_grab.get() == true) {
     		Robot.gear_grab.release();
     	} else {
