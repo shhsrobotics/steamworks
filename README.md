@@ -5,9 +5,11 @@
 
 ##Authors:
 
+<img src="https://avatars0.githubusercontent.com/u/5702902?v=3&s=460"
+alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 #### Daniel Rostovtsev
 [*@danrotsy*](https://github.com/danrotsy)
-##### _Thank go opencv was added to wpilib this year_
+##### Thank go opencv was added to wpilib this year
 
 <img src="https://avatars3.githubusercontent.com/u/25121645?v=3&s=460"
 alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
@@ -18,7 +20,7 @@ alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 #### Rocco Vaccone
 [*@rvaccone*](https://github.com/rvaccone)
-_##### My favorite color is potatoe_
+##### My favorite color is potatoe
 
 <img src="https://avatars3.githubusercontent.com/u/21017264?v=3&s=460"
 alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
