@@ -1,4 +1,4 @@
-![IMAGE ALT TEXT HERE](https://i.ytimg.com/vi/EMiNmJW7enI/maxresdefault.jpg)]
+![IMAGE ALT TEXT HERE](https://i.ytimg.com/vi/EMiNmJW7enI/maxresdefault.jpg)
 
 # steamworks
 486's 2017 code
