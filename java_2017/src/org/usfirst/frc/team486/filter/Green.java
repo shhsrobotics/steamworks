@@ -22,8 +22,8 @@ import org.opencv.imgproc.*;
 	// ----------------------------------------------------------
 	// HSV THRESHOLDING VALUES
 	// ----------------------------------------------------------
-	Scalar lower_hsv = new Scalar(80,25,229);
-	Scalar upper_hsv = new Scalar(140,237,255);
+	Scalar lower_hsv = new Scalar(50,20,240);
+	Scalar upper_hsv = new Scalar(90,255,255);
 	//opencv uses ranges (H: 0-180, S: 0-255, V:0-255)
 	// ----------------------------------------------------------
 	 

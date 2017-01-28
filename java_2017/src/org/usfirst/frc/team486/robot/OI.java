@@ -24,6 +24,6 @@ public class OI {
 	// OI METHOD FOR BUTTON TRIGGERS
 	// ----------------------------------------------------------
 	public OI(){
-		grabbutton.whenPressed(new GearGrabCommand());
+		grabbutton.whileActive(new GearGrabCommand());
 	}
 }

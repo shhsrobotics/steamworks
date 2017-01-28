@@ -13,8 +13,6 @@ public class GearGrabSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private static boolean state = false;
-	
 	private Solenoid grab = new Solenoid(RobotMap.GRAB_PIN);
 
     public void initDefaultCommand() {
@@ -23,18 +21,15 @@ public class GearGrabSubsystem extends Subsystem {
     }
     
     public void release(){
-    	this.state = false;
     	grab.set(false);
     }
     
     public void grab(){
-    	this.state = true;
     	grab.set(true);
     }
     
-    public void toggle(){
-    	this.state = !this.state;
-    	grab.set(this.state);
+    public boolean get(){
+    	return grab.get();
     }
     
 }
