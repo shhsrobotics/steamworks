@@ -13,10 +13,8 @@
 
 [*@Panda5421*](https://github.com/Panda5421)
 
-![alt](https://avatars0.githubusercontent.com/u/25404382?v=3&s=460) #### Rocco Vaccone
-
 <img src="https://avatars0.githubusercontent.com/u/25404382?v=3&s=460"
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+alt="IMAGE ALT TEXT HERE" width="10" height="10" border="1" /></a> #### Rocco Vaccone
 
 [*@rvaccone*](https://github.com/rvaccone)
 
