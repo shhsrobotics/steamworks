@@ -5,6 +5,8 @@
 
 #### Daniel Rostovtsev
 
+[*danrotsy*](https://github.com/danrotsy)
+
 #### Mikki Pumarejo
 
 #### Rocco Vaccone
