@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot.commands;
 import org.usfirst.frc.team486.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,11 +18,17 @@ public class GearGrabCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gear_grab.toggle();
+    	SmartDashboard.putBoolean("claw", Robot.gear_grab.get());
+    	if (Robot.gear_grab.get() == true) {
+    		Robot.gear_grab.release();
+    	} else {
+    		Robot.gear_grab.grab();
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
