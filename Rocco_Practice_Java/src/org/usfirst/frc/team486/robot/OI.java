@@ -1,8 +1,11 @@
 package org.usfirst.frc.team486.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team486.robot.commands.ExampleCommand;
+import org.usfirst.frc.team486.robot.commands.ShooterCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -16,7 +19,9 @@ public class OI {
 	// number it is.
 	// Joystick stick = new Joystick(port);
 	// Button button = new JoystickButton(stick, buttonNumber);
-
+	public Joystick leftstick = new Joystick(RobotMap.LEFT_STICK_PIN);
+	public Joystick rightstick = new Joystick(RobotMap.RIGHT_STICK_PIN);
+	public Joystick opstick = new Joystick(RobotMap.OPSTICK_PIN);
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
 	// commands the same as any other Button.
@@ -24,6 +29,8 @@ public class OI {
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	// Once you have a button, it's trivial to bind it to a button in one of
 	// three ways:
+	
+	public JoystickButton shootbutton = new JoystickButton(opstick,RobotMap.SHOOTER_BUTTON);
 
 	// Start the command when the button is pressed and let it run the command
 	// until it is finished as determined by it's isFinished method.
@@ -36,4 +43,7 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	public OI(){
+		shootbutton.whenActive(new ShooterCommand());
+	}
 }
