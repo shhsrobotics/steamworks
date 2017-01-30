@@ -13,6 +13,7 @@ import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.LEDSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.RollerSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.SolenoidSlidesSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.SolenoidSubsystem;
 
 /**
@@ -30,6 +31,8 @@ public class Robot extends IterativeRobot {
 	public static final LEDSubsystem led = new LEDSubsystem();
 	public static final RollerSubsystem roller = new RollerSubsystem();
 	public static final SolenoidSubsystem solenoid = new SolenoidSubsystem();
+	public static final SolenoidSlidesSubsystem slide = new SolenoidSlidesSubsystem();
+	
 	
 
 	Command autonomousCommand;

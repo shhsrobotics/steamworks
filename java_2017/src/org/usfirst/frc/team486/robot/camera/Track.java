@@ -7,6 +7,8 @@ import java.util.List;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team486.control.Canyon;
+import org.usfirst.frc.team486.robot.CamThread;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
@@ -14,6 +16,10 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 
 public class Track {
+	
+	public Track(){
+		CamThread.init();
+	}
 	
 	private static PowerDistributionPanel pdp = new PowerDistributionPanel();
 	
@@ -33,28 +39,6 @@ public class Track {
 	private boolean found = false;
 	
 	// ----------------------------------------------------------
-	// VOLTAGE CONSTANTS (left)
-	// ----------------------------------------------------------
-	private static final double V_LOW_LEFT = 11.9;
-	private static final double V_LOW_K_CIELING_LEFT= 0.4;
-	private static final double V_HIGH_LEFT = 12.7;
-	private static final double V_HIGH_K_CIELING_LEFT = 0.37;
-	private static final double V_SLOPE_LEFT = 
-			(V_HIGH_K_CIELING_LEFT - V_LOW_K_CIELING_LEFT) / (V_HIGH_LEFT - V_LOW_LEFT);
-	private static final double V_INTERCEPT_LEFT = V_LOW_K_CIELING_LEFT - (V_SLOPE_LEFT * V_LOW_LEFT);
-	
-	// ----------------------------------------------------------
-	// VOLTAGE CONSTANTS (right)
-	// ----------------------------------------------------------
-	private static final double V_LOW_RIGHT = 11.9;
-	private static final double V_LOW_K_CIELING_RIGHT = 0.4;
-	private static final double V_HIGH_RIGHT = 12.7;
-	private static final double V_HIGH_K_CIELING_RIGHT = 0.37;
-	private static final double V_SLOPE_RIGHT = 
-			(V_HIGH_K_CIELING_RIGHT - V_LOW_K_CIELING_RIGHT) / (V_HIGH_RIGHT - V_LOW_RIGHT);
-	private static final double V_INTERCEPT_RIGHT = V_LOW_K_CIELING_RIGHT - (V_SLOPE_RIGHT * V_LOW_RIGHT);
-	
-	// ----------------------------------------------------------
 	// "GLOBAL" VARIABLES
 	// ----------------------------------------------------------
 	private static Point center = new Point(320, 220);
@@ -70,51 +54,7 @@ public class Track {
 	private static final int IMG_HEIGHT = 320;
 	private static final int CUT = 1;
 	
-	// ----------------------------------------------------------
-	// CORRECTION COMPUTATION CONSTANTS (all)
-	// ----------------------------------------------------------
-	private static final double K_THRESH = 0.05;
-	private static final double K_BOUND = 0.5;
-	private static final double K_DELTA = Track.K_THRESH-Track.K_BOUND;
-	
-	// ----------------------------------------------------------
-	// CORRECTION COMPUTATION CONSTANTS (left)
-	// ----------------------------------------------------------
-	private static double K_LEFT_CIELING = 0.37;
-	private static double K_LEFT_FLOOR = 0.35;
-	private static double K_LEFT_SLOPE = 
-			(Track.K_LEFT_CIELING - Track.K_LEFT_FLOOR)/Track.K_DELTA;
-	private static double K_LEFT_INTERCEPT = 
-			(Track.K_LEFT_FLOOR) - (Track.K_LEFT_SLOPE * Track.K_THRESH);
-	
-	// ----------------------------------------------------------
-	// CORRECTION COMPUTATION CONSTANTS (right)
-	// ----------------------------------------------------------
-	private static double K_RIGHT_CIELING = 0.37;
-	private static double K_RIGHT_FLOOR = 0.35;
-	private static double K_RIGHT_SLOPE = 
-			(Track.K_RIGHT_CIELING - Track.K_RIGHT_FLOOR)/Track.K_DELTA;
-	private static double K_RIGHT_INTERCEPT = 
-			(Track.K_RIGHT_FLOOR) - (Track.K_RIGHT_SLOPE * Track.K_THRESH);
-	
-	// ----------------------------------------------------------
-	// UPDATE CONSTANTS (left)(right)
-	// ----------------------------------------------------------
-	private static void update_correction_constants(){
-		Track.K_LEFT_CIELING = Track.V_SLOPE_LEFT*(Track.voltage) + Track.V_INTERCEPT_LEFT;
-		Track.K_RIGHT_CIELING = Track.V_SLOPE_RIGHT*(Track.voltage) + Track.V_INTERCEPT_RIGHT;
-		Track.K_LEFT_FLOOR = Track.K_LEFT_FLOOR - 0.02;
-		Track.K_RIGHT_FLOOR = Track.K_RIGHT_FLOOR - 0.02;
-		Track.K_LEFT_SLOPE = 
-				(Track.K_LEFT_CIELING - Track.K_LEFT_FLOOR)/Track.K_DELTA;
-		Track.K_LEFT_INTERCEPT = 
-				(Track.K_LEFT_FLOOR) - (Track.K_LEFT_SLOPE * Track.K_THRESH);
-		Track.K_RIGHT_SLOPE = 
-				(Track.K_RIGHT_CIELING - Track.K_RIGHT_FLOOR)/Track.K_DELTA;
-		Track.K_RIGHT_INTERCEPT = 
-				(Track.K_RIGHT_FLOOR) - (Track.K_RIGHT_SLOPE * Track.K_THRESH);
-	}
-	
+	public static Canyon canyon = new Canyon(CamThread.COOK_SETTINGS);
 	
 	// ----------------------------------------------------------
 	// GENERAL TRACKING METHOD (finds contours and then filters)
@@ -179,7 +119,6 @@ public class Track {
     		this.found = true;
     	}
 		Track.update(this.min_x, this.min_y, this.width, this.height);
-		Track.update_correction_constants();
 	}
 	
 	// ----------------------------------------------------------
@@ -234,41 +173,8 @@ public class Track {
 		Track.center.x = (int) (x + width*0.5);
 		Track.center.y = (int) (y + height*0.5);
 		Track.offset = (double) 2*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
-		Track.correction = Track.calc_correction(Track.offset);
+		Track.correction = Track.canyon.evaluate(Track.offset);
 		Track.voltage = Track.pdp.getVoltage();
-	}
-	
-	// ----------------------------------------------------------
-	// CALCULATES CORRECTION FROM OFFSET
-	// ----------------------------------------------------------
-	private static double calc_correction(double offset){
-		double correction = 0;
-		if ((-Track.K_THRESH <= offset) && (Track.K_THRESH >= offset)){
-			//INSIDE THRESHOLD
-			correction = 0;
-		} else{
-			//OUTSIDE THRESHOLD
-			if (offset > 0){
-				//RIGHT
-				if (offset <= Track.K_BOUND){
-					//SLOPED
-					correction = Track.K_RIGHT_SLOPE*offset + Track.K_RIGHT_INTERCEPT;
-				} else {
-					//PLATEUD
-					correction = Track.K_RIGHT_CIELING;
-				}
-			} else {
-				//LEFT
-				if (offset >= -Track.K_BOUND){
-					//SLOPED
-					correction = -(Track.K_LEFT_SLOPE*offset + Track.K_LEFT_INTERCEPT);
-				} else {
-					//PLATEUD
-					correction = -(Track.K_LEFT_CIELING);
-				}
-			}
-		}
-		return correction;
 	}
 	
 	// ----------------------------------------------------------

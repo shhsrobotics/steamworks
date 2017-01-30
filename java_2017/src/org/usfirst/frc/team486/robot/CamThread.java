@@ -68,19 +68,30 @@ public class CamThread {
 	
 	
 	
-	//private static HashMap<String,Double> COOK_SETTINGS= new HashMap<String,Double>();
-	//private static double K_BOUND = 0.05;
-	//private static double K_THRESHOLD = 0.5;
-	//private static double K_NEG_FLOOR = V_to_NEG_FLOOR.evaluate(pdp.getVoltage());
-	//private static double K_NEG_CIELING = V_to_NEG_CIELING.evaluate(pdp.getVoltage());
-	//private static double K_POS_FLOOR = V_to_POS_FLOOR.evaluate(pdp.getVoltage());
-	//private static double K_POS_CIELING = V_to_POS_CIELING.evaluate(pdp.getVoltage());
+	public static HashMap<String,Double> COOK_SETTINGS= new HashMap<String,Double>();
+	private static double K_BOUND = 0.05;
+	private static double K_THRESHOLD = 0.5;
+	private static double K_NEG_FLOOR = V_to_NEG_FLOOR.evaluate(pdp.getVoltage());
+	private static double K_NEG_CIELING = V_to_NEG_CIELING.evaluate(pdp.getVoltage());
+	private static double K_POS_FLOOR = V_to_POS_FLOOR.evaluate(pdp.getVoltage());
+	private static double K_POS_CIELING = V_to_POS_CIELING.evaluate(pdp.getVoltage());
+	
+	public static double correction = 0;
+	
+	public static void init(){
+		COOK_SETTINGS.put("bound", K_BOUND);
+		COOK_SETTINGS.put("threshold", K_THRESHOLD);
+		COOK_SETTINGS.put("neg_floor", K_NEG_FLOOR);
+		COOK_SETTINGS.put("neg_cieling", K_NEG_CIELING);
+		COOK_SETTINGS.put("pos_floor", K_POS_FLOOR);
+		COOK_SETTINGS.put("pos_cieling", K_POS_CIELING);
+	}
 	
 	public void update_cook_settings(){
 		double voltage = pdp.getVoltage();
-		//K_NEG_FLOOR = V_to_NEG_FLOOR.evaluate(voltage);
-		//K_NEG_CIELING = V_to_NEG_CIELING.evaluate(voltage);
-		//K_POS_FLOOR = V_to_POS_FLOOR.evaluate(voltage);
-		//K_POS_CIELING = V_to_POS_CIELING.evaluate(voltage);
+		K_NEG_FLOOR = V_to_NEG_FLOOR.evaluate(voltage);
+		K_NEG_CIELING = V_to_NEG_CIELING.evaluate(voltage);
+		K_POS_FLOOR = V_to_POS_FLOOR.evaluate(voltage);
+		K_POS_CIELING = V_to_POS_CIELING.evaluate(voltage);
 	}
 }

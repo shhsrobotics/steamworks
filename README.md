@@ -17,7 +17,7 @@ alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 <img src="https://avatars3.githubusercontent.com/u/25121645?v=3&s=460"
 alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 [*@Panda5421*](https://github.com/Panda5421)
-###### *Thank god for coding. I don't know where I'd be without it.*
+###### *Saving people. Hunting things. The family business.*
 
 ***
 

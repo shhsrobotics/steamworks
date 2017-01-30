@@ -33,6 +33,23 @@ public class Canyon {
 		this.pos = new Line(pos_floor, pos_cieling);
 	}
 	
+	public void update(HashMap<String,Double> val_dict){
+		this.K_BOUND = (double) val_dict.get("bound");
+		this.K_THRESHOLD = (double) val_dict.get("threshold");
+		this.K_NEG_CIELING = (double) val_dict.get("neg_cieling");
+		this.K_NEG_FLOOR = (double) val_dict.get("neg_floor");
+		this.K_POS_CIELING = (double) val_dict.get("pos_cieling");
+		this.K_POS_FLOOR = (double) val_dict.get("pos_floor");
+		
+		Point neg_floor = new Point(this.K_THRESHOLD, this.K_NEG_FLOOR);
+		Point neg_cieling = new Point(this.K_BOUND, this.K_NEG_CIELING);
+		Point pos_floor = new Point(this.K_THRESHOLD, this.K_POS_FLOOR);
+		Point pos_cieling = new Point(this.K_BOUND, this.K_POS_CIELING);
+		
+		this.neg = new Line(neg_floor, neg_cieling);
+		this.pos = new Line(pos_floor, pos_cieling);
+	}
+	
 	public double evaluate(double x){
 		double output = 0;
 		if (!((x > - this.K_THRESHOLD) && (x < this.K_THRESHOLD))) {
