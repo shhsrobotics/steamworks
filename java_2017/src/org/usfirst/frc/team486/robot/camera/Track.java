@@ -54,7 +54,7 @@ public class Track {
 	private static final int IMG_HEIGHT = 320;
 	private static final int CUT = 1;
 	
-	public static Canyon canyon = new Canyon(CamThread.COOK_SETTINGS);
+	private static Canyon canyon = new Canyon(CamThread.COOK_SETTINGS);
 	
 	// ----------------------------------------------------------
 	// GENERAL TRACKING METHOD (finds contours and then filters)

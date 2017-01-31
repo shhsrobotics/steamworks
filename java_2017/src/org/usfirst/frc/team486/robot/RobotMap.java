@@ -20,6 +20,7 @@ public class RobotMap {
 	// ----------------------------------------------------------
 	public static int TRACK_BUTTON = 1;
 	public static int GRAB_BUTTON = 2;
+	public static int SHOOT_BUTTON = 3;
 	
 	// ----------------------------------------------------------
 	// PWM PORTS
@@ -28,6 +29,7 @@ public class RobotMap {
 	public static int LEFT_DRIVE_2 = 1;
 	public static int RIGHT_DRIVE_1 = 2;
 	public static int RIGHT_DRIVE_2 = 3;
+	public static int SHOOTER_PIN = 4;
 	
 	// ----------------------------------------------------------
 	// RELAYS

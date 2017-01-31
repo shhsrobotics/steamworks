@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.GearGrabSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.GearLiftSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team486.robot.triggers.OpstickBackTrigger;
 import org.usfirst.frc.team486.robot.triggers.OpstickForwardTrigger;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
@@ -38,6 +39,7 @@ public class Robot extends IterativeRobot {
 	public static final CompressorSubsystem compressor = new CompressorSubsystem();
 	public static final GearGrabSubsystem gear_grab = new GearGrabSubsystem();
 	public static final GearLiftSubsystem gear_lift = new GearLiftSubsystem();
+	public static final ShooterSubsystem shooter = new ShooterSubsystem();
 	public static OI oi;
 	
 	private final OpstickBackTrigger opstickbacktrigger = new OpstickBackTrigger();
@@ -120,7 +122,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		Robot.camera.light_off();
-		//camthread.interrupt();
+		camthread_literal.interrupt();
 	}
 
 	@Override
