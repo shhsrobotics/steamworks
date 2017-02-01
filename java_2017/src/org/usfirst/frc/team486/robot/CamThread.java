@@ -78,6 +78,7 @@ public class CamThread {
 	
 	public static double correction = 0;
 	
+	// WARNING WARNING WARNING
 	public static void init(){
 		COOK_SETTINGS.put("bound", K_BOUND);
 		COOK_SETTINGS.put("threshold", K_THRESHOLD);

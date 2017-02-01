@@ -18,7 +18,7 @@ import org.opencv.core.Rect;
 public class Track {
 	
 	public Track(){
-		CamThread.init();
+		//CamThread.init();
 	}
 	
 	private static PowerDistributionPanel pdp = new PowerDistributionPanel();
