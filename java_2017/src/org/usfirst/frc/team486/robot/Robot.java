@@ -77,8 +77,7 @@ public class Robot extends IterativeRobot {
 			Green green_prep = new Green();
 			Track track = new Track();
 			
-			while (!Thread.interrupted()) {
-			
+			do {
 				cvSink.grabFrame(source);
 				//CONVERTING IMAGE TYPES (source is BGR)
 				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
@@ -107,7 +106,7 @@ public class Robot extends IterativeRobot {
 				outputStream.putFrame(source);
 				
 				track.reset();
-			}	
+			} while (!Thread.interrupted());
 		});
 		
 		camthread_literal.start();
