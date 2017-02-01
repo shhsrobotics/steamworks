@@ -31,6 +31,7 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class Robot extends IterativeRobot {
 
@@ -62,7 +63,7 @@ public class Robot extends IterativeRobot {
 		opstickforwardtrigger.whileActive(new GearLiftCommand(false));
 		
 		camthread_literal = new Thread(() -> {
-			
+			DriverStation.reportWarning("Initializing camera...", false);
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 			camera.setResolution(640, 480);
 			
