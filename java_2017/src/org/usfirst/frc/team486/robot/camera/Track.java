@@ -8,7 +8,6 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team486.control.Canyon;
-import org.usfirst.frc.team486.robot.CamThread;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
@@ -16,12 +15,6 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 
 public class Track {
-	
-	public Track(){
-		//CamThread.init();
-	}
-	
-	private static PowerDistributionPanel pdp = new PowerDistributionPanel();
 	
 	// ----------------------------------------------------------
 	// TRACK INSTANCE COMPUTATION VARIABLES
@@ -39,30 +32,12 @@ public class Track {
 	private boolean found = false;
 	
 	// ----------------------------------------------------------
-	// "GLOBAL" VARIABLES
-	// ----------------------------------------------------------
-	private static Point center = new Point(320, 220);
-	private static double correction = 0; //value between -1 and 1 (-1 being 100% left, 100% right)
-	private static double offset = 0;
-	private static double voltage = Track.pdp.getVoltage(); //first guess
-	
-	// ----------------------------------------------------------
 	// TRACK INSTANCE COMPUTATION CONSTANTS
 	// ----------------------------------------------------------
 	private static final Point IMG_CENTER = new Point(320,220);
-	private static final int IMG_WIDTH = 640;
-	private static final int IMG_HEIGHT = 320;
+	private static final int IMG_WIDTH = 320;
+	private static final int IMG_HEIGHT = 220;
 	private static final int CUT = 1;
-	
-	private static Canyon canyon = new Canyon(CamThread.COOK_SETTINGS);
-	
-	// ----------------------------------------------------------
-	// GENERAL TRACKING METHOD (finds contours and then filters)
-	// ----------------------------------------------------------
-	public void track(Mat filtered) {
-		List<MatOfPoint> contours = this.find_blobs(filtered);
-		this.find_dimensions(contours);
-	}
 	
 	// ----------------------------------------------------------
 	// CONTOUR FINDING METHOD
@@ -77,7 +52,7 @@ public class Track {
 	// ----------------------------------------------------------
 	// DIMENSION FINDING METHOD (calculates relative positions)
 	// ----------------------------------------------------------
-	public void find_dimensions(List<MatOfPoint> contours){
+	public Status find_center(List<MatOfPoint> contours){
 		for (Iterator<MatOfPoint> iter = contours.iterator(); iter.hasNext(); ) {
 		    MatOfPoint contour = iter.next();
 		    if (Imgproc.contourArea(contour) > 300){
@@ -117,8 +92,24 @@ public class Track {
 		this.height = this.max_y - this.min_y;
 		if (this.num_blobs >= Track.CUT){
     		this.found = true;
+    	} else {
+    		this.found = false;
     	}
-		Track.update(this.min_x, this.min_y, this.width, this.height);
+		Point center = this.dim_to_center(this.min_x, this.min_y, this.width, this.height);
+		double distance = this.find_distance();
+		double offset = this.find_offset();
+		double correction = this.find_correction();
+		this.reset();
+		return new Status(center, distance, offset, correction);
+	}
+	
+	public Point dim_to_center(double min_x, double min_y, double w, double h){
+		Point out = new Point(0,0);
+		if (this.found){
+			out.x = min_x + w * 0.5;
+			out.y = min_y + w * 0.5;
+		}
+		return out;
 	}
 	
 	// ----------------------------------------------------------
@@ -134,60 +125,25 @@ public class Track {
 		
 		this.width = 0;
 		this.height = 0;
-		
-		this.found = false;
 	}
 	
-	// ----------------------------------------------------------
-	// RETURNS THE CENTER (static)
-	// ----------------------------------------------------------
-	public static Point get_center(){
-		return Track.center;
-	}
-
-	// ----------------------------------------------------------
-	// RETURNS THE DRIVE CORRECTION (static)
-	// ----------------------------------------------------------
-	public static double get_correction(){
-		return Track.correction;
+	private double find_offset(){
+		//yet to be implemented
+		return 0.0;
 	}
 	
-	// ----------------------------------------------------------
-	// RETURNS THE DRIVE OFFSET (static)
-	// ----------------------------------------------------------
-	public static double get_offset(){
-		return Track.offset;
+	private double find_distance(){
+		//yet to be implemented
+		return 0.0;
 	}
 	
-	// ----------------------------------------------------------
-	// RETURNS THE VOLTAGE OF THE PDP (static)
-	// ----------------------------------------------------------
-	public static double get_voltage(){
-		return Track.voltage;
-	}
-	
-	// ----------------------------------------------------------
-	// UPDATES STATIC VARIABLES
-	// ----------------------------------------------------------
-	public static void update(int x, int y, int width, int height){
-		Track.center.x = (int) (x + width*0.5);
-		Track.center.y = (int) (y + height*0.5);
-		Track.offset = (double) 2*((Track.center.x - Track.IMG_CENTER.x)/Track.IMG_WIDTH);
-		Track.correction = Track.canyon.evaluate(Track.offset);
-		Track.voltage = Track.pdp.getVoltage();
-	}
-	
-	// ----------------------------------------------------------
-	// RETURNS THE NUMBER OF BLOBS IN THE INSTANCE
-	// ----------------------------------------------------------
-	public int get_num_blobs(){
-		return this.num_blobs;
-	}
-	
-	// ----------------------------------------------------------
-	// RETURNS THE FOUND BOOLEAN IN THE INSTANCE
-	// ----------------------------------------------------------
 	public boolean get_found(){
 		return this.found;
 	}
+	
+	private double find_correction(){
+		// yet to be implemented
+		return 0.0;
+	}
+
 }

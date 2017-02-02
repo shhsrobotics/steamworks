@@ -3,8 +3,8 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.filter.Green;
 import org.usfirst.frc.team486.robot.camera.Display;
+import org.usfirst.frc.team486.robot.camera.Status;
 import org.usfirst.frc.team486.robot.camera.Track;
-import org.usfirst.frc.team486.robot.camera.Track2;
 import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -65,30 +65,34 @@ public class Robot extends IterativeRobot {
 		opstickforwardtrigger.whileActive(new GearLiftCommand(false));
 		
 		visionThread = new Thread(() -> {
+			
+			int width = Robot.camera.get_frame().get_width();
+			int height = Robot.camera.get_frame().get_height();
+			
 			// Get the UsbCamera from CameraServer
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 			// Set the resolution
-			camera.setResolution(640, 480);
+			camera.setResolution(width, height);
 
 			// Get a CvSink. This will capture Mats from the camera
 			CvSink cvSink = CameraServer.getInstance().getVideo();
 			// Setup a CvSource. This will send images back to the Dashboard
-			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
+			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", width, height);
 
-			// Mats are very memory expensive. Lets reuse this Mat.
+			// Mats are very memory expensive.
 			Mat source = new Mat();
 			Mat hsv = new Mat();
 			Mat filtered = new Mat();
 			
-			//Track track = new Track();
-			
-			Track2 track = new Track2();
+			// Define camera package classes necessary
+			Track track = new Track();
 			Display display = new Display();
+			Status new_status;
 			
+			// Define variables necessary for tracking
 			List<MatOfPoint> contours;
 			
-			Point center;
-			
+			// Define filters from filter package
 			Green green_prep = new Green();
 
 			// This cannot be 'true'. The program will never exit if it is. This
@@ -103,79 +107,29 @@ public class Robot extends IterativeRobot {
 					// skip the rest of the current iteration
 					continue;
 				}
-				// Pull mat 
+				// Convert color data type
 				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
-				
+				//filter
 				green_prep.filter_hsv(hsv,filtered);
-				
-				//contours = track.find_blobs(filtered);
+				// find contours
 				contours = track.find_blobs(filtered);
-				
-				center = track.find_center(contours);
-				
-				SmartDashboard.putNumber("center_x", center.x);
-				SmartDashboard.putNumber("center_y", center.y);
-				
+				// evaluate new status
+				new_status = track.find_center(contours);
+				// update status
+				Robot.camera.get_status().update(new_status);
+				// display status
+				SmartDashboard.putNumber("center_x", Robot.camera.get_status().get_center().x);
+				SmartDashboard.putNumber("center_y", Robot.camera.get_status().get_center().y);
+				// if found, draw target center
 				if (track.get_found()){
-					Imgproc.circle(source, center, 10, new Scalar(0, 0, 255), -1);
+					display.draw_point(source, Robot.camera.get_status().get_center(), "red");
 				}
-				
 				// Give the output stream a new image to display
 				outputStream.putFrame(source);
 			}
 		});
 		visionThread.setDaemon(true);
 		visionThread.start();
-		
-//		camthread_literal = new Thread(() -> {
-//			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-//			camera.setResolution(320, 240);
-//			DriverStation.reportWarning("Initializing camera...", true);
-//			
-//			CvSink cvSink = CameraServer.getInstance().getVideo();
-//			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
-//			
-//			Mat source = new Mat();
-//			Mat hsv = new Mat();
-//			Mat filtered = new Mat();
-//			
-//			Display display = new Display();
-//			Green green_prep = new Green();
-//			Track track = new Track();
-//			
-//			do {
-//				cvSink.grabFrame(source);
-//				//CONVERTING IMAGE TYPES (source is BGR)
-//				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
-//				
-//				//Filter through color ranges
-//				if (CamThread.FILTER_COLOR == "green"){
-//					//RED
-//					green_prep.filter_hsv(hsv,filtered);
-//				} else if (CamThread.FILTER_COLOR == "blue") {
-//					//BLUE
-//				}
-//				
-//				List<MatOfPoint> contours = track.find_blobs(filtered);
-//				track.find_dimensions(contours);
-//				SmartDashboard.putNumber("blobs", track.get_num_blobs());
-//				SmartDashboard.putNumber("center_x", Track.get_center().x);
-//				SmartDashboard.putNumber("center_y", Track.get_center().y);
-//				SmartDashboard.putNumber("correction", Track.get_correction());
-//				SmartDashboard.putNumber("offset", Track.get_offset());
-//				
-//				if (track.get_found()){
-//					display.draw_point(source, Track.get_center(), "red");
-//				}
-//				
-//				//DISPLAY IMAGE
-//				outputStream.putFrame(source);
-//				
-//				track.reset();
-//			} while (!Thread.interrupted());
-//		});
-//		camthread_literal.setDaemon(true);
-//		camthread_literal.start();
 	}
 
 	
@@ -186,7 +140,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		Robot.camera.light_off();
 	}
 
 	@Override
@@ -226,7 +179,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Robot.camera.light_on();
 		Scheduler.getInstance().run();
 	}
 
@@ -236,7 +188,6 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		Robot.camera.light_on();
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}

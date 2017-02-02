@@ -15,18 +15,22 @@ public class TeleopCommand extends Command {
         // eg. requires(chassis);
     	requires(Robot.drivechain);
     	requires(Robot.compressor);
+    	requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drivechain.initdrive();
     	Robot.compressor.on();
+    	Robot.camera.light_on();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.oi.trackbutton.get()){
-    		Robot.drivechain.drive_value(Track.get_correction(), -Track.get_correction());
+    		Robot.drivechain.drive_value(
+    				Robot.camera.get_status().get_correction(), 
+    				-Robot.camera.get_status().get_correction());
     	} else {
     		Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
     	}
@@ -40,11 +44,13 @@ public class TeleopCommand extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.compressor.off();
+    	Robot.camera.light_off();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.compressor.off();
+    	Robot.camera.light_off();
     }
 }
