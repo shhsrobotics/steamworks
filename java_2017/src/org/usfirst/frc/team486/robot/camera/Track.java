@@ -15,12 +15,12 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 
 public class Track {
-	
+
 	// ----------------------------------------------------------
 	// TRACK INSTANCE COMPUTATION VARIABLES
 	// ----------------------------------------------------------
 	private int num_blobs = 0;
-	
+
 	private int min_x = -1;
 	private int min_y = -1;
 	private int max_x = -1;
@@ -28,9 +28,9 @@ public class Track {
 	
 	private int height = 0;
 	private int width = 0;
-	
+
 	private boolean found = false;
-	
+
 	// ----------------------------------------------------------
 	// TRACK INSTANCE COMPUTATION CONSTANTS
 	// ----------------------------------------------------------
@@ -38,7 +38,7 @@ public class Track {
 	private static final int IMG_WIDTH = 320;
 	private static final int IMG_HEIGHT = 220;
 	private static final int CUT = 1;
-	
+
 	// ----------------------------------------------------------
 	// CONTOUR FINDING METHOD
 	// ----------------------------------------------------------
@@ -48,7 +48,7 @@ public class Track {
 		Imgproc.findContours(filtered, contours, heirarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 		return contours;
 	}
-	
+
 	// ----------------------------------------------------------
 	// DIMENSION FINDING METHOD (calculates relative positions)
 	// ----------------------------------------------------------
@@ -102,7 +102,7 @@ public class Track {
 		this.reset();
 		return new Status(center, distance, offset, correction);
 	}
-	
+
 	public Point dim_to_center(double min_x, double min_y, double w, double h){
 		Point out = new Point(0,0);
 		if (this.found){
@@ -111,36 +111,36 @@ public class Track {
 		}
 		return out;
 	}
-	
+
 	// ----------------------------------------------------------
 	// INSTANCE RESETING METHOD
 	// ----------------------------------------------------------
 	public void reset(){
 		this.num_blobs = 0;
-		
+
 		this.min_x = -1;
 		this.min_y = -1;
 		this.max_x = -1;
 		this.max_y = -1;
-		
+
 		this.width = 0;
 		this.height = 0;
 	}
-	
+
 	private double find_offset(){
 		//yet to be implemented
 		return 0.0;
 	}
-	
+
 	private double find_distance(){
 		//yet to be implemented
 		return 0.0;
 	}
-	
+
 	public boolean get_found(){
 		return this.found;
 	}
-	
+
 	private double find_correction(){
 		// yet to be implemented
 		return 0.0;
