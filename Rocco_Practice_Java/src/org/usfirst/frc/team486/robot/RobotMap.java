@@ -26,4 +26,6 @@ public class RobotMap {
 	public static int Right_Drive1 = 2;
 	public static int Right_Drive2 = 3;
 	public static int SHOOTER_PIN = 4;
+	
+	public static int compressor_pin = 0;
 }

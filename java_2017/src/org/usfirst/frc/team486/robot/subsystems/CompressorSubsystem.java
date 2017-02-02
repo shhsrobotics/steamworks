@@ -25,4 +25,3 @@ public class CompressorSubsystem extends Subsystem {
     	compressor.setClosedLoopControl(false);
     }
 }
-

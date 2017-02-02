@@ -47,6 +47,10 @@ public class Robot extends IterativeRobot {
 	
 	private final OpstickBackTrigger opstickbacktrigger = new OpstickBackTrigger();
 	private final OpstickForwardTrigger opstickforwardtrigger = new OpstickForwardTrigger();
+	
+	private Status current_status;
+	private int width = Robot.camera.get_frame().get_width();
+	private int height = Robot.camera.get_frame().get_height();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -66,9 +70,6 @@ public class Robot extends IterativeRobot {
 		
 		visionThread = new Thread(() -> {
 			
-			int width = Robot.camera.get_frame().get_width();
-			int height = Robot.camera.get_frame().get_height();
-			
 			// Get the UsbCamera from CameraServer
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 			// Set the resolution
@@ -87,7 +88,6 @@ public class Robot extends IterativeRobot {
 			// Define camera package classes necessary
 			Track track = new Track();
 			Display display = new Display();
-			Status new_status;
 			
 			// Define variables necessary for tracking
 			List<MatOfPoint> contours;
@@ -113,16 +113,14 @@ public class Robot extends IterativeRobot {
 				green_prep.filter_hsv(hsv,filtered);
 				// find contours
 				contours = track.find_blobs(filtered);
-				// evaluate new status
-				new_status = track.find_center(contours);
-				// update status
-				Robot.camera.get_status().update(new_status);
+				// evaluates and updates current status, but does not update camera status
+				current_status = track.find_center(contours);
 				// display status
-				SmartDashboard.putNumber("center_x", Robot.camera.get_status().get_center().x);
-				SmartDashboard.putNumber("center_y", Robot.camera.get_status().get_center().y);
+//				SmartDashboard.putNumber("center_x", current_status.get_center().x);
+//				SmartDashboard.putNumber("center_y", current_status.get_center().y);
 				// if found, draw target center
-				if (track.get_found()){
-					display.draw_point(source, Robot.camera.get_status().get_center(), "red");
+				if (current_status.get_distance() != -1){
+					//display.draw_point(source, current_status.get_center(), "red");
 				}
 				// Give the output stream a new image to display
 				outputStream.putFrame(source);

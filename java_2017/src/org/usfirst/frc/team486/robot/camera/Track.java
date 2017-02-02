@@ -9,7 +9,7 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team486.control.Canyon;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
@@ -34,10 +34,7 @@ public class Track {
 	// ----------------------------------------------------------
 	// TRACK INSTANCE COMPUTATION CONSTANTS
 	// ----------------------------------------------------------
-	private static final Point IMG_CENTER = new Point(320,220);
-	private static final int IMG_WIDTH = 320;
-	private static final int IMG_HEIGHT = 220;
-	private static final int CUT = 1;
+	private int cut = 1;
 
 	// ----------------------------------------------------------
 	// CONTOUR FINDING METHOD
@@ -55,7 +52,7 @@ public class Track {
 	public Status find_center(List<MatOfPoint> contours){
 		for (Iterator<MatOfPoint> iter = contours.iterator(); iter.hasNext(); ) {
 		    MatOfPoint contour = iter.next();
-		    if (Imgproc.contourArea(contour) > 300){
+		    if (Imgproc.contourArea(contour) > 50){
 		    	this.num_blobs = this.num_blobs + 1;
 		    	Rect rect = Imgproc.boundingRect(contour);
 		    	if (this.min_x == -1){
@@ -90,15 +87,28 @@ public class Track {
 		}
 		this.width = this.max_x - this.min_x;
 		this.height = this.max_y - this.min_y;
-		if (this.num_blobs >= Track.CUT){
-    		this.found = true;
-    	} else {
-    		this.found = false;
-    	}
-		Point center = this.dim_to_center(this.min_x, this.min_y, this.width, this.height);
-		double distance = this.find_distance();
-		double offset = this.find_offset();
-		double correction = this.find_correction();
+		Point center;
+		double distance;
+		double offset;
+		double correction;
+		if (this.num_blobs >= this.cut){
+			center = this.dim_to_center(this.min_x, this.min_y, this.width, this.height);
+			distance = this.find_distance();
+			offset = this.find_offset();
+			correction = this.find_correction();
+		} else {
+			center = new Point(-1,-1);
+			distance = -1;
+			offset = 0;
+			correction = 0;
+		}
+		//Point center = this.dim_to_center(this.min_x, this.min_y, this.width, this.height);
+		//double distance = this.find_distance();
+		//double offset = this.find_offset();
+		//double correction = this.find_correction();
+		SmartDashboard.putNumber("center_x", 100);
+		SmartDashboard.putNumber("center_y", center.y);
+		SmartDashboard.putNumber("blobs", contours.size());
 		this.reset();
 		return new Status(center, distance, offset, correction);
 	}
@@ -137,13 +147,8 @@ public class Track {
 		return 0.0;
 	}
 
-	public boolean get_found(){
-		return this.found;
-	}
-
 	private double find_correction(){
 		// yet to be implemented
 		return 0.0;
 	}
-
 }

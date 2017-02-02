@@ -15,7 +15,7 @@ public class TeleopCommand extends Command {
         // eg. requires(chassis);
     	requires(Robot.drivechain);
     	requires(Robot.compressor);
-    	requires(Robot.camera);
+ //   	requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
@@ -29,7 +29,7 @@ public class TeleopCommand extends Command {
     protected void execute() {
     	if (Robot.oi.trackbutton.get()){
     		Robot.drivechain.drive_value(
-    				Robot.camera.get_status().get_correction(), 
+   				Robot.camera.get_status().get_correction(), 
     				-Robot.camera.get_status().get_correction());
     	} else {
     		Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);

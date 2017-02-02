@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot.subsystems;
 import org.usfirst.frc.team486.robot.RobotMap;
 import org.usfirst.frc.team486.robot.camera.Frame;
 import org.usfirst.frc.team486.robot.camera.Status;
+import org.usfirst.frc.team486.robot.commands.TeleopCommand;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
