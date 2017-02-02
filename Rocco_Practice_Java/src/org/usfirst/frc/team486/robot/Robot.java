@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.commands.ExampleCommand;
+import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ShooterSubsystem;
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveSubsystem drive = new DriveSubsystem();
 	public static final ShooterSubsystem shooter = new ShooterSubsystem();
+	public static final CompressorSubsystem compressor = new CompressorSubsystem();
 	public static OI oi;
 
 	Command autonomousCommand;
