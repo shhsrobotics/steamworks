@@ -6,6 +6,7 @@ import org.usfirst.frc.team486.robot.camera.Display;
 import org.usfirst.frc.team486.robot.camera.Status;
 import org.usfirst.frc.team486.robot.camera.Track;
 import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
+import org.usfirst.frc.team486.robot.commands.ShooterCommand;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -21,6 +22,7 @@ import org.usfirst.frc.team486.robot.subsystems.GearLiftSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team486.robot.triggers.OpstickBackTrigger;
 import org.usfirst.frc.team486.robot.triggers.OpstickForwardTrigger;
+import org.usfirst.frc.team486.robot.triggers.Opstick_1_3_Trigger;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 
@@ -47,6 +49,7 @@ public class Robot extends IterativeRobot {
 	
 	private final OpstickBackTrigger opstickbacktrigger = new OpstickBackTrigger();
 	private final OpstickForwardTrigger opstickforwardtrigger = new OpstickForwardTrigger();
+	private final Opstick_1_3_Trigger opstick_1_3_trigger = new Opstick_1_3_Trigger();
 	
 	private Status current_status;
 	private int width = Robot.camera.get_frame().get_width();
@@ -67,6 +70,7 @@ public class Robot extends IterativeRobot {
 		
 		opstickbacktrigger.whileActive(new GearLiftCommand(true));
 		opstickforwardtrigger.whileActive(new GearLiftCommand(false));
+		opstick_1_3_trigger.whileActive(new ShooterCommand());
 		
 		visionThread = new Thread(() -> {
 			
