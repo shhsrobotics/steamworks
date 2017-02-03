@@ -8,11 +8,14 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team486.robot.commands.CompressorCommand;
 import org.usfirst.frc.team486.robot.commands.ExampleCommand;
 import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ShooterSubsystem;
+import org.usfirst.frc.team486.robot.triggers.OpstickBackwardTrigger;
+import org.usfirst.frc.team486.robot.triggers.OpstickForwardTrigger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +31,9 @@ public class Robot extends IterativeRobot {
 	public static final ShooterSubsystem shooter = new ShooterSubsystem();
 	public static final CompressorSubsystem compressor =new CompressorSubsystem();
 	public static OI oi;
+	
+	public final OpstickBackwardTrigger op_backward = new OpstickBackwardTrigger();
+	public final OpstickForwardTrigger op_forward = new OpstickForwardTrigger();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -42,6 +48,9 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		op_forward.whileActive(new CompressorCommand(true));
+		op_backward.whileActive(new CompressorCommand(false));
+		
 	}
 
 	/**

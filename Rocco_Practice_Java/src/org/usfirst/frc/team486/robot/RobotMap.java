@@ -28,4 +28,6 @@ public class RobotMap {
 	public static int SHOOTER_PIN = 4;
 	
 	public static int compressor_pin = 0;
+	
+	public static double OPSTICK_THRESHOLD= 0.3;
 }

@@ -42,6 +42,7 @@ public class RobotMap {
 	public static int COMPRESSOR_PIN = 0;
 	public static int LIFT_PIN = 0;
 	public static int GRAB_PIN = 1;
+	public static int SHOOTER_REG_PIN = 2;
 	
 	// ----------------------------------------------------------
 	// CONTROL VALUES

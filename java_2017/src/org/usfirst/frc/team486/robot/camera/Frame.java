@@ -31,7 +31,7 @@ public class Frame {
 	private void set_320x240(){
 		this.type = "320x240";
 		this.width = 320;
-		this.height = 220;
+		this.height = 240;
 		this.center = new Point(160,120);
 	}
 	
