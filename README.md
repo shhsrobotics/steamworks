@@ -34,3 +34,5 @@ alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 alt="IMAGE ALT TEXT HERE" width="70" height="70" border="5" /></a>
 [*@alekoz47*](https://github.com/alekoz47)
 ###### *Never mutate state*
+
+<img src="https://pbs.twimg.com/media/C0Qq0rdXcAAm7Ip.jpg" alt="MEME" width="200" height="200" border="5"/>
