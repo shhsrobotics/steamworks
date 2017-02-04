@@ -20,7 +20,7 @@ public class GearLiftCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (this.state == true){
+    	if (this.state){
     		Robot.gear_lift.raise();
     	} else {
     		Robot.gear_lift.drop();

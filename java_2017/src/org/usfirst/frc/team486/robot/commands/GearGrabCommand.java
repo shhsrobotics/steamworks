@@ -18,7 +18,7 @@ public class GearGrabCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (Robot.gear_grab.get() == true) {
+    	if (Robot.gear_grab.get()) {
     		Robot.gear_grab.release();
     	} else {
     		Robot.gear_grab.grab();
