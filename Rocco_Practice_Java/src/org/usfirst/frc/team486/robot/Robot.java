@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.commands.CompressorCommand;
 import org.usfirst.frc.team486.robot.commands.ExampleCommand;
-import org.usfirst.frc.team486.robot.subsystems.CollectSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ExampleSubsystem;
@@ -33,7 +32,7 @@ public class Robot extends IterativeRobot {
 	public static final DriveSubsystem drive = new DriveSubsystem();
 	public static final ShooterSubsystem shooter = new ShooterSubsystem();
 	public static final CompressorSubsystem compressor = new CompressorSubsystem();
-	public static final GrabSubsystem GrabSubsystem = new GrabSubsystem();
+	public static final GrabSubsystem grab = new GrabSubsystem();
 	public static OI oi;
 	
 	public final OpstickBackwardTrigger op_backward = new OpstickBackwardTrigger();

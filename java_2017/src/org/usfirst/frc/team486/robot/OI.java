@@ -1,6 +1,7 @@
 package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.GearGrabCommand;
+import org.usfirst.frc.team486.robot.commands.ShooterCommand;
 import org.usfirst.frc.team486.robot.commands.ShooterRegDebugCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -30,5 +31,6 @@ public class OI {
 		grabbutton.whileActive(new GearGrabCommand());
 		shootregdebug.whenActive(new ShooterRegDebugCommand(true));
 		shootregdebug.whenInactive(new ShooterRegDebugCommand(false));
+		//trackbutton.whileHeld(new ShooterCommand());
 	}
 }
