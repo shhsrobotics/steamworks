@@ -7,7 +7,6 @@ import java.util.List;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team486.control.Canyon;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -52,7 +51,7 @@ public class Track {
 	public Status find_center(List<MatOfPoint> contours){
 		for (Iterator<MatOfPoint> iter = contours.iterator(); iter.hasNext(); ) {
 		    MatOfPoint contour = iter.next();
-		    if (Imgproc.contourArea(contour) > 50){
+		    if (Imgproc.contourArea(contour) > 150){
 		    	this.num_blobs = this.num_blobs + 1;
 		    	Rect rect = Imgproc.boundingRect(contour);
 		    	if (this.min_x == -1){
@@ -106,9 +105,9 @@ public class Track {
 		//double distance = this.find_distance();
 		//double offset = this.find_offset();
 		//double correction = this.find_correction();
-		SmartDashboard.putNumber("center_x", 100);
+		SmartDashboard.putNumber("center_x", center.x);
 		SmartDashboard.putNumber("center_y", center.y);
-		SmartDashboard.putNumber("blobs", contours.size());
+		SmartDashboard.putNumber("blobs", this.num_blobs);
 		this.reset();
 		return new Status(center, distance, offset, correction);
 	}

@@ -27,13 +27,7 @@ public class TeleopCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.trackbutton.get()){
-    		Robot.drivechain.drive_value(
-   				Robot.camera.get_status().get_correction(), 
-    				-Robot.camera.get_status().get_correction());
-    	} else {
-    		Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
-    	}
+    	Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
     }
 
     // Make this return true when this Command no longer needs to run execute()

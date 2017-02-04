@@ -15,6 +15,7 @@ public class RobotMap {
 	public static int LEFT_STICK_PIN = 0;
 	public static int RIGHT_STICK_PIN = 1;
 	public static int OPSTICK_PIN = 2;
+	public static int grab_button = 2;
 	
 	public static int SHOOTER_BUTTON = 1;
 	// If you are using multiple modules, make sure to define both the port
@@ -28,6 +29,7 @@ public class RobotMap {
 	public static int SHOOTER_PIN = 4;
 	
 	public static int compressor_pin = 0;
+	public static int grab_pin = 1;
 	
 	public static double OPSTICK_THRESHOLD= 0.3;
 }

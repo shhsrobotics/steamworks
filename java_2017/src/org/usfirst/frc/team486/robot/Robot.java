@@ -124,7 +124,7 @@ public class Robot extends IterativeRobot {
 //				SmartDashboard.putNumber("center_y", current_status.get_center().y);
 				// if found, draw target center
 				if (current_status.get_distance() != -1){
-					//display.draw_point(source, current_status.get_center(), "red");
+					display.draw_point(source, current_status.get_center(), "red");
 				}
 				// Give the output stream a new image to display
 				outputStream.putFrame(source);
