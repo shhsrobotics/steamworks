@@ -37,7 +37,7 @@ public class TeleopCommand extends Command {
     		SmartDashboard.putNumber("correction", 0.0);
     	}
     	Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
-    	SmartDashboard.putNumber("shooter_rpm", Robot.shooter.shooter_enc.getRate());
+    	SmartDashboard.putNumber("shooter_rpm", Math.round(Robot.shooter.shooter_enc.getRate()));
     }
 
     // Make this return true when this Command no longer needs to run execute()
