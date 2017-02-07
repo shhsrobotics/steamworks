@@ -21,7 +21,7 @@ public class ShooterSubsystem extends Subsystem {
 	private Talon shooter = new Talon(RobotMap.SHOOTER_PIN);
 	
 	public Encoder shooter_enc = 
-			new Encoder(RobotMap.ENCODER_PIN_A, RobotMap.ENCODER_PIN_B, false, Encoder.EncodingType.k2X);
+			new Encoder(RobotMap.ENCODER_PIN_B, RobotMap.ENCODER_PIN_A, false, Encoder.EncodingType.k1X);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
