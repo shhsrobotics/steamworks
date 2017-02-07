@@ -1,20 +1,21 @@
 
 package org.usfirst.frc.team486.robot;
 
-import org.usfirst.frc.team486.filter.Green;
-import org.usfirst.frc.team486.robot.camera.Display;
+import org.opencv.core.Mat;
 import org.usfirst.frc.team486.robot.camera.Status;
 import org.usfirst.frc.team486.robot.camera.Track;
 import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
 import org.usfirst.frc.team486.robot.commands.ShooterCommand;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.GearGrabSubsystem;
@@ -25,17 +26,6 @@ import org.usfirst.frc.team486.robot.triggers.OpstickForwardTrigger;
 import org.usfirst.frc.team486.robot.triggers.Opstick_1_3_Trigger;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
-
-import java.util.List;
-
-import org.opencv.imgproc.Imgproc;
-import org.opencv.core.*;
-
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
 
 public class Robot extends IterativeRobot {
 
@@ -74,61 +64,61 @@ public class Robot extends IterativeRobot {
 		
 		visionThread = new Thread(() -> {
 			
-			// Get the UsbCamera from CameraServer
-			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-			// Set the resolution
-			camera.setResolution(width, height);
-
-			// Get a CvSink. This will capture Mats from the camera
-			CvSink cvSink = CameraServer.getInstance().getVideo();
-			// Setup a CvSource. This will send images back to the Dashboard
-			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", width, height);
-
-			// Mats are very memory expensive.
-			Mat source = new Mat();
-			Mat hsv = new Mat();
-			Mat filtered = new Mat();
-			
-			// Define camera package classes necessary
-			Track track = new Track();
-			Display display = new Display();
+//			// Get the UsbCamera from CameraServer
+//			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+//			//UsbCamera camera = new UsbCamera("USB Camera 0", 0);
+//			// Set the resolution
+//			camera.setResolution(320, 240);
+//
+//			// Get a CvSink. This will capture Mats from the camera
+//			CvSink cvSink = CameraServer.getInstance().getVideo();
+//			// Setup a CvSource. This will send images back to the Dashboard
+//			CvSource outputStream = CameraServer.getInstance().putVideo("Center", 320, 240);
+//
+//			// Mats are very memory expensive.
+//			Mat source = new Mat();
+//			Mat hsv = new Mat();
+//			Mat filtered = new Mat();
+//			
+//			// Define camera package classes necessary
+//			Track track = new Track();
 			
 			// Define variables necessary for tracking
-			List<MatOfPoint> contours;
+//			List<MatOfPoint> contours;
 			
 			// Define filters from filter package
-			Green green_prep = new Green();
+//			Green green_prep = new Green();
 
-			// This cannot be 'true'. The program will never exit if it is. This
-			// lets the robot stop this thread when restarting robot code or
-			// deploying.
-			while (!Thread.interrupted()) {
-				// Tell the CvSink to grab a frame from the camera and put it
-				// in the source mat.  If there is an error notify the output.
-				if (cvSink.grabFrame(source) == 0) {
-					// Send the output the error.
-					outputStream.notifyError(cvSink.getError());
-					// skip the rest of the current iteration
-					continue;
-				}
-				// Convert color data type
-				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
-				//filter
-				green_prep.filter_hsv(hsv,filtered);
-				// find contours
-				contours = track.find_blobs(filtered);
-				// evaluates and updates current status, but does not update camera status
-				current_status = track.find_center(contours);
-				// display status
-//				SmartDashboard.putNumber("center_x", current_status.get_center().x);
-//				SmartDashboard.putNumber("center_y", current_status.get_center().y);
-				// if found, draw target center
-				if (current_status.get_distance() != -1){
-					display.draw_point(source, current_status.get_center(), "red");
-				}
-				// Give the output stream a new image to display
-				outputStream.putFrame(source);
-			}
+//			// This cannot be 'true'. The program will never exit if it is. This
+//			// lets the robot stop this thread when restarting robot code or
+//			// deploying.
+//			while (!Thread.interrupted()) {
+//				// Tell the CvSink to grab a frame from the camera and put it
+//				// in the source mat.  If there is an error notify the output.
+//				if (CameraServer.getInstance().getVideo().grabFrame(source) == 0) {
+//					// Send the output the error.
+//					outputStream.notifyError(cvSink.getError());
+//					// skip the rest of the current iteration
+//				continue;
+//				}
+//				// Convert color data type
+//				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
+//				//filter
+//				green_prep.filter_hsv(hsv,filtered);
+//				// find contours
+//				contours = track.find_blobs(filtered);
+//				// evaluates and updates current status, but does not update camera status
+//				current_status = track.find_center(contours);
+//				// display status
+////				SmartDashboard.putNumber("center_x", current_status.get_center().x);
+////				SmartDashboard.putNumber("center_y", current_status.get_center().y);
+//				// if found, draw target center
+//				if (current_status.get_distance() != -1){
+//					display.draw_point(source, current_status.get_center(), "red");
+//				}
+//				// Give the output stream a new image to display
+//				outputStream.putFrame(source);
+//			}
 		});
 		visionThread.setDaemon(true);
 		visionThread.start();

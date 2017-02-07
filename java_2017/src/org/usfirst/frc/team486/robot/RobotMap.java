@@ -33,6 +33,12 @@ public class RobotMap {
 	public static int SHOOTER_PIN = 4;
 	
 	// ----------------------------------------------------------
+	// DIO PORTS
+	// ----------------------------------------------------------
+	public static int ENCODER_PIN_A = 0;
+	public static int ENCODER_PIN_B = 1;
+	
+	// ----------------------------------------------------------
 	// RELAYS
 	// ----------------------------------------------------------
 	public static int LED_PIN = 1;

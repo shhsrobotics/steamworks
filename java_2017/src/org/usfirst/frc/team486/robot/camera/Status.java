@@ -16,11 +16,14 @@ public class Status {
 	// prescribed correction (between -1 and 1)
 	private double correction;
 	
+	private boolean led_on;
+	
 	public Status(Point center_in, double distance_in, double offset_percentage_in, double correction_in){
 		this.center = center_in;
 		this.distance = distance_in;
 		this.offset_percentage = offset_percentage_in;
 		this.correction = correction_in;
+		this.led_on = false;
 	}
 	
 	public void update(Status new_status){
@@ -43,6 +46,18 @@ public class Status {
 	
 	public double get_correction(){
 		return this.correction;
+	}
+	
+	public void led_on(){
+		this.led_on = true;
+	}
+	
+	public void led_off(){
+		this.led_on = false;
+	}
+	
+	public boolean get_led(){
+		return this.led_on;
 	}
 	
 }
