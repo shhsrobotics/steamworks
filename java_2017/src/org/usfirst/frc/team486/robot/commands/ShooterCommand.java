@@ -23,6 +23,7 @@ public class ShooterCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.shooter.spin(Robot.oi.opstick.getY());
+    	
     	//Robot.shooter.spin(0.5);
     }
 
@@ -40,5 +41,6 @@ public class ShooterCommand extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.shooter.stop();
+    	SmartDashboard.putNumber("correction", 0);
     }
 }

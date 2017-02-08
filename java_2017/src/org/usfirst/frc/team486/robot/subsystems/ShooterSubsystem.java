@@ -1,7 +1,8 @@
 package org.usfirst.frc.team486.robot.subsystems;
 
-import org.usfirst.frc.team486.robot.Robot;
 import org.usfirst.frc.team486.robot.RobotMap;
+import org.usfirst.frc.team486.robot.commands.ShooterCommand;
+import org.usfirst.frc.team486.robot.commands.TeleopCommand;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;

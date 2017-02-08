@@ -4,6 +4,7 @@ import org.usfirst.frc.team486.robot.Robot;
 import org.usfirst.frc.team486.robot.camera.Track;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,7 +16,7 @@ public class TeleopCommand extends Command {
         // eg. requires(chassis);
     	requires(Robot.drivechain);
     	requires(Robot.compressor);
- //   	requires(Robot.camera);
+    	requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
