@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot.subsystems;
 import org.usfirst.frc.team486.robot.RobotMap;
 import org.usfirst.frc.team486.robot.commands.Teleop;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -21,10 +22,14 @@ public class Chassis extends Subsystem {
 	
 	private Encoder leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_PIN_A, RobotMap.LEFT_ENCODER_PIN_B);
 	private Encoder rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_PIN_A, RobotMap.RIGHT_ENCODER_PIN_B);
+	
+	private AnalogGyro gyro = new AnalogGyro(RobotMap.GYRO_PIN);
+	double Kp = 0.3;
 
     public void initDefaultCommand() {
     	setDefaultCommand(new Teleop());
     }
+    
     public void drive_joystick(Joystick leftStick, Joystick rightStick) {
     	this.drive.tankDrive(leftStick, rightStick);
     }
@@ -42,6 +47,7 @@ public class Chassis extends Subsystem {
     	right_val = slow_cook(right_val);
     	this.drive.tankDrive(right_val, left_val);
     }
+    
     public void slowDrive_value(double left_val_in, double right_val_in){
     	double right_val = slow_cook(right_val_in);
     	double left_val = slow_cook(left_val_in);
@@ -89,5 +95,16 @@ public class Chassis extends Subsystem {
     	return this.rightEncoder.getRate();
     }
     
+    public void gyro_start(){
+    	gyro.calibrate();
+    }
+    
+    public double gyro_angle(){
+    	return gyro.getAngle();
+    }
+    
+    public void gyro_reset(){
+    	gyro.reset();
+    }
 }
 

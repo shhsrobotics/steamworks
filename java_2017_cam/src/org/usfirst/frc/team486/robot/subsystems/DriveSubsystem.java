@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot.subsystems;
 import org.usfirst.frc.team486.robot.RobotMap;
 import org.usfirst.frc.team486.robot.commands.TeleopCommand;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
@@ -20,6 +21,8 @@ public class DriveSubsystem extends Subsystem {
 	private Talon right_1 = new Talon(RobotMap.RIGHT_DRIVE_1);
 	private Talon right_2 = new Talon(RobotMap.RIGHT_DRIVE_2);
 	private RobotDrive drive = new RobotDrive(left_1, left_2, right_1, right_2);
+	private AnalogGyro gyro = new AnalogGyro(RobotMap.GYRO_PIN);
+	double Kp = 0.3;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -38,6 +41,11 @@ public class DriveSubsystem extends Subsystem {
     	drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false);
     	drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
     }
-    
+    public void gyro_start(){
+    	gyro.calibrate();
+    }
+    public double gyro_angle(){
+    	return gyro.getAngle();
+    }
 }
 

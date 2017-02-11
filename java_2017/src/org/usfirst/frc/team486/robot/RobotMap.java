@@ -24,6 +24,7 @@ public class RobotMap {
 	public static int SHOOT_REG_DEBUG = 11;
 	public static int WINCH_BUTTON = 1;
 	public static int SLOW_BUTTON = 2;
+	public static int RESET_BUTTON = 6;
 	
 	// ----------------------------------------------------------
 	// PWM PORTS
@@ -62,4 +63,8 @@ public class RobotMap {
 	// CONTROL VALUES
 	// ----------------------------------------------------------
 	public static double OPSTICK_THRESHOLD = 0.3;
+	//-----------------------------------------------------------
+	// ANALOG
+	//-----------------------------------------------------------
+	public static int GYRO_PIN = 0;
 }

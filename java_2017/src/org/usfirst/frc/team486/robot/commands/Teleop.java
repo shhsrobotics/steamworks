@@ -2,6 +2,7 @@ package org.usfirst.frc.team486.robot.commands;
 
 import org.usfirst.frc.team486.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -32,11 +33,16 @@ public class Teleop extends Command {
     	} else {
     		Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
     	}
+    	
+    	if (Robot.oi.resetbutton.get()){
+    		Robot.drivechain.gyro_reset();
+    	}
     		
     	SmartDashboard.putNumber("LEFT_RAW", Robot.drivechain.get_left_encoder_raw());
     	SmartDashboard.putNumber("LEFT_RATE", Robot.drivechain.get_left_encoder_rate());
     	SmartDashboard.putNumber("RIGHT RAW", Robot.drivechain.get_right_encoder_raw());
     	SmartDashboard.putNumber("RIGHT_RATE", Robot.drivechain.get_right_encoder_rate());
+    	SmartDashboard.putNumber("Analog gyro angle", Robot.drivechain.gyro_angle());
     }
 
     // Make this return true when this Command no longer needs to run execute()

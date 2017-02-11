@@ -57,4 +57,8 @@ public class RobotMap {
 	// CONTROL VALUES
 	// ----------------------------------------------------------
 	public static double OPSTICK_THRESHOLD = 0.3;
+	//-----------------------------------------------------------
+	//ANALOG
+	//-----------------------------------------------------------
+	public static int GYRO_PIN = 0;
 }

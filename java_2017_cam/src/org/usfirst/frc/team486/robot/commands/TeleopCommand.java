@@ -24,11 +24,13 @@ public class TeleopCommand extends Command {
     	Robot.drivechain.initdrive();
     	Robot.compressor.on();
     	Robot.camera.light_on();
+    	Robot.drivechain.gyro_start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
+    	SmartDashboard.putNumber("Analog gyro", Robot.drivechain.gyro_angle());
     	
     }
 

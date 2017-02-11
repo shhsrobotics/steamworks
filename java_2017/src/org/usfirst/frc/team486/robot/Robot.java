@@ -55,6 +55,9 @@ public class Robot extends IterativeRobot {
 		
 		opstickbacktrigger.whileActive(new LiftGear(true));
 		opstickforwardtrigger.whileActive(new LiftGear(false));
+		
+		Robot.drivechain.gyro_start();
+		Timer.delay(5);
 	}
 
 	

@@ -25,6 +25,7 @@ public class OI {
 	public JoystickButton shootregdebug = new JoystickButton(opstick, RobotMap.SHOOT_REG_DEBUG);
 	public JoystickButton winchbutton = new JoystickButton(rightstick, RobotMap.WINCH_BUTTON);
 	public JoystickButton slowbutton = new JoystickButton(rightstick, RobotMap.SLOW_BUTTON);
+	public JoystickButton resetbutton = new JoystickButton(opstick, RobotMap.RESET_BUTTON);
 
 	// ----------------------------------------------------------
 	// OI METHOD FOR BUTTON TRIGGERS
