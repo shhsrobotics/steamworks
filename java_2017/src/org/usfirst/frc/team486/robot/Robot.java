@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
 import org.usfirst.frc.team486.robot.commands.ShooterCommand;
+import org.usfirst.frc.team486.robot.commands.GearGrabCommand;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -13,14 +14,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team486.robot.subsystems.GearGrabSubsystem;
-import org.usfirst.frc.team486.robot.subsystems.GearLiftSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.WinchSubsystem;
 import org.usfirst.frc.team486.robot.triggers.OpstickBackTrigger;
 import org.usfirst.frc.team486.robot.triggers.OpstickForwardTrigger;
 import org.usfirst.frc.team486.robot.triggers.Opstick_1_3_Trigger;
 import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.ClawSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 
 public class Robot extends IterativeRobot {
@@ -28,11 +28,11 @@ public class Robot extends IterativeRobot {
 	public static final CameraSubsystem camera = new CameraSubsystem();
 	public static final DriveSubsystem drivechain = new DriveSubsystem();
 	public static final CompressorSubsystem compressor = new CompressorSubsystem();
-	public static final GearGrabSubsystem gear_grab = new GearGrabSubsystem();
-	public static final GearLiftSubsystem gear_lift = new GearLiftSubsystem();
 	public static final ShooterSubsystem shooter = new ShooterSubsystem();
 	public static final WinchSubsystem winch = new WinchSubsystem();
 	public static OI oi;
+	
+	public static final ClawSubsystem claw = new ClawSubsystem();
 	
 	private final OpstickBackTrigger opstickbacktrigger = new OpstickBackTrigger();
 	private final OpstickForwardTrigger opstickforwardtrigger = new OpstickForwardTrigger();

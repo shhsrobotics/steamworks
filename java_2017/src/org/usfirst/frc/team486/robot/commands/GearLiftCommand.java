@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
+
 public class GearLiftCommand extends Command {
 	
 	private boolean state;
@@ -14,16 +15,16 @@ public class GearLiftCommand extends Command {
     public GearLiftCommand(boolean state_in) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.gear_lift);
+    	requires(Robot.claw);
     	this.state = state_in;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (this.state){
-    		Robot.gear_lift.raise();
+    	if (state){
+    		Robot.claw.raise();
     	} else {
-    		Robot.gear_lift.drop();
+    		Robot.claw.lower();
     	}
     }
 

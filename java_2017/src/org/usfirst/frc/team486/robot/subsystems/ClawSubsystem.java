@@ -8,24 +8,34 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class GearLiftSubsystem extends Subsystem {
+public class ClawSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-
+	private Solenoid claw = new Solenoid(RobotMap.CLAW_PIN);
 	private Solenoid lift = new Solenoid(RobotMap.LIFT_PIN);
-	
+
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    }
-    
-    public void drop(){
-    	lift.set(false);
-    }
-    
-    public void raise(){
-    	lift.set(true);
-    }
+    	}
+    public void grab(){
+		claw.set(true);
+	}
+	public void release(){
+		claw.set(false);
+	}
+	public boolean get(){
+		return claw.get();
+	}
+	public void raise(){
+		lift.set(true);
+	}
+	public void lower(){
+		lift.set(false);
+	}
+	public boolean status(){
+		return lift.get();
+	}
 }
 

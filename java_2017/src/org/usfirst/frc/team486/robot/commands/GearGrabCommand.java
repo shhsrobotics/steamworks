@@ -13,15 +13,15 @@ public class GearGrabCommand extends Command {
     public GearGrabCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.gear_grab);
+    	requires(Robot.claw);
     }
-
+    
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (Robot.gear_grab.get()) {
-    		Robot.gear_grab.release();
+    	if (Robot.claw.get()) {
+    		Robot.claw.release();
     	} else {
-    		Robot.gear_grab.grab();
+    		Robot.claw.grab();
     	}
     }
 
