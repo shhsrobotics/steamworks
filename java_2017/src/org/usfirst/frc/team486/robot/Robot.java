@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team486.robot;
 
+import org.usfirst.frc.team486.robot.commands.AutoDriveFiveFeetCommandGroup;
 import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
 import org.usfirst.frc.team486.robot.commands.ShooterCommand;
 
@@ -49,6 +50,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		chooser.addDefault("Drive forward 5 feet (WARNING: UNTESTED)", new AutoDriveFiveFeetCommandGroup());
+		SmartDashboard.putData("Autonomous Mode", chooser);
 		oi = new OI();
 		
 		shooter.reset();
