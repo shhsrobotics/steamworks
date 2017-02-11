@@ -6,10 +6,12 @@ import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
 import org.usfirst.frc.team486.robot.commands.ShooterCommand;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.GearGrabSubsystem;
@@ -44,7 +46,8 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	
-	Thread visionThread;
+	//Thread visionThread;
+	Thread encoderThread;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -54,10 +57,28 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		
+		shooter.reset();
+		shooter.start_encoder();
+		
 		opstickbacktrigger.whileActive(new GearLiftCommand(true));
 		opstickforwardtrigger.whileActive(new GearLiftCommand(false));
 //		opstick_1_3_trigger.whileActive(new ShooterCommand());
-		
+		encoderThread = new Thread(() -> {
+			double time = 0;
+			while(!Thread.interrupted()){
+				double r1 = shooter.get_raw();
+				Timer.delay(0.25);
+				double r2 = shooter.get_raw();
+				Timer.delay(0.25);
+				double rate = (r1-r2)/(0.25);
+				SmartDashboard.putNumber("shooter_rpm", rate);
+				SmartDashboard.putNumber("shooter_distance", r2);
+				time += 0.5;
+				SmartDashboard.putNumber("correction", time);
+			}
+		});
+		encoderThread.setDaemon(true);
+		encoderThread.start();
 //		visionThread = new Thread(() -> {
 //			
 //			// Get the UsbCamera from CameraServer

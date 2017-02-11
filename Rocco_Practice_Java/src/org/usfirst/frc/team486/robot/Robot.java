@@ -51,8 +51,6 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
-		op_forward.whileActive(new CompressorCommand(true));
-		op_backward.whileActive(new CompressorCommand(false));
 		
 	}
 
