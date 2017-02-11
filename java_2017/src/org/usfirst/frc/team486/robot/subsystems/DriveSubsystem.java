@@ -32,6 +32,28 @@ public class DriveSubsystem extends Subsystem {
     public void drive_value(double left_val, double right_val){
     	this.drive.tankDrive(left_val, right_val);
     }
+    
+    public void slow_drive_joystick(Joystick leftStick, Joystick rightStick){
+    	double left_val;
+    	double right_val;
+    	left_val = leftStick.getY();
+    	left_val = slow_cook(left_val);
+    	right_val = rightStick.getY();
+    	right_val = slow_cook(right_val);
+    	this.drive.tankDrive(left_val,  right_val);
+    }
+    public void slowDrive_value(double left_val, double right_val){
+    	double right_vale = slow_cook(right_val);
+    	double left_vale = slow_cook(left_val);
+    	this.drive.tankDrive(left_vale, right_vale);
+    }
+    
+    private double slow_cook(double val_in){
+    	double val;
+    	val = (val_in * val_in) * 0.5;
+    	return val;
+    }
+    
     public void initdrive() {
     	this.drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false);
     	this.drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
@@ -66,5 +88,6 @@ public class DriveSubsystem extends Subsystem {
     public double get_right_encoder_rate(){
     	return this.rightEncoder.getRate();
     }
+    
 }
 

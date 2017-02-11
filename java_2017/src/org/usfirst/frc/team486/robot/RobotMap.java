@@ -23,6 +23,7 @@ public class RobotMap {
 	public static int SHOOT_OVERRIDE = 3;
 	public static int SHOOT_REG_DEBUG = 11;
 	public static int WINCH_BUTTON = 1;
+	public static int SLOW_BUTTON = 2;
 	
 	// ----------------------------------------------------------
 	// PWM PORTS
