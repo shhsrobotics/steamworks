@@ -1,9 +1,8 @@
 package org.usfirst.frc.team486.robot;
 
-import org.usfirst.frc.team486.robot.commands.GearGrabCommand;
-import org.usfirst.frc.team486.robot.commands.ShooterCommand;
-import org.usfirst.frc.team486.robot.commands.ShooterRegDebugCommand;
-import org.usfirst.frc.team486.robot.commands.WinchCommand;
+import org.usfirst.frc.team486.robot.commands.GrabGear;
+import org.usfirst.frc.team486.robot.commands.AutoShoot;
+import org.usfirst.frc.team486.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -31,11 +30,12 @@ public class OI {
 	// OI METHOD FOR BUTTON TRIGGERS
 	// ----------------------------------------------------------
 	public OI(){
-		grabbutton.whileActive(new GearGrabCommand());
-		shootregdebug.whenActive(new ShooterRegDebugCommand(true));
-		shootregdebug.whenInactive(new ShooterRegDebugCommand(false));
+		grabbutton.whileActive(new GrabGear());
+		//shootregdebug.whenActive(new AcceptBall_DEBUG(true));
+		//shootregdebug.whenInactive(new AcceptBall_DEBUG(false));
 		//trackbutton.whileHeld(new ShooterCommand());
-		trackbutton.whileActive(new ShooterCommand());
-		winchbutton.whileActive(new WinchCommand());
+		//trackbutton.whenActive(new ShootAuto());
+		trackbutton.whenActive(new AutoShoot(65000));
+		winchbutton.whileActive(new Climb());
 	}
 }

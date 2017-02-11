@@ -8,26 +8,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class ShooterCommand extends Command {
-    public ShooterCommand() {
+public class Climb extends Command {
+
+    public Climb() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooter);
+    	requires(Robot.winch);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.spin(Robot.oi.opstick.getY());
-    	//Robot.shooter.spin(0.5);
-    	//Robot.shooter.shooter_enc.setSamplesToAverage(5);
-    	//SmartDashboard.putBoolean("shooter_direction_test", rate);
-    	SmartDashboard.putNumber("SHOOTER_RAW", Robot.shooter.get_raw());
-    	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
+    	Robot.winch.drive(1);
+    	SmartDashboard.putNumber("correction", 1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,13 +33,12 @@ public class ShooterCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.stop();
+    	Robot.winch.drive(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooter.stop();
-    	SmartDashboard.putNumber("correction", 0);
+    	Robot.winch.drive(0);
     }
 }

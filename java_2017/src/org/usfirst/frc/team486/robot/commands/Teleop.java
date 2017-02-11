@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class TeleopCommand extends Command {
+public class Teleop extends Command {
 
-    public TeleopCommand() {
+    public Teleop() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivechain);

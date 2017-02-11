@@ -1,8 +1,8 @@
 package org.usfirst.frc.team486.robot.subsystems;
 
 import org.usfirst.frc.team486.robot.RobotMap;
-import org.usfirst.frc.team486.robot.commands.ShooterCommand;
-import org.usfirst.frc.team486.robot.commands.TeleopCommand;
+import org.usfirst.frc.team486.robot.commands.Shoot;
+import org.usfirst.frc.team486.robot.commands.Teleop;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class ShooterSubsystem extends Subsystem {
+public class Shooter extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -20,20 +20,13 @@ public class ShooterSubsystem extends Subsystem {
 	private Solenoid shooter_reg = new Solenoid(RobotMap.SHOOTER_REG_PIN);
 	
 	private Talon shooter = new Talon(RobotMap.SHOOTER_PIN);
-	
-//	public Encoder shooter_enc = 
-//			new Encoder(RobotMap.ENCODER_PIN_B, RobotMap.ENCODER_PIN_A, false, Encoder.EncodingType.k1X);
-	
-//	private Encoder shooter_enc = new Encoder(RobotMap.ENCODER_PIN_B, RobotMap.ENCODER_PIN_A, false, Encoder.EncodingType.k1X);
 
 	private Encoder shooter_enc = 
 			new Encoder(RobotMap.SHOOTER_ENCODER_PIN_B, RobotMap.SHOOTER_ENCODER_PIN_A, false, Encoder.EncodingType.k1X);
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
-    
+
     public void spin(double power){
     	shooter.set(power);
     }
@@ -61,6 +54,5 @@ public class ShooterSubsystem extends Subsystem {
     public void reset(){
     	shooter_enc.reset();
     }
-
 }
 

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team486.robot.subsystems;
 
 import org.usfirst.frc.team486.robot.RobotMap;
-import org.usfirst.frc.team486.robot.commands.TeleopCommand;
+import org.usfirst.frc.team486.robot.commands.Teleop;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class DriveSubsystem extends Subsystem {
+public class Chassis extends Subsystem {
 
 	private Talon left_1 = new Talon(RobotMap.LEFT_DRIVE_1);
 	private Talon left_2 = new Talon(RobotMap.LEFT_DRIVE_2);
@@ -23,7 +23,7 @@ public class DriveSubsystem extends Subsystem {
 	private Encoder rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_PIN_A, RobotMap.RIGHT_ENCODER_PIN_B);
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new TeleopCommand());
+    	setDefaultCommand(new Teleop());
     }
     public void drive_joystick(Joystick leftStick, Joystick rightStick) {
     	this.drive.tankDrive(leftStick, rightStick);
@@ -40,17 +40,17 @@ public class DriveSubsystem extends Subsystem {
     	left_val = slow_cook(left_val);
     	right_val = rightStick.getY();
     	right_val = slow_cook(right_val);
-    	this.drive.tankDrive(left_val,  right_val);
+    	this.drive.tankDrive(right_val, left_val);
     }
-    public void slowDrive_value(double left_val, double right_val){
-    	double right_vale = slow_cook(right_val);
-    	double left_vale = slow_cook(left_val);
-    	this.drive.tankDrive(left_vale, right_vale);
+    public void slowDrive_value(double left_val_in, double right_val_in){
+    	double right_val = slow_cook(right_val_in);
+    	double left_val = slow_cook(left_val_in);
+    	this.drive.tankDrive(right_val, left_val);
     }
     
     private double slow_cook(double val_in){
     	double val;
-    	val = (val_in * val_in) * 0.5;
+    	val = (val_in)*0.5;
     	return val;
     }
     

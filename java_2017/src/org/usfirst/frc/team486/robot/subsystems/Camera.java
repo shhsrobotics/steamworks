@@ -1,7 +1,7 @@
 package org.usfirst.frc.team486.robot.subsystems;
 
 import org.usfirst.frc.team486.robot.RobotMap;
-import org.usfirst.frc.team486.robot.commands.TeleopCommand;
+import org.usfirst.frc.team486.robot.commands.Teleop;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class CameraSubsystem extends Subsystem {
+public class Camera extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

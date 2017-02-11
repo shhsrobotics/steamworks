@@ -1,20 +1,25 @@
 package org.usfirst.frc.team486.robot.commands;
 
 import org.usfirst.frc.team486.robot.Robot;
+import org.usfirst.frc.team486.robot.control.ShootControl;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class ShooterRegDebugCommand extends Command {
-
-	private boolean state;
+public class AutoShoot extends Command {
 	
-    public ShooterRegDebugCommand(boolean state_in) {
+	private double target;
+	private double offset;
+	private double correction;
+	private ShootControl control = new ShootControl();
+	
+    public AutoShoot(double rate) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this.state = state_in;
+    	this.target = rate;
     	requires(Robot.shooter);
     }
 
@@ -24,7 +29,11 @@ public class ShooterRegDebugCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (this.state){
+    	offset = (Robot.shooter.get_rate() - target);
+    	correction = control.get_correction(offset);
+    	Robot.shooter.spin(correction); // since backwards
+    	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
+    	if (Robot.oi.shootregdebug.get()){
     		Robot.shooter.open();
     	} else {
     		Robot.shooter.close();
@@ -38,10 +47,12 @@ public class ShooterRegDebugCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.shooter.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.shooter.stop();
     }
 }

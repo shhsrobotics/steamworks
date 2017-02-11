@@ -7,29 +7,28 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
+public class AcceptBall_DEBUG extends Command {
 
-public class GearLiftCommand extends Command {
-	
 	private boolean state;
-
-    public GearLiftCommand(boolean state_in) {
+	
+    public AcceptBall_DEBUG(boolean state_in) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.claw);
     	this.state = state_in;
+    	requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (state){
-    		Robot.claw.raise();
-    	} else {
-    		Robot.claw.lower();
-    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (this.state){
+    		Robot.shooter.open();
+    	} else {
+    		Robot.shooter.close();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

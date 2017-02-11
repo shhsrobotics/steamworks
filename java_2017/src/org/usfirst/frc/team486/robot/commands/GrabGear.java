@@ -8,22 +8,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class WinchCommand extends Command {
-
-    public WinchCommand() {
+public class GrabGear extends Command {
+	
+    public GrabGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.winch);
+    	requires(Robot.claw);
     }
-
+    
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if (Robot.claw.get()) {
+    		Robot.claw.release();
+    	} else {
+    		Robot.claw.grab();
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.winch.drive(1);
-    	SmartDashboard.putNumber("correction", 1);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,12 +37,10 @@ public class WinchCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.winch.drive(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.winch.drive(0);
     }
 }
