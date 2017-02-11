@@ -1,10 +1,12 @@
 
 package org.usfirst.frc.team486.robot;
 
+import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
 import org.usfirst.frc.team486.robot.commands.AutoDriveFiveFeetCommandGroup;
 import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
 import org.usfirst.frc.team486.robot.commands.ShooterCommand;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,6 +27,7 @@ import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
 
 public class Robot extends IterativeRobot {
+	Command autonomousCommand;
 
 	public static final CameraSubsystem camera = new CameraSubsystem();
 	public static final DriveSubsystem drivechain = new DriveSubsystem();
@@ -37,9 +40,7 @@ public class Robot extends IterativeRobot {
 	
 	private final OpstickBackTrigger opstickbacktrigger = new OpstickBackTrigger();
 	private final OpstickForwardTrigger opstickforwardtrigger = new OpstickForwardTrigger();
-
-	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser chooser = new SendableChooser();
 	
 	//Thread visionThread;
 	Thread encoderThread;
@@ -50,10 +51,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		chooser.addDefault("Drive forward 5 feet (WARNING: UNTESTED)", new AutoDriveFiveFeetCommandGroup());
+		chooser.addDefault("Drive forward 5 feet (WARNING: UNTESTED)", new AutoDriveDistance(5.0, 0.8));
 		SmartDashboard.putData("Autonomous Mode", chooser);
 		oi = new OI();
-		
+		//autonomousCommand = (Command)chooser.getSelected();
 		shooter.reset();
 		
 		opstickbacktrigger.whileActive(new GearLiftCommand(true));
@@ -88,18 +89,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		autonomousCommand = new AutoDriveDistance(5.0, 0.8);
+		DriverStation.reportWarning("Auto hardwired: " + autonomousCommand.getName(), true);
+		autonomousCommand.start();
 	}
 
 	/**
@@ -116,8 +108,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
+		autonomousCommand.cancel();
 	}
 
 	/**

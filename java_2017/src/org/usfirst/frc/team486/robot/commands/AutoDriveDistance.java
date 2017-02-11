@@ -2,7 +2,9 @@ package org.usfirst.frc.team486.robot.commands;
 
 import org.usfirst.frc.team486.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -12,6 +14,7 @@ public class AutoDriveDistance extends Command {
 	private double feet, speed;
 	private double lMod = 1.0;
 	private double rMod = 1.0;
+	private boolean hasRun = false;
 
     public AutoDriveDistance(double feet, double speed) {
         // Use requires() here to declare subsystem dependencies
@@ -23,8 +26,10 @@ public class AutoDriveDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	hasRun = false;
     	Robot.drivechain.reset_encoders();
     	Robot.drivechain.drive_value(speed, speed);
+    	DriverStation.reportWarning("Starting drive command: speed " + speed + ", distance " + feet, true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,16 +50,20 @@ public class AutoDriveDistance extends Command {
     			rMod = rMod * scale;
     		}
     	}
+    	Robot.drivechain.drive_value(lMod * speed, rMod * speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.drivechain.get_left_encoder_raw_feet() >= feet && Robot.drivechain.get_right_encoder_raw_feet() >= feet);
+    	boolean val = ((Robot.drivechain.get_left_encoder_raw_feet() >= feet) && (Robot.drivechain.get_right_encoder_raw_feet() >= feet));
+    	DriverStation.reportWarning("Ran isFinished. Got result: " + val + ". Feet: " + feet + " LF: " + Robot.drivechain.get_left_encoder_raw_feet() + ". RF: " + Robot.drivechain.get_right_encoder_raw_feet(), true);
+        return val;
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.drivechain.drive_value(0.0, 0.0);
+    	DriverStation.reportWarning("Finishing drive command: speed " + speed + ", distance " + feet, true);
     }
 
     // Called when another command which requires one or more of the same
