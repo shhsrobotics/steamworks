@@ -1,7 +1,6 @@
 package org.usfirst.frc.team486.robot.commands;
 
 import org.usfirst.frc.team486.robot.Robot;
-import org.usfirst.frc.team486.robot.camera.Track;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,7 +28,10 @@ public class TeleopCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
-    	
+    	SmartDashboard.putNumber("LEFT_RAW", Robot.drivechain.get_left_encoder_raw());
+    	SmartDashboard.putNumber("LEFT_RATE", Robot.drivechain.get_left_encoder_rate());
+    	SmartDashboard.putNumber("RIGHT RAW", Robot.drivechain.get_right_encoder_raw());
+    	SmartDashboard.putNumber("RIGHT_RATE", Robot.drivechain.get_right_encoder_rate());
     }
 
     // Make this return true when this Command no longer needs to run execute()

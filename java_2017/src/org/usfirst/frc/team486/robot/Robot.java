@@ -1,7 +1,6 @@
 
 package org.usfirst.frc.team486.robot;
 
-import org.usfirst.frc.team486.robot.camera.Status;
 import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
 import org.usfirst.frc.team486.robot.commands.ShooterCommand;
 
@@ -37,11 +36,6 @@ public class Robot extends IterativeRobot {
 	
 	private final OpstickBackTrigger opstickbacktrigger = new OpstickBackTrigger();
 	private final OpstickForwardTrigger opstickforwardtrigger = new OpstickForwardTrigger();
-//	private final Opstick_1_3_Trigger opstick_1_3_trigger = new Opstick_1_3_Trigger();
-	
-//	private Status current_status;
-//	private int width = Robot.camera.get_frame().get_width();
-//	private int height = Robot.camera.get_frame().get_height();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -58,87 +52,9 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		shooter.reset();
-		shooter.start_encoder();
 		
 		opstickbacktrigger.whileActive(new GearLiftCommand(true));
 		opstickforwardtrigger.whileActive(new GearLiftCommand(false));
-//		opstick_1_3_trigger.whileActive(new ShooterCommand());
-		encoderThread = new Thread(() -> {
-			double time = 0;
-			while(!Thread.interrupted()){
-				double r1 = shooter.get_raw();
-				Timer.delay(0.25);
-				double r2 = shooter.get_raw();
-				Timer.delay(0.25);
-				double rate = (r1-r2)/(0.25);
-				SmartDashboard.putNumber("shooter_rpm", rate);
-				SmartDashboard.putNumber("shooter_distance", r2);
-				time += 0.5;
-				SmartDashboard.putNumber("correction", time);
-			}
-		});
-		encoderThread.setDaemon(true);
-		encoderThread.start();
-//		visionThread = new Thread(() -> {
-//			
-//			// Get the UsbCamera from CameraServer
-//			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-//			// Set the resolution
-//			camera.setResolution(width, height);
-//
-//			// Get a CvSink. This will capture Mats from the camera
-//			CvSink cvSink = CameraServer.getInstance().getVideo();
-//			// Setup a CvSource. This will send images back to the Dashboard
-//			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", width, height);
-//
-//			// Mats are very memory expensive.
-//			Mat source = new Mat();
-//			Mat hsv = new Mat();
-//			Mat filtered = new Mat();
-//			
-//			// Define camera package classes necessary
-//			Track track = new Track();
-//			Display display = new Display();
-//			
-//			// Define variables necessary for tracking
-//			List<MatOfPoint> contours;
-//			
-//			// Define filters from filter package
-//			Green green_prep = new Green();
-//
-//			// This cannot be 'true'. The program will never exit if it is. This
-//			// lets the robot stop this thread when restarting robot code or
-//			// deploying.
-//			while (!Thread.interrupted()) {
-//				// Tell the CvSink to grab a frame from the camera and put it
-//				// in the source mat.  If there is an error notify the output.
-//				if (cvSink.grabFrame(source) == 0) {
-//					// Send the output the error.
-//					outputStream.notifyError(cvSink.getError());
-//					// skip the rest of the current iteration
-//					continue;
-//				}
-//				// Convert color data type
-//				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
-//				//filter
-//				green_prep.filter_hsv(hsv,filtered);
-//				// find contours
-//				contours = track.find_blobs(filtered);
-//				// evaluates and updates current status, but does not update camera status
-//				current_status = track.find_center(contours);
-//				// display status
-////				SmartDashboard.putNumber("center_x", current_status.get_center().x);
-////				SmartDashboard.putNumber("center_y", current_status.get_center().y);
-//				// if found, draw target center
-//				if (current_status.get_distance() != -1){
-//					display.draw_point(source, current_status.get_center(), "red");
-//				}
-//				// Give the output stream a new image to display
-//				outputStream.putFrame(source);
-//			}
-//		});
-//		visionThread.setDaemon(true);
-//		visionThread.start();
 	}
 
 	

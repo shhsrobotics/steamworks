@@ -26,9 +26,8 @@ public class ShooterSubsystem extends Subsystem {
 	
 //	private Encoder shooter_enc = new Encoder(RobotMap.ENCODER_PIN_B, RobotMap.ENCODER_PIN_A, false, Encoder.EncodingType.k1X);
 
-	private Encoder shooter_enc = new Encoder(RobotMap.ENCODER_PIN_B, RobotMap.ENCODER_PIN_A);
-	
-	private double rate = 0;
+	private Encoder shooter_enc = 
+			new Encoder(RobotMap.SHOOTER_ENCODER_PIN_B, RobotMap.SHOOTER_ENCODER_PIN_A, false, Encoder.EncodingType.k1X);
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -62,13 +61,6 @@ public class ShooterSubsystem extends Subsystem {
     public void reset(){
     	shooter_enc.reset();
     }
-    
-    public void set_rate(double new_rate){
-    	this.rate = new_rate;
-    }
-    
-    public void start_encoder(){
-    	shooter_enc.setDistancePerPulse(0.5);
-    }
+
 }
 

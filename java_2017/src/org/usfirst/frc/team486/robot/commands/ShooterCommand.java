@@ -26,6 +26,8 @@ public class ShooterCommand extends Command {
     	//Robot.shooter.spin(0.5);
     	//Robot.shooter.shooter_enc.setSamplesToAverage(5);
     	//SmartDashboard.putBoolean("shooter_direction_test", rate);
+    	SmartDashboard.putNumber("SHOOTER_RAW", Robot.shooter.get_raw());
+    	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
