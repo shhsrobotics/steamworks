@@ -14,7 +14,8 @@ public class AutoShoot extends Command {
 	private double target;
 	private double offset;
 	private double correction;
-	private ShootControl control = new ShootControl();
+	private double max;
+	private ShootControl control = new ShootControl(0.1,20000);
 	
     public AutoShoot(double rate) {
         // Use requires() here to declare subsystem dependencies
@@ -30,6 +31,9 @@ public class AutoShoot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	offset = (Robot.shooter.get_rate() - target);
+    	max = Robot.oi.opstick.getThrottle();
+    	SmartDashboard.putNumber("correction", max);
+    	control.update_max(max);
     	correction = control.get_correction(offset);
     	Robot.shooter.spin(correction); // since backwards
     	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());

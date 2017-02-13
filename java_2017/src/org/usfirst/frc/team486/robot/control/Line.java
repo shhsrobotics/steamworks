@@ -19,3 +19,4 @@ public class Line {
 		return (this.m*x + this.b);
 	}
 }
+ 
