@@ -7,7 +7,7 @@ package org.usfirst.frc.team486.robot;
  * floating around.
  */
 public class RobotMap {
-	
+
 	// ----------------------------------------------------------
 	// USB PORTS
 	// ----------------------------------------------------------
@@ -25,6 +25,9 @@ public class RobotMap {
 	public static int WINCH_BUTTON = 1;
 	public static int SLOW_BUTTON = 2;
 	public static int RESET_BUTTON = 6;
+	public static int SHOOT_67K_DEBUG = 9;
+	public static int SHOOT_54K_DEBUG = 8;
+	public static int SHOOT_30K_DEBUG = 7;
 	
 	// ----------------------------------------------------------
 	// PWM PORTS

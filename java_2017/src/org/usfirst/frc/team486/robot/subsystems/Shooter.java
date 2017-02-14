@@ -5,6 +5,7 @@ import org.usfirst.frc.team486.robot.commands.Shoot;
 import org.usfirst.frc.team486.robot.commands.Teleop;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,6 +24,12 @@ public class Shooter extends Subsystem {
 
 	private Encoder shooter_enc = 
 			new Encoder(RobotMap.SHOOTER_ENCODER_PIN_B, RobotMap.SHOOTER_ENCODER_PIN_A, false, Encoder.EncodingType.k1X);
+	
+	private PowerDistributionPanel pdp = new PowerDistributionPanel();
+	
+	public double get_voltage(){
+		return pdp.getVoltage();
+	}
 	
     public void initDefaultCommand() {
     }

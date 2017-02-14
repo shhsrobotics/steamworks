@@ -22,10 +22,17 @@ public class OI {
 	public JoystickButton trackbutton = new JoystickButton(opstick, RobotMap.TRACK_BUTTON);
 	public JoystickButton grabbutton = new JoystickButton(opstick, RobotMap.GRAB_BUTTON);
 	public JoystickButton shootoveride = new JoystickButton(opstick, RobotMap.SHOOT_OVERRIDE);
-	public JoystickButton shootregdebug = new JoystickButton(opstick, RobotMap.SHOOT_REG_DEBUG);
 	public JoystickButton winchbutton = new JoystickButton(rightstick, RobotMap.WINCH_BUTTON);
 	public JoystickButton slowbutton = new JoystickButton(rightstick, RobotMap.SLOW_BUTTON);
 	public JoystickButton resetbutton = new JoystickButton(opstick, RobotMap.RESET_BUTTON);
+	
+	// ----------------------------------------------------------
+	// DEBUG BUTTONS
+	// ----------------------------------------------------------
+	public JoystickButton shootregdebug = new JoystickButton(opstick, RobotMap.SHOOT_REG_DEBUG);
+	public JoystickButton shootdebug30k = new JoystickButton(opstick, RobotMap.SHOOT_30K_DEBUG);
+	public JoystickButton shootdebug54k = new JoystickButton(opstick, RobotMap.SHOOT_54K_DEBUG);
+	public JoystickButton shootdebug67k = new JoystickButton(opstick, RobotMap.SHOOT_67K_DEBUG);
 
 	// ----------------------------------------------------------
 	// OI METHOD FOR BUTTON TRIGGERS
@@ -36,7 +43,9 @@ public class OI {
 		//shootregdebug.whenInactive(new AcceptBall_DEBUG(false));
 		//trackbutton.whileHeld(new ShooterCommand());
 		//trackbutton.whenActive(new ShootAuto());
-		trackbutton.whenActive(new AutoShoot(65000));
+		shootdebug30k.whenActive(new AutoShoot(30000));
+		shootdebug54k.whenActive(new AutoShoot(54000));
+		shootdebug67k.whenActive(new AutoShoot(67000));
 		winchbutton.whileActive(new Climb());
 	}
 }
