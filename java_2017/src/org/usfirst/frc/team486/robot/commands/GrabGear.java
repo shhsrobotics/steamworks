@@ -9,19 +9,34 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class GrabGear extends Command {
+	boolean state_in;
+	boolean stateSpecified;
 	
+    public GrabGear(boolean state_in) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.claw);
+    	this.state_in = state_in;
+    	stateSpecified = true;
+    }
+    
     public GrabGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.claw);
+    	this.state_in = !(Robot.claw.get());
+    	stateSpecified = false;
     }
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (Robot.claw.get()) {
-    		Robot.claw.release();
-    	} else {
+    	if (!stateSpecified) {
+    		this.state_in = !(Robot.claw.get());
+    	}
+    	if (state_in) {
     		Robot.claw.grab();
+    	} else {
+    		Robot.claw.release();
     	}
     }
 
@@ -32,7 +47,7 @@ public class GrabGear extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

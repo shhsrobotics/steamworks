@@ -100,19 +100,19 @@ public class Chassis extends Subsystem {
     	return this.rightEncoder.getRate();
     }
     
-    public double get_left_encoder_raw_feet(){
+    public double get_left_encoder_raw_inches(){
     	return this.leftEncoder.getRaw() / Chassis.INCH_LEFT;
     }
     
-    public double get_left_encoder_rate_feet(){
+    public double get_left_encoder_rate_inches(){
     	return this.leftEncoder.getRate() / Chassis.INCH_LEFT;
     }
     
-    public double get_right_encoder_raw_feet(){
+    public double get_right_encoder_raw_inches(){
     	return this.rightEncoder.getRaw() / Chassis.INCH_RIGHT;
     }
     
-    public double get_right_encoder_rate_feet(){
+    public double get_right_encoder_rate_inches(){
     	return this.rightEncoder.getRate() / Chassis.INCH_RIGHT;
     }
     

@@ -32,11 +32,11 @@ public class AutoMode1 extends CommandGroup {
         // arm.
     	addSequential(new LiftGear(false));
     	addSequential(new Wait(0.25));
-    	addSequential(new GrabGear());
+    	addSequential(new GrabGear(true));
     	addSequential(new Wait(0.25));
     	addSequential(new LiftGear(true));
     	addSequential(new AutoDriveDistance(75.0, 0.4)); // This is the real-world value
-    	addSequential(new GrabGear());
+    	addSequential(new GrabGear(false));
     	addSequential(new Wait(0.25));
     	addSequential(new AutoDriveDistance(-35.0, -0.4)); // This is the real-world value
     	addSequential(new Turn(-60.0));
