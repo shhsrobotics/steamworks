@@ -1,6 +1,7 @@
 package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.GrabGear;
+import org.usfirst.frc.team486.robot.commands.Open;
 import org.usfirst.frc.team486.robot.commands.AutoShoot;
 import org.usfirst.frc.team486.robot.commands.Climb;
 
@@ -43,6 +44,7 @@ public class OI {
 		//shootregdebug.whenInactive(new AcceptBall_DEBUG(false));
 		//trackbutton.whileHeld(new ShooterCommand());
 		//trackbutton.whenActive(new ShootAuto());
+		shootregdebug.whileActive(new Open());
 		shootdebug30k.whenActive(new AutoShoot(30000));
 		shootdebug54k.whenActive(new AutoShoot(54000));
 		shootdebug67k.whenActive(new AutoShoot(67000));
