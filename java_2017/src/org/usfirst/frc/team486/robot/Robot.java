@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.LiftGear;
 import org.usfirst.frc.team486.robot.commands.Shoot;
+import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -49,6 +50,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		chooser.addDefault("Drive forward 5 feet (WARNING: UNTESTED)", new AutoDriveDistance(5.0, 0.4));
+		SmartDashboard.putData("Auto Chooser", chooser);
 		oi = new OI();
 		
 		//shooter.reset();

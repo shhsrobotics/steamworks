@@ -2,6 +2,7 @@ package org.usfirst.frc.team486.robot.commands;
 
 import org.usfirst.frc.team486.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,6 +25,7 @@ public class Teleop extends Command {
     	Robot.drivechain.initdrive();
     	Robot.compressor.on();
     	Robot.camera.light_on();
+		DriverStation.reportWarning("Starting Teleop command", true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -54,6 +56,7 @@ public class Teleop extends Command {
     protected void end() {
     	Robot.compressor.off();
     	Robot.camera.light_off();
+    	DriverStation.reportWarning("Ending Teleop command", true);
     }
 
     // Called when another command which requires one or more of the same
@@ -61,5 +64,6 @@ public class Teleop extends Command {
     protected void interrupted() {
     	Robot.compressor.off();
     	Robot.camera.light_off();
+    	DriverStation.reportWarning("Teleop command interrupted", true);
     }
 }
