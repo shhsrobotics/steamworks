@@ -2,6 +2,7 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 import org.usfirst.frc.team486.robot.commands.Open;
+import org.usfirst.frc.team486.robot.commands.Turn;
 import org.usfirst.frc.team486.robot.commands.AutoShoot;
 import org.usfirst.frc.team486.robot.commands.Climb;
 
@@ -25,7 +26,6 @@ public class OI {
 	public JoystickButton shootoveride = new JoystickButton(opstick, RobotMap.SHOOT_OVERRIDE);
 	public JoystickButton winchbutton = new JoystickButton(rightstick, RobotMap.WINCH_BUTTON);
 	public JoystickButton slowbutton = new JoystickButton(rightstick, RobotMap.SLOW_BUTTON);
-	public JoystickButton resetbutton = new JoystickButton(opstick, RobotMap.RESET_BUTTON);
 	
 	// ----------------------------------------------------------
 	// DEBUG BUTTONS
@@ -34,6 +34,8 @@ public class OI {
 	public JoystickButton shootdebug30k = new JoystickButton(opstick, RobotMap.SHOOT_30K_DEBUG);
 	public JoystickButton shootdebug54k = new JoystickButton(opstick, RobotMap.SHOOT_54K_DEBUG);
 	public JoystickButton shootdebug67k = new JoystickButton(opstick, RobotMap.SHOOT_67K_DEBUG);
+	public JoystickButton resetbutton = new JoystickButton(opstick, RobotMap.RESET_BUTTON);
+	public JoystickButton turndebug = new JoystickButton(opstick, RobotMap.TURN_DEBUG);
 
 	// ----------------------------------------------------------
 	// OI METHOD FOR BUTTON TRIGGERS
@@ -49,5 +51,6 @@ public class OI {
 		shootdebug54k.whenActive(new AutoShoot(54000));
 		shootdebug67k.whenActive(new AutoShoot(67000));
 		winchbutton.whileActive(new Climb());
+		turndebug.whenPressed(new Turn(90));
 	}
 }
