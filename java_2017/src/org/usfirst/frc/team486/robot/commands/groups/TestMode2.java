@@ -40,6 +40,6 @@ public class TestMode2 extends CommandGroup {
     	addSequential(new AutoDriveDistance(33.5/3, 0.4)); // This is the real-world value
     	addSequential(new GrabGear());
     	addSequential(new Wait(0.25));
-    	addSequential(new AutoDriveDistance(-18.0/3, 0.4));
+    	addSequential(new AutoDriveDistance(-18.0/3, -0.4));
     }
 }
