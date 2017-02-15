@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.LiftGear;
 import org.usfirst.frc.team486.robot.commands.Shoot;
+import org.usfirst.frc.team486.robot.commands.groups.AutoMode1;
 import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
 import org.usfirst.frc.team486.robot.commands.AutoPrintDebugStatements;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
@@ -53,8 +54,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		chooser.addDefault("Drive forward 5 feet (WARNING: UNTESTD)", new AutoDriveDistance(5.0, 0.4));
+		chooser.addObject("Drive forward 5 feet (WARNING: UNTESTD)", new AutoDriveDistance(5.0, 0.4));
 		chooser.addDefault("Just print debug statements", new AutoPrintDebugStatements(10.0));
+		chooser.addObject("Auto Mode 1", new AutoMode1());
+		
 		SmartDashboard.putData("Auto Chooser", chooser);
 		//autonomousCommand = chooser.getSelected();
 		oi = new OI();
