@@ -30,6 +30,7 @@ public class AutoDriveDistance extends Command {
     	Robot.drivechain.reset_encoders();
     	Robot.drivechain.drive_value(speed, speed);
     	DriverStation.reportWarning("Starting drive command: speed " + speed + ", distance " + feet, true);
+    	Robot.drivechain.gyro_reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -74,6 +75,7 @@ public class AutoDriveDistance extends Command {
     protected void end() {
     	Robot.drivechain.drive_value(0.0, 0.0);
     	DriverStation.reportWarning("Finishing drive command: speed " + speed + ", distance " + feet, true);
+    	DriverStation.reportWarning("Final gyro value: " + Robot.drivechain.gyro_angle(), true);
     }
 
     // Called when another command which requires one or more of the same
