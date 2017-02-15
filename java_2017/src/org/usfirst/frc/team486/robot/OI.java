@@ -35,7 +35,6 @@ public class OI {
 	public JoystickButton shootdebug54k = new JoystickButton(opstick, RobotMap.SHOOT_54K_DEBUG);
 	public JoystickButton shootdebug67k = new JoystickButton(opstick, RobotMap.SHOOT_67K_DEBUG);
 	public JoystickButton resetbutton = new JoystickButton(opstick, RobotMap.RESET_BUTTON);
-	public JoystickButton turndebug = new JoystickButton(opstick, RobotMap.TURN_DEBUG);
 
 	// ----------------------------------------------------------
 	// OI METHOD FOR BUTTON TRIGGERS
@@ -51,6 +50,5 @@ public class OI {
 		shootdebug54k.whenActive(new AutoShoot(54000));
 		shootdebug67k.whenActive(new AutoShoot(67000));
 		winchbutton.whileActive(new Climb());
-		turndebug.whenPressed(new Turn(90));
 	}
 }

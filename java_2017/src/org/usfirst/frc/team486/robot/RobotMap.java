@@ -27,7 +27,6 @@ public class RobotMap {
 	public static int SHOOT_67K_DEBUG = 9;
 	public static int SHOOT_54K_DEBUG = 8;
 	public static int SHOOT_30K_DEBUG = 7;
-	public static int TURN_DEBUG = 11;
 	// LEFTSTICK
 	// RIGHTSTICK
 	public static int WINCH_BUTTON = 1;

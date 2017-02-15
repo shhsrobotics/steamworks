@@ -30,11 +30,11 @@ public class Turn extends Command {
     protected void execute() {
     	if (angle < 0){
     		// Right
-    		Robot.drivechain.drive_value(-0.48, 0.48);
+    		Robot.drivechain.drive_value(0.48, -0.48);
     		DriverStation.reportWarning("Turning Right", true);
     	} else {
     		// Left
-    		Robot.drivechain.drive_value(0.48, -0.48);
+    		Robot.drivechain.drive_value(-0.48, 0.48);
     		DriverStation.reportWarning("Turning Left", true);
     	}
     }
