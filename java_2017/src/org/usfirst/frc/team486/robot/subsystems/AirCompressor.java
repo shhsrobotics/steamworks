@@ -13,9 +13,9 @@ public class AirCompressor extends Subsystem {
 
 	Compressor compressor = new Compressor(RobotMap.COMPRESSOR_PIN);
 
-    public void initDefaultCommand() {
-    	setDefaultCommand(new Teleop());
-    }
+    //public void initDefaultCommand() {
+    //	setDefaultCommand(new Teleop());
+    //}
     
     public void on(){
     	compressor.setClosedLoopControl(true);
@@ -24,4 +24,10 @@ public class AirCompressor extends Subsystem {
     public void off(){
     	compressor.setClosedLoopControl(false);
     }
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
+	}
 }
