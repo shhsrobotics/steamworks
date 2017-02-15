@@ -53,9 +53,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		chooser.addObject("Drive forward 5 feet (WARNING: UNTESTED)", new AutoDriveDistance(5.0, 0.4));
+		chooser.addDefault("Drive forward 5 feet (WARNING: UNTESTD)", new AutoDriveDistance(5.0, 0.4));
 		chooser.addDefault("Just print debug statements", new AutoPrintDebugStatements(10.0));
 		SmartDashboard.putData("Auto Chooser", chooser);
+		//autonomousCommand = chooser.getSelected();
 		oi = new OI();
 		
 		//shooter.reset();

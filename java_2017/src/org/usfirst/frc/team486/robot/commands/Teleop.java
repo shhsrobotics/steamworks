@@ -45,6 +45,7 @@ public class Teleop extends Command {
     	SmartDashboard.putNumber("RIGHT RAW", Robot.drivechain.get_right_encoder_raw());
     	SmartDashboard.putNumber("RIGHT_RATE", Robot.drivechain.get_right_encoder_rate());
     	SmartDashboard.putNumber("Analog gyro angle", Robot.drivechain.gyro_angle());
+    	DriverStation.reportWarning("Just put SmartDashboard", true);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -33,7 +33,7 @@ public class AutoDriveDistance extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    /*protected void execute() {
     	if (Robot.drivechain.get_left_encoder_rate_feet() < Robot.drivechain.get_right_encoder_rate_feet()) {
     		rMod = Robot.drivechain.get_left_encoder_rate_feet() * rMod / Robot.drivechain.get_right_encoder_rate_feet() * lMod;
     	} else if (Robot.drivechain.get_left_encoder_rate_feet() > Robot.drivechain.get_right_encoder_rate_feet()) {
@@ -53,12 +53,21 @@ public class AutoDriveDistance extends Command {
     	Robot.drivechain.drive_value(lMod * speed, rMod * speed);
     	hasRun = true;
     }
+    */
+    
+    protected void execute() {
+    	Robot.drivechain.drive_value(speed, speed);
+    }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
+    /*protected boolean isFinished() {
     	boolean val = ((Robot.drivechain.get_left_encoder_raw_feet() >= feet) && (Robot.drivechain.get_right_encoder_raw_feet() >= feet));
     	DriverStation.reportWarning("Ran isFinished. Got result: " + val + ". Feet: " + feet + " LF: " + Robot.drivechain.get_left_encoder_raw_feet() + ". RF: " + Robot.drivechain.get_right_encoder_raw_feet(), true);
         return (val || !hasRun);
+    }*/
+    
+    protected boolean isFinished() {
+    	return (Robot.drivechain.get_left_encoder_raw_feet() > feet);
     }
 
     // Called once after isFinished returns true
@@ -70,5 +79,7 @@ public class AutoDriveDistance extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.drivechain.drive_value(0.0, 0.0);
+    	DriverStation.reportWarning("Interrupting drive command: speed " + speed + ", distance " + feet, true);
     }
 }

@@ -38,7 +38,7 @@ public class Chassis extends Subsystem {
     }
     
     public void drive_value(double left_val, double right_val){
-    	this.drive.tankDrive(left_val, right_val);
+    	this.drive.tankDrive(-1 * left_val, -1 * right_val);
     }
     
     public void slow_drive_joystick(Joystick leftStick, Joystick rightStick){

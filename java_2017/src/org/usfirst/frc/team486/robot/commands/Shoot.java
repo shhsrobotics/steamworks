@@ -24,8 +24,8 @@ public class Shoot extends Command {
     protected void execute() {
 //    	Robot.shooter.spin(Robot.oi.opstick.getY());
 //    	SmartDashboard.putNumber("SHOOTER_RAW", Robot.shooter.get_raw());
-//    	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
-//    	
+    	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
+//
     }
 
     // Make this return true when this Command no longer needs to run execute()
