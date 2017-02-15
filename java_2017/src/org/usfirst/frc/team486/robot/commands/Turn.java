@@ -7,9 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Turn extends Command {
 
-    public Turn(double angle) {
+	private double angle;
+	
+    public Turn(double angle_in) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	this.angle = angle_in;
     }
 
     // Called just before this Command runs the first time
