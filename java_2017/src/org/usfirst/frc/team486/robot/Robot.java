@@ -21,6 +21,7 @@ import org.usfirst.frc.team486.robot.triggers.OpstickForwardTrigger;
 import org.usfirst.frc.team486.robot.triggers.Opstick_1_3_Trigger;
 import org.usfirst.frc.team486.robot.subsystems.Camera;
 import org.usfirst.frc.team486.robot.subsystems.Claw;
+import org.usfirst.frc.team486.robot.subsystems.Regulator;
 import org.usfirst.frc.team486.robot.subsystems.Shooter;
 import org.usfirst.frc.team486.robot.subsystems.AirCompressor;
 
@@ -31,6 +32,7 @@ public class Robot extends IterativeRobot {
 	public static final AirCompressor compressor = new AirCompressor();
 	public static final Shooter shooter = new Shooter();
 	public static final Winch winch = new Winch();
+	public static final Regulator regulator = new Regulator();
 	public static OI oi;
 	
 	public static final Claw claw = new Claw();

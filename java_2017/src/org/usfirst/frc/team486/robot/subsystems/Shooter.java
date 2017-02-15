@@ -18,8 +18,6 @@ public class Shooter extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private Solenoid shooter_reg = new Solenoid(RobotMap.SHOOTER_REG_PIN);
-	
 	private Talon shooter = new Talon(RobotMap.SHOOTER_PIN);
 
 	private Encoder shooter_enc = 
@@ -40,14 +38,6 @@ public class Shooter extends Subsystem {
     
     public void stop(){
     	shooter.set(0);
-    }
-    
-    public void open(){
-    	shooter_reg.set(true);
-    }
-    
-    public void close(){
-    	shooter_reg.set(false);
     }
     
     public double get_raw(){

@@ -16,7 +16,6 @@ public class AutoShoot extends Command {
 	private double correction;
 	private double voltage;
 	private ShootControl control;
-	private boolean state;
 	
     public AutoShoot(double rate) {
         // Use requires() here to declare subsystem dependencies
@@ -24,7 +23,6 @@ public class AutoShoot extends Command {
     	this.target = rate;
     	requires(Robot.shooter);
     	this.control = new ShootControl(this.target, Robot.shooter.get_voltage());
-    	Robot.shooter.close();
     }
 
     // Called just before this Command runs the first time
@@ -40,11 +38,6 @@ public class AutoShoot extends Command {
     	SmartDashboard.putNumber("correction", this.correction);
     	Robot.shooter.spin(this.correction); // since backwards
     	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
-    	if (Robot.oi.shootregdebug.get()){
-    		Robot.shooter.open();
-    	} else {
-    		Robot.shooter.close();
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -63,13 +56,11 @@ public class AutoShoot extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.shooter.stop();
-    	Robot.shooter.close();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.shooter.stop();
-    	Robot.shooter.close();
     }
 }
