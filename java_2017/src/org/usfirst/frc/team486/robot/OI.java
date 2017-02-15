@@ -39,10 +39,6 @@ public class OI {
 	// ----------------------------------------------------------
 	public OI(){
 		grabbutton.whileActive(new GrabGear());
-		//shootregdebug.whenActive(new AcceptBall_DEBUG(true));
-		//shootregdebug.whenInactive(new AcceptBall_DEBUG(false));
-		//trackbutton.whileHeld(new ShooterCommand());
-		//trackbutton.whenActive(new ShootAuto());
 		shootdebug30k.whenActive(new AutoShoot(30000));
 		shootdebug54k.whenActive(new AutoShoot(54000));
 		shootdebug67k.whenActive(new AutoShoot(67000));
