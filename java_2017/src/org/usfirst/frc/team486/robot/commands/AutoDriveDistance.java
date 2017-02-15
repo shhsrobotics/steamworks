@@ -68,7 +68,11 @@ public class AutoDriveDistance extends Command {
     }*/
     
     protected boolean isFinished() {
-    	return (Robot.drivechain.get_left_encoder_raw_feet() > feet);
+    	if (feet >= 0) {
+    		return (Robot.drivechain.get_left_encoder_raw_feet() > feet);
+    	} else {
+    		return (Robot.drivechain.get_left_encoder_raw_feet() < feet);
+    	}
     }
 
     // Called once after isFinished returns true
