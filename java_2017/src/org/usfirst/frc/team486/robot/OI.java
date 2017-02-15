@@ -34,7 +34,7 @@ public class OI {
 	public JoystickButton shootdebug30k = new JoystickButton(opstick, RobotMap.SHOOT_30K_DEBUG);
 	public JoystickButton shootdebug54k = new JoystickButton(opstick, RobotMap.SHOOT_54K_DEBUG);
 	public JoystickButton shootdebug67k = new JoystickButton(opstick, RobotMap.SHOOT_67K_DEBUG);
-	public JoystickButton resetbutton = new JoystickButton(opstick, RobotMap.RESET_BUTTON);
+	public JoystickButton resetbutton = new JoystickButton(opstick, RobotMap.RESET_BUTTON); 
 
 	// ----------------------------------------------------------
 	// OI METHOD FOR BUTTON TRIGGERS

@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoMode1 extends CommandGroup {
+public class TestMode3 extends CommandGroup {
 
-    public AutoMode1() {
+    public TestMode3() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -35,11 +35,11 @@ public class AutoMode1 extends CommandGroup {
     	addSequential(new GrabGear());
     	addSequential(new Wait(0.25));
     	addSequential(new LiftGear(true));
-    	addSequential(new AutoDriveDistance(75.0, 0.4)); // This is the real-world value
+    	addSequential(new AutoDriveDistance(83.632/3, 0.4)); // This is the real-world value
+    	addSequential(new Turn(60.0));
+    	addSequential(new AutoDriveDistance(33.5/3, 0.4)); // This is the real-world value
     	addSequential(new GrabGear());
     	addSequential(new Wait(0.25));
-    	addSequential(new AutoDriveDistance(-35.0, -0.4)); // This is the real-world value
-    	addSequential(new Turn(-60.0));
-    	addSequential(new AutoDriveDistance(83.0, 0.4)); // This is the real-world value
+    	addSequential(new AutoDriveDistance(-18.0/3, 0.4)); // This is the real-world value
     }
 }

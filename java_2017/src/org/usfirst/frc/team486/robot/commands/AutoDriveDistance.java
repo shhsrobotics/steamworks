@@ -11,17 +11,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutoDriveDistance extends Command {
 	
-	private double feet, speed;
+	private double inches, speed;
 	private double lMod = 1.0;
 	private double rMod = 1.0;
 	private boolean hasRun = false;
 
-    public AutoDriveDistance(double feet, double speed) {
+    public AutoDriveDistance(double inches_in, double speed_in) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivechain);
-    	this.feet = feet;
-    	this.speed = speed;
+    	this.inches = inches_in;
+    	this.speed = speed_in;
     }
 
     // Called just before this Command runs the first time
@@ -29,7 +29,7 @@ public class AutoDriveDistance extends Command {
     	hasRun = false;
     	Robot.drivechain.reset_encoders();
     	Robot.drivechain.drive_value(speed, speed);
-    	DriverStation.reportWarning("Starting drive command: speed " + speed + ", distance " + feet, true);
+    	DriverStation.reportWarning("Starting drive command: speed " + speed + ", distance " + inches, true);
     	Robot.drivechain.gyro_reset();
     }
 
@@ -68,13 +68,13 @@ public class AutoDriveDistance extends Command {
     }*/
     
     protected boolean isFinished() {
-    	return (Robot.drivechain.get_left_encoder_raw_feet() > feet);
+    	return (Robot.drivechain.get_left_encoder_raw_feet() > inches);
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.drivechain.drive_value(0.0, 0.0);
-    	DriverStation.reportWarning("Finishing drive command: speed " + speed + ", distance " + feet, true);
+    	DriverStation.reportWarning("Finishing drive command: speed " + speed + ", distance " + inches, true);
     	DriverStation.reportWarning("Final gyro value: " + Robot.drivechain.gyro_angle(), true);
     }
 
@@ -82,6 +82,6 @@ public class AutoDriveDistance extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.drivechain.drive_value(0.0, 0.0);
-    	DriverStation.reportWarning("Interrupting drive command: speed " + speed + ", distance " + feet, true);
+    	DriverStation.reportWarning("Interrupting drive command: speed " + speed + ", distance " + inches, true);
     }
 }

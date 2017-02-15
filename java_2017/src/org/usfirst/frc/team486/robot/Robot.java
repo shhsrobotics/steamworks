@@ -3,6 +3,12 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.LiftGear;
 import org.usfirst.frc.team486.robot.commands.Shoot;
+import org.usfirst.frc.team486.robot.commands.groups.AutoMode1;
+import org.usfirst.frc.team486.robot.commands.groups.AutoMode2;
+import org.usfirst.frc.team486.robot.commands.groups.AutoMode3;
+import org.usfirst.frc.team486.robot.commands.groups.TestMode1;
+import org.usfirst.frc.team486.robot.commands.groups.TestMode2;
+import org.usfirst.frc.team486.robot.commands.groups.TestMode3;
 import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
 import org.usfirst.frc.team486.robot.commands.AutoPrintDebugStatements;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
@@ -53,8 +59,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		chooser.addDefault("Drive forward 5 feet (WARNING: UNTESTD)", new AutoDriveDistance(5.0, 0.4));
 		chooser.addDefault("Just print debug statements", new AutoPrintDebugStatements(10.0));
+		chooser.addObject("Test Mode 1", new TestMode1());
+		chooser.addObject("Test Mode 2", new TestMode2());
+		chooser.addObject("Test Mode 3", new TestMode3());
+		chooser.addObject("Auto Mode 1", new AutoMode1());
+		chooser.addObject("Auto Mode 2", new AutoMode2());
+		chooser.addObject("Auto Mode 3", new AutoMode3());
 		SmartDashboard.putData("Auto Chooser", chooser);
 		//autonomousCommand = chooser.getSelected();
 		oi = new OI();

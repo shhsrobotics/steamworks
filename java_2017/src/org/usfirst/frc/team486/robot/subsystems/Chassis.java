@@ -15,7 +15,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Chassis extends Subsystem {
 	
 	public static double FOOT_LEFT = -885.5166667;
+	public static double INCH_LEFT = FOOT_LEFT/12.0;
 	public static double FOOT_RIGHT = 192.7833333;
+	public static double INCH_RIGHT = FOOT_RIGHT/12.0;
 
 	private Talon left_1 = new Talon(RobotMap.LEFT_DRIVE_1);
 	private Talon left_2 = new Talon(RobotMap.LEFT_DRIVE_2);
@@ -99,19 +101,19 @@ public class Chassis extends Subsystem {
     }
     
     public double get_left_encoder_raw_feet(){
-    	return this.leftEncoder.getRaw() / Chassis.FOOT_LEFT;
+    	return this.leftEncoder.getRaw() / Chassis.INCH_LEFT;
     }
     
     public double get_left_encoder_rate_feet(){
-    	return this.leftEncoder.getRate() / Chassis.FOOT_LEFT;
+    	return this.leftEncoder.getRate() / Chassis.INCH_LEFT;
     }
     
     public double get_right_encoder_raw_feet(){
-    	return this.rightEncoder.getRaw() / Chassis.FOOT_RIGHT;
+    	return this.rightEncoder.getRaw() / Chassis.INCH_RIGHT;
     }
     
     public double get_right_encoder_rate_feet(){
-    	return this.rightEncoder.getRate() / Chassis.FOOT_RIGHT;
+    	return this.rightEncoder.getRate() / Chassis.INCH_RIGHT;
     }
     
     public void gyro_start(){
