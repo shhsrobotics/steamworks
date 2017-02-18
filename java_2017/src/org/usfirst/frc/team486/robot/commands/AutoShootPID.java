@@ -28,6 +28,7 @@ public class AutoShootPID extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
