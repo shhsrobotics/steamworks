@@ -13,6 +13,7 @@ import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
 import org.usfirst.frc.team486.robot.commands.AutoPrintDebugStatements;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -60,6 +61,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		CameraServer.getInstance().startAutomaticCapture();
 		chooser.addDefault("Just print debug statements", new AutoPrintDebugStatements(10.0));
 		chooser.addObject("Test Mode 1", new TestMode1());
 		chooser.addObject("Test Mode 2", new TestMode2());

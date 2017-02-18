@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 import org.usfirst.frc.team486.robot.commands.Open;
 import org.usfirst.frc.team486.robot.commands.Turn;
+import org.usfirst.frc.team486.robot.commands.groups.JostleBalls;
 import org.usfirst.frc.team486.robot.commands.AutoShootPID;
 import org.usfirst.frc.team486.robot.commands.Climb;
 
@@ -27,6 +28,9 @@ public class OI {
 	public JoystickButton winchbutton = new JoystickButton(rightstick, RobotMap.WINCH_BUTTON);
 	public JoystickButton slowbutton = new JoystickButton(rightstick, RobotMap.SLOW_BUTTON);
 	
+	public JoystickButton jostlebutton = new JoystickButton(opstick, RobotMap.JOSTLE_BUTTON);
+	public JoystickButton jostlebutton2 = new JoystickButton(opstick, RobotMap.JOSTLE_BUTTON_2);
+	
 	// ----------------------------------------------------------
 	// DEBUG BUTTONS
 	// ----------------------------------------------------------
@@ -50,5 +54,7 @@ public class OI {
 		shootdebug54k.whenActive(new AutoShootPID(54000.0));
 		shootdebug67k.whenActive(new AutoShootPID(67000.0));
 		winchbutton.whileActive(new Climb());
+		jostlebutton.whenActive(new JostleBalls(0.5, 1.0, 1));
+		jostlebutton2.whenActive(new JostleBalls(1.0, 1.0, 1));
 	}
 }

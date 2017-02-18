@@ -23,6 +23,8 @@ public class RobotMap {
 	public static int GRAB_BUTTON = 2;
 	public static int SHOOT_OVERRIDE = 3;
 	public static int RESET_BUTTON = 6;
+	public static int JOSTLE_BUTTON = 11;
+	public static int JOSTLE_BUTTON_2 = 12;
 	public static int SHOOT_REG_DEBUG = 4;
 	public static int SHOOT_67K_DEBUG = 9;
 	public static int SHOOT_54K_DEBUG = 8;

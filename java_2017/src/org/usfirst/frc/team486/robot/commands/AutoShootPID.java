@@ -28,12 +28,20 @@ public class AutoShootPID extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
+    	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate() * -1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	boolean out = false;
+    	if (this.rate == 67000){
+    		out = !Robot.oi.shootdebug67k.get();
+    	} else if (this.rate == 54000) {
+    		out = !Robot.oi.shootdebug54k.get();
+    	} else if (this.rate == 30000) {
+    		out = !Robot.oi.shootdebug30k.get();
+    	}
+        return out;
     }
 
     // Called once after isFinished returns true
