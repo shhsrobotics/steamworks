@@ -19,22 +19,24 @@ public class ShooterPID extends PIDSubsystem {
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
         // enable() - Enables the PID controller.
-    	super("ShooterPID", 0.0, 0.0, 0.0);
+    	super("ShooterPID", 1.0, 0.0, 0.0);
     	setAbsoluteTolerance(2500.0);
     	getPIDController().setContinuous(false);
+    	getPIDController().setInputRange(0.0, 95000.0);
+    	getPIDController().setOutputRange(0.0, 1.0);
+    	getPIDController().startLiveWindowMode();
     }
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new AutoShootPID());
     }
 
     protected double returnPIDInput() {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        return get_rate();
+        return get_rate() * -1;
     }
 
     protected void usePIDOutput(double output) {
@@ -55,12 +57,14 @@ public class ShooterPID extends PIDSubsystem {
 		return pdp.getVoltage();
 	}
 
-    public void spin(double power){
+    private void spin(double power){
     	shooter.set(power);
     }
     
     public void stop(){
-    	shooter.set(0);
+    	//shooter.set(0);
+    	disable();
+    	this.spin(0.0);
     }
     
     public double get_raw(){

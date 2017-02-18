@@ -3,7 +3,7 @@ package org.usfirst.frc.team486.robot;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 import org.usfirst.frc.team486.robot.commands.Open;
 import org.usfirst.frc.team486.robot.commands.Turn;
-import org.usfirst.frc.team486.robot.commands.AutoShoot;
+import org.usfirst.frc.team486.robot.commands.AutoShootPID;
 import org.usfirst.frc.team486.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -46,9 +46,9 @@ public class OI {
 		//trackbutton.whileHeld(new ShooterCommand());
 		//trackbutton.whenActive(new ShootAuto());
 		shootregdebug.whileActive(new Open());
-		shootdebug30k.whenActive(new AutoShoot(30000));
-		shootdebug54k.whenActive(new AutoShoot(54000));
-		shootdebug67k.whenActive(new AutoShoot(67000));
+		shootdebug30k.whenActive(new AutoShootPID(30000.0));
+		shootdebug54k.whenActive(new AutoShootPID(54000.0));
+		shootdebug67k.whenActive(new AutoShootPID(67000.0));
 		winchbutton.whileActive(new Climb());
 	}
 }

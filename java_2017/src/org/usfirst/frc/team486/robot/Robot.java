@@ -30,6 +30,7 @@ import org.usfirst.frc.team486.robot.subsystems.Camera;
 import org.usfirst.frc.team486.robot.subsystems.Claw;
 import org.usfirst.frc.team486.robot.subsystems.Regulator;
 import org.usfirst.frc.team486.robot.subsystems.Shooter;
+import org.usfirst.frc.team486.robot.subsystems.ShooterPID;
 import org.usfirst.frc.team486.robot.subsystems.AirCompressor;
 
 public class Robot extends IterativeRobot {
@@ -37,7 +38,7 @@ public class Robot extends IterativeRobot {
 	public static final Camera camera = new Camera();
 	public static final Chassis drivechain = new Chassis();
 	public static final AirCompressor compressor = new AirCompressor();
-	public static final Shooter shooter = new Shooter();
+	public static final ShooterPID shooter = new ShooterPID();
 	public static final Winch winch = new Winch();
 	public static final Regulator regulator = new Regulator();
 	public static OI oi;
