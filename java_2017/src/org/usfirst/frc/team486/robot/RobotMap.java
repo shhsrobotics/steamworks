@@ -71,6 +71,9 @@ public class RobotMap {
 	// CONTROL VALUES
 	// ----------------------------------------------------------
 	public static double OPSTICK_THRESHOLD = 0.3;
+	public static double SHOOTSPEED_1 = 50000.0;
+	public static double SHOOTSPEED_2 = 54000.0;
+	public static double SHOOTSPEED_3 = 58000.0;
 	//-----------------------------------------------------------
 	// ANALOG
 	//-----------------------------------------------------------

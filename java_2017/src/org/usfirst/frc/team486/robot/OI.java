@@ -44,15 +44,15 @@ public class OI {
 	// OI METHOD FOR BUTTON TRIGGERS
 	// ----------------------------------------------------------
 	public OI(){
-		grabbutton.whileActive(new GrabGear());
+		grabbutton.whenActive(new GrabGear());
 		//shootregdebug.whenActive(new AcceptBall_DEBUG(true));
 		//shootregdebug.whenInactive(new AcceptBall_DEBUG(false));
 		//trackbutton.whileHeld(new ShooterCommand());
 		//trackbutton.whenActive(new ShootAuto());
 		shootregdebug.whileActive(new Open());
-		shootdebug30k.whenActive(new AutoShootPID(30000.0));
-		shootdebug54k.whenActive(new AutoShootPID(54000.0));
-		shootdebug67k.whenActive(new AutoShootPID(67000.0));
+		shootdebug30k.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_1));
+		shootdebug54k.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_2));
+		shootdebug67k.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_3));
 		winchbutton.whileActive(new Climb());
 		jostlebutton.whenActive(new JostleBalls(0.5, 1.0, 1));
 		jostlebutton2.whenActive(new JostleBalls(1.0, 1.0, 1));

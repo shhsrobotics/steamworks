@@ -1,6 +1,7 @@
 package org.usfirst.frc.team486.robot.commands;
 
 import org.usfirst.frc.team486.robot.Robot;
+import org.usfirst.frc.team486.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,12 +35,12 @@ public class AutoShootPID extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	boolean out = false;
-    	if (this.rate == 67000){
-    		out = !Robot.oi.shootdebug67k.get();
-    	} else if (this.rate == 54000) {
-    		out = !Robot.oi.shootdebug54k.get();
-    	} else if (this.rate == 30000) {
+    	if (this.rate == RobotMap.SHOOTSPEED_1){
     		out = !Robot.oi.shootdebug30k.get();
+    	} else if (this.rate == RobotMap.SHOOTSPEED_2) {
+    		out = !Robot.oi.shootdebug54k.get();
+    	} else if (this.rate == RobotMap.SHOOTSPEED_3) {
+    		out = !Robot.oi.shootdebug67k.get();
     	}
         return out;
     }
