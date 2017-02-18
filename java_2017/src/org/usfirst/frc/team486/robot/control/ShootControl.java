@@ -35,13 +35,29 @@ public class ShootControl {
 		
 	public void update(double target, double voltage){
 		if (target == 67000){
-			this.max = this.l_67k.get_val(voltage);
+			//this.max = this.l_67k.get_val(voltage);
+			max = l_67k.get_val(voltage) * 1.2;
+			if (max > 1.0) {
+				max = 1.0;
+			}
 		} else if (target == 54000){
-			this.max = this.l_54k.get_val(voltage);
+			//this.max = this.l_54k.get_val(voltage);
+			max = l_54k.get_val(voltage) * 1.2;
+			if (max > 1.0) {
+				max = 1.0;
+			}
 		} else if (target == 30000){
-			this.max = this.l_30k.get_val(voltage);
+			//this.max = this.l_30k.get_val(voltage);
+			max = l_30k.get_val(voltage) * 1.2;
+			if (max > 1.0) {
+				max = 1.0;
+			}
 		} else {
-			this.max = this.l_30k.get_val(voltage);
+			//this.max = this.l_30k.get_val(voltage);
+			max = l_30k.get_val(voltage) * 1.2;
+			if (max > 1.0) {
+				max = 1.0;
+			}
 		}
 		this.p1 = new Point(-this.delta, this.max);
 		this.p2 = new Point(this.delta, -this.max);
