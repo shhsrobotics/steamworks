@@ -4,7 +4,6 @@ import org.usfirst.frc.team486.robot.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -12,9 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class AutoDriveDistance extends Command {
 	
 	private double inches, speed;
-	private double lMod = 1.0;
-	private double rMod = 1.0;
-	private boolean hasRun = false;
 
     public AutoDriveDistance(double inches_in, double speed_in) {
         // Use requires() here to declare subsystem dependencies
@@ -26,7 +22,6 @@ public class AutoDriveDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	hasRun = false;
     	Robot.drivechain.reset_encoders();
     	Robot.drivechain.drive_value(speed, speed);
     	DriverStation.reportWarning("Starting drive command: speed " + speed + ", distance " + inches, true);

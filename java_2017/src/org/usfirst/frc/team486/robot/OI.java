@@ -1,8 +1,6 @@
 package org.usfirst.frc.team486.robot;
 
-import org.usfirst.frc.team486.robot.commands.GrabGear;
 import org.usfirst.frc.team486.robot.commands.Open;
-import org.usfirst.frc.team486.robot.commands.Turn;
 import org.usfirst.frc.team486.robot.commands.groups.JostleBalls;
 import org.usfirst.frc.team486.robot.commands.AutoShootPID;
 import org.usfirst.frc.team486.robot.commands.Climb;

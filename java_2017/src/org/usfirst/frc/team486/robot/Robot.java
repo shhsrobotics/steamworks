@@ -2,20 +2,17 @@
 package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.LiftGear;
-import org.usfirst.frc.team486.robot.commands.Shoot;
 import org.usfirst.frc.team486.robot.commands.groups.AutoMode1;
 import org.usfirst.frc.team486.robot.commands.groups.AutoMode2;
 import org.usfirst.frc.team486.robot.commands.groups.AutoMode3;
 import org.usfirst.frc.team486.robot.commands.groups.TestMode1;
 import org.usfirst.frc.team486.robot.commands.groups.TestMode2;
 import org.usfirst.frc.team486.robot.commands.groups.TestMode3;
-import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
 import org.usfirst.frc.team486.robot.commands.AutoPrintDebugStatements;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -31,7 +28,6 @@ import org.usfirst.frc.team486.robot.triggers.OpenTrigger;
 import org.usfirst.frc.team486.robot.subsystems.Camera;
 import org.usfirst.frc.team486.robot.subsystems.Claw;
 import org.usfirst.frc.team486.robot.subsystems.Regulator;
-import org.usfirst.frc.team486.robot.subsystems.Shooter;
 import org.usfirst.frc.team486.robot.subsystems.ShooterPID;
 import org.usfirst.frc.team486.robot.subsystems.AirCompressor;
 
