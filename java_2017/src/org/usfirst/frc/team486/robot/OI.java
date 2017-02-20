@@ -40,7 +40,7 @@ public class OI {
 	// OI METHOD FOR BUTTON TRIGGERS
 	// ----------------------------------------------------------
 	public OI(){
-		grabbutton.whileActive(new GrabGear());
+		grabbutton.whenActive(new GrabGear());
 		//shootregdebug.whenActive(new AcceptBall_DEBUG(true));
 		//shootregdebug.whenInactive(new AcceptBall_DEBUG(false));
 		//trackbutton.whileHeld(new ShooterCommand());
