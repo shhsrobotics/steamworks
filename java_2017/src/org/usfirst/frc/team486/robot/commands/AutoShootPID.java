@@ -36,11 +36,11 @@ public class AutoShootPID extends Command {
     protected boolean isFinished() {
     	boolean out = false;
     	if (this.rate == RobotMap.SHOOTSPEED_1){
-    		out = !Robot.oi.shootauto1.get();
+    		out = !Robot.oi.low_speed.get();
     	} else if (this.rate == RobotMap.SHOOTSPEED_2) {
-    		out = !Robot.oi.shootauto2.get();
+    		out = !Robot.oi.mid_speed.get();
     	} else if (this.rate == RobotMap.SHOOTSPEED_3) {
-    		out = !Robot.oi.shootauto3.get();
+    		out = !Robot.oi.high_speed.get();
     	}
         return out;
     }

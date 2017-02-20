@@ -24,9 +24,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.subsystems.Chassis;
 import org.usfirst.frc.team486.robot.subsystems.Winch;
-import org.usfirst.frc.team486.robot.triggers.OpstickBackTrigger;
-import org.usfirst.frc.team486.robot.triggers.OpstickForwardTrigger;
-import org.usfirst.frc.team486.robot.triggers.Opstick_1_3_Trigger;
+import org.usfirst.frc.team486.robot.triggers.CloseTrigger;
+import org.usfirst.frc.team486.robot.triggers.LiftTrigger;
+import org.usfirst.frc.team486.robot.triggers.LowerTrigger;
+import org.usfirst.frc.team486.robot.triggers.OpenTrigger;
 import org.usfirst.frc.team486.robot.subsystems.Camera;
 import org.usfirst.frc.team486.robot.subsystems.Claw;
 import org.usfirst.frc.team486.robot.subsystems.Regulator;
@@ -42,13 +43,14 @@ public class Robot extends IterativeRobot {
 	public static final ShooterPID shooter = new ShooterPID();
 	public static final Winch winch = new Winch();
 	public static final Regulator regulator = new Regulator();
-	public static OI oi;
-	
 	public static final Claw claw = new Claw();
-	
-	private final OpstickBackTrigger opstickbacktrigger = new OpstickBackTrigger();
-	private final OpstickForwardTrigger opstickforwardtrigger = new OpstickForwardTrigger();
+	public static OI oi;
 
+	private final OpenTrigger open_trigger = new OpenTrigger();
+	private final CloseTrigger close_trigger = new CloseTrigger(); 
+	private final LiftTrigger lift_trigger = new LiftTrigger();
+	private final LowerTrigger lower_trigger = new LowerTrigger();
+	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	
@@ -75,8 +77,10 @@ public class Robot extends IterativeRobot {
 		
 		//shooter.reset();
 		
-		opstickbacktrigger.whileActive(new LiftGear(true));
-		opstickforwardtrigger.whileActive(new LiftGear(false));
+		open_trigger.whileActive(new GrabGear(false));
+		close_trigger.whileActive(new GrabGear(true));
+		lift_trigger.whileActive(new LiftGear(true));
+		lower_trigger.whileActive(new LiftGear(false));
 		
 		Robot.drivechain.gyro_start();
 	}

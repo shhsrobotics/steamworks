@@ -30,14 +30,10 @@ public class Teleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.slowbutton.get()){
+    	if (Robot.oi.left_slow.get() || Robot.oi.right_slow.get()){
     		Robot.drivechain.slow_drive_joystick(Robot.oi.leftstick, Robot.oi.rightstick);
     	} else {
     		Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
-    	}
-    	
-    	if (Robot.oi.resetbutton.get()){
-    		Robot.drivechain.gyro_reset();
     	}
     		
     	SmartDashboard.putNumber("LEFT_RAW", Robot.drivechain.get_left_encoder_raw());

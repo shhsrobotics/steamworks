@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 /**
  *
  */
-public class Opstick_1_3_Trigger extends Trigger {
+public class CloseTrigger extends Trigger {
 
     public boolean get() {
-        return ((Robot.oi.shootoveride.get()) && (Robot.oi.trackbutton.get()));
+        return (Robot.oi.left_close.get() || Robot.oi.right_close.get());
     }
 }
