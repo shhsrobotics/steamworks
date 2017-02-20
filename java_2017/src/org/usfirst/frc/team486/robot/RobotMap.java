@@ -21,8 +21,8 @@ public class RobotMap {
 	// OPSTICK
 	public static int BALL_IN_BUTTON= 1;
 	public static int JOSTLE_BUTTON = 2;
-	public static int LOW_SPEED_BUTTON = 3;
-	public static int MID_SPEED_BUTTON = 4;
+	public static int LOW_SPEED_BUTTON = 4;
+	public static int MID_SPEED_BUTTON = 3;
 	public static int HIGH_SPEED_BUTTON = 5;
 	public static int WINCH_BUTTON = 6;
 	// LEFTSTICK
