@@ -3,12 +3,14 @@ package org.usfirst.frc.team486.robot.subsystems;
 import org.usfirst.frc.team486.robot.RobotMap;
 import org.usfirst.frc.team486.robot.commands.Teleop;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 /**
  *
  */
@@ -28,7 +30,8 @@ public class Chassis extends Subsystem {
 	private Encoder leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_PIN_A, RobotMap.LEFT_ENCODER_PIN_B);
 	private Encoder rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_PIN_A, RobotMap.RIGHT_ENCODER_PIN_B);
 	
-	private AnalogGyro gyro = new AnalogGyro(RobotMap.GYRO_PIN);
+	//private AnalogGyro gyro = new AnalogGyro(RobotMap.GYRO_PIN);
+	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	double Kp = 0.3;
 
     public void initDefaultCommand() {

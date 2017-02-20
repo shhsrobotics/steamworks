@@ -47,8 +47,6 @@ public class Teleop extends Command {
     	}
     	//DriverStation.reportWarning("Just put SmartDashboard values", true);
     	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
-    	SmartDashboard.putNumber("SHOOTER_RATE_GRAPH", Robot.shooter.get_rate() * -1);
-    	SmartDashboard.putNumber("SHOOTER_DIST", Robot.shooter.get_raw());
     }
 
     // Make this return true when this Command no longer needs to run execute()
