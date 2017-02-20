@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	
 	//Thread visionThread;
-	Thread encoderThread;
+	//Thread encoderThread;
 
 	/**
 	 * This function is run when the robot is first started up and should be

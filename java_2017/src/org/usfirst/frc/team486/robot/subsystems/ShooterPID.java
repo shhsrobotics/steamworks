@@ -21,7 +21,8 @@ public class ShooterPID extends PIDSubsystem {
         // enable() - Enables the PID controller.
     	//super("ShooterPID", 2.0, 0.25, 0.125);  //base
     	super("ShooterPID", 3.0, 0.3, 0.2);  //slightly more aggressive
-    	setAbsoluteTolerance(2500.0);
+    	//setAbsoluteTolerance(2500.0);
+    	setAbsoluteTolerance(500.0);
     	getPIDController().setContinuous(false);
     	getPIDController().setInputRange(0.0, 95000.0);
     	getPIDController().setOutputRange(0.0, 1.0);
