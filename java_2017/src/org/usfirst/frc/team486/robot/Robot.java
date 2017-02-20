@@ -77,8 +77,8 @@ public class Robot extends IterativeRobot {
 		
 		//shooter.reset();
 		
-		open_trigger.whileActive(new GrabGear(true));
-		close_trigger.whileActive(new GrabGear(false));
+		open_trigger.whileActive(new GrabGear(false));
+		close_trigger.whileActive(new GrabGear(true));
 		lift_trigger.whileActive(new LiftGear(true));
 		lower_trigger.whileActive(new LiftGear(false));
 		

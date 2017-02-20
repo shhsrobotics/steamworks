@@ -34,8 +34,8 @@ public class RobotMap {
 	// RIGHTSTICK
 	public static int RIGHT_LIFT_BUTTON = 3;
 	public static int RIGHT_LOWER_BUTTON = 2;
-	public static int RIGHT_CLOSE_BUTTON = 5;
-	public static int RIGHT_OPEN_BUTTON = 4;
+	public static int RIGHT_CLOSE_BUTTON = 4;
+	public static int RIGHT_OPEN_BUTTON = 5;
 	public static int SLOW_DRIVE_RIGHT = 1;
 	
 	// ----------------------------------------------------------

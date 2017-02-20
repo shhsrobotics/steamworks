@@ -32,20 +32,20 @@ public class OI {
 	// ----------------------------------------------------------
 	// LEFTSTICK BUTTONS
 	// ----------------------------------------------------------
-	public JoystickButton left_slow = new JoystickButton(opstick, RobotMap.SLOW_DRIVE_LEFT);
-	public JoystickButton left_lower = new JoystickButton(opstick, RobotMap.LEFT_LOWER_BUTTON);
-	public JoystickButton left_lift = new JoystickButton(opstick, RobotMap.LEFT_LIFT_BUTTON);
-	public JoystickButton left_open = new JoystickButton(opstick, RobotMap.LEFT_OPEN_BUTTON);
-	public JoystickButton left_close = new JoystickButton(opstick, RobotMap.LEFT_CLOSE_BUTTON);
+	public JoystickButton left_slow = new JoystickButton(leftstick, RobotMap.SLOW_DRIVE_LEFT);
+	public JoystickButton left_lower = new JoystickButton(leftstick, RobotMap.LEFT_LOWER_BUTTON);
+	public JoystickButton left_lift = new JoystickButton(leftstick, RobotMap.LEFT_LIFT_BUTTON);
+	public JoystickButton left_open = new JoystickButton(leftstick, RobotMap.LEFT_OPEN_BUTTON);
+	public JoystickButton left_close = new JoystickButton(leftstick, RobotMap.LEFT_CLOSE_BUTTON);
 	
 	// ----------------------------------------------------------
 	// RIGHTSTICK BUTTONS
 	// ----------------------------------------------------------
-	public JoystickButton right_slow = new JoystickButton(opstick, RobotMap.SLOW_DRIVE_RIGHT);
-	public JoystickButton right_lower = new JoystickButton(opstick, RobotMap.RIGHT_LOWER_BUTTON);
-	public JoystickButton right_lift = new JoystickButton(opstick, RobotMap.RIGHT_LIFT_BUTTON);
-	public JoystickButton right_open = new JoystickButton(opstick, RobotMap.RIGHT_OPEN_BUTTON);
-	public JoystickButton right_close = new JoystickButton(opstick, RobotMap.RIGHT_CLOSE_BUTTON);
+	public JoystickButton right_slow = new JoystickButton(rightstick, RobotMap.SLOW_DRIVE_RIGHT);
+	public JoystickButton right_lower = new JoystickButton(rightstick, RobotMap.RIGHT_LOWER_BUTTON);
+	public JoystickButton right_lift = new JoystickButton(rightstick, RobotMap.RIGHT_LIFT_BUTTON);
+	public JoystickButton right_open = new JoystickButton(rightstick, RobotMap.RIGHT_OPEN_BUTTON);
+	public JoystickButton right_close = new JoystickButton(rightstick, RobotMap.RIGHT_CLOSE_BUTTON);
 
 	// ----------------------------------------------------------
 	// OI METHOD FOR BUTTON TRIGGERS
