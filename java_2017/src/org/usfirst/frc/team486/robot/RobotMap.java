@@ -19,20 +19,24 @@ public class RobotMap {
 	// BUTTON NUMBERS
 	// ----------------------------------------------------------
 	// OPSTICK
-	public static int TRACK_BUTTON = 1;
-	public static int GRAB_BUTTON = 2;
-	public static int SHOOT_OVERRIDE = 3;
-	public static int RESET_BUTTON = 6;
-	public static int JOSTLE_BUTTON = 11;
-	public static int JOSTLE_BUTTON_2 = 12;
-	public static int SHOOT_REG_DEBUG = 4;
-	public static int SHOOT_AUTO_3 = 9;
-	public static int SHOOT_AUTO_2 = 8;
-	public static int SHOOT_AUTO_1 = 7;
+	public static int BALL_IN_BUTTON= 1;
+	public static int JOSTLE_BUTTON = 2;
+	public static int LOW_SPEED_BUTTON = 3;
+	public static int MID_SPEED_BUTTON = 4;
+	public static int HIGH_SPEED_BUTTON = 5;
+	public static int WINCH_BUTTON = 6;
 	// LEFTSTICK
+	public static int LEFT_LIFT_BUTTON = 3;
+	public static int LEFT_LOWER_BUTTON = 2;
+	public static int LEFT_CLOSE_BUTTON = 5;
+	public static int LEFT_OPEN_BUTTON = 4;
+	public static int SLOW_DRIVE_LEFT = 1;
 	// RIGHTSTICK
-	public static int WINCH_BUTTON = 1;
-	public static int SLOW_BUTTON = 2;
+	public static int RIGHT_LIFT_BUTTON = 3;
+	public static int RIGHT_LOWER_BUTTON = 2;
+	public static int RIGHT_CLOSE_BUTTON = 5;
+	public static int RIGHT_OPEN_BUTTON = 4;
+	public static int SLOW_DRIVE_RIGHT = 1;
 	
 	// ----------------------------------------------------------
 	// PWM PORTS

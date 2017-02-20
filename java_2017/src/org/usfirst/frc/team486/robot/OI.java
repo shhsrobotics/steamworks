@@ -20,41 +20,46 @@ public class OI {
 	public Joystick opstick = new Joystick(RobotMap.OP_STICK_PORT);
 	
 	// ----------------------------------------------------------
-	// JOYSTICK BUTTONS
+	// OPSTICK BUTTONS
 	// ----------------------------------------------------------
-	public JoystickButton trackbutton = new JoystickButton(opstick, RobotMap.TRACK_BUTTON);
-	public JoystickButton grabbutton = new JoystickButton(opstick, RobotMap.GRAB_BUTTON);
-	public JoystickButton shootoveride = new JoystickButton(opstick, RobotMap.SHOOT_OVERRIDE);
-	public JoystickButton winchbutton = new JoystickButton(rightstick, RobotMap.WINCH_BUTTON);
-	public JoystickButton slowbutton = new JoystickButton(rightstick, RobotMap.SLOW_BUTTON);
-	
-	public JoystickButton jostlebutton = new JoystickButton(opstick, RobotMap.JOSTLE_BUTTON);
-	public JoystickButton jostlebutton2 = new JoystickButton(opstick, RobotMap.JOSTLE_BUTTON_2);
+	public JoystickButton ball_in = new JoystickButton(opstick, RobotMap.BALL_IN_BUTTON);
+	public JoystickButton jostle = new JoystickButton(opstick, RobotMap.JOSTLE_BUTTON);
+	public JoystickButton low_speed = new JoystickButton(opstick, RobotMap.LOW_SPEED_BUTTON);
+	public JoystickButton mid_speed = new JoystickButton(opstick, RobotMap.MID_SPEED_BUTTON);
+	public JoystickButton high_speed = new JoystickButton(opstick, RobotMap.HIGH_SPEED_BUTTON);
+	public JoystickButton winch = new JoystickButton(opstick, RobotMap.WINCH_BUTTON);
 	
 	// ----------------------------------------------------------
-	// DEBUG BUTTONS
+	// LEFTSTICK BUTTONS
 	// ----------------------------------------------------------
-	public JoystickButton shootregdebug = new JoystickButton(opstick, RobotMap.SHOOT_REG_DEBUG);
-	public JoystickButton shootauto1 = new JoystickButton(opstick, RobotMap.SHOOT_AUTO_1);
-	public JoystickButton shootauto2 = new JoystickButton(opstick, RobotMap.SHOOT_AUTO_2);
-	public JoystickButton shootauto3 = new JoystickButton(opstick, RobotMap.SHOOT_AUTO_3);
-	public JoystickButton resetbutton = new JoystickButton(opstick, RobotMap.RESET_BUTTON); 
+	public JoystickButton left_slow = new JoystickButton(opstick, RobotMap.SLOW_DRIVE_LEFT);
+	public JoystickButton left_lower = new JoystickButton(opstick, RobotMap.LEFT_LOWER_BUTTON);
+	public JoystickButton left_lift = new JoystickButton(opstick, RobotMap.LEFT_LIFT_BUTTON);
+	public JoystickButton left_open = new JoystickButton(opstick, RobotMap.LEFT_OPEN_BUTTON);
+	public JoystickButton left_close = new JoystickButton(opstick, RobotMap.LEFT_CLOSE_BUTTON);
+	
+	// ----------------------------------------------------------
+	// RIGHTSTICK BUTTONS
+	// ----------------------------------------------------------
+	public JoystickButton right_slow = new JoystickButton(opstick, RobotMap.SLOW_DRIVE_RIGHT);
+	public JoystickButton right_lower = new JoystickButton(opstick, RobotMap.RIGHT_LOWER_BUTTON);
+	public JoystickButton right_lift = new JoystickButton(opstick, RobotMap.RIGHT_LIFT_BUTTON);
+	public JoystickButton right_open = new JoystickButton(opstick, RobotMap.RIGHT_OPEN_BUTTON);
+	public JoystickButton right_close = new JoystickButton(opstick, RobotMap.RIGHT_CLOSE_BUTTON);
 
 	// ----------------------------------------------------------
 	// OI METHOD FOR BUTTON TRIGGERS
 	// ----------------------------------------------------------
 	public OI(){
-		grabbutton.whenActive(new GrabGear());
-		//shootregdebug.whenActive(new AcceptBall_DEBUG(true));
-		//shootregdebug.whenInactive(new AcceptBall_DEBUG(false));
-		//trackbutton.whileHeld(new ShooterCommand());
-		//trackbutton.whenActive(new ShootAuto());
-		shootregdebug.whileActive(new Open());
-		shootauto1.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_1));
-		shootauto2.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_2));
-		shootauto3.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_3));
-		winchbutton.whileActive(new Climb());
-		jostlebutton.whenActive(new JostleBalls(0.5, 1.0, 1));
-		jostlebutton2.whenActive(new JostleBalls(1.0, 1.0, 1));
+		// ------------------------------------------------------
+		// OPSTICK COMMANDS
+		// ------------------------------------------------------
+		ball_in.whileActive(new Open());
+		jostle.whenActive(new JostleBalls(0.5, 1.0, 1));
+		low_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_1));
+		mid_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_2));
+		high_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_3));
+		winch.whileActive(new Climb());
+		// Driver stick commands done with triggers, since all are two buttons (and duplicated)
 	}
 }
