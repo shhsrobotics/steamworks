@@ -78,6 +78,8 @@ public class RobotMap {
 	public static double SHOOTSPEED_1 = 50000.0;
 	public static double SHOOTSPEED_2 = 54000.0;
 	public static double SHOOTSPEED_3 = 58000.0;
+	public static double AUTO_MOVE_SPEED = 0.6;
+	public static double AUTO_MOVE_SLOW_SPEED = 0.48;
 	//-----------------------------------------------------------
 	// ANALOG
 	//-----------------------------------------------------------

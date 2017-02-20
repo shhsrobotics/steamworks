@@ -1,5 +1,6 @@
 package org.usfirst.frc.team486.robot.commands.groups;
 
+import org.usfirst.frc.team486.robot.RobotMap;
 import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 import org.usfirst.frc.team486.robot.commands.LiftGear;
@@ -35,11 +36,11 @@ public class AutoMode3 extends CommandGroup {
     	addSequential(new GrabGear());
     	addSequential(new Wait(0.25));
     	addSequential(new LiftGear(true));
-    	addSequential(new AutoDriveDistance(83.632, 0.4)); // This is the real-world value
+    	addSequential(new AutoDriveDistance(81.632, RobotMap.AUTO_MOVE_SPEED)); // This is the real-world value
     	addSequential(new Turn(60.0));
-    	addSequential(new AutoDriveDistance(33.5, 0.4)); // This is the real-world value
+    	addSequential(new AutoDriveDistance(31.0, RobotMap.AUTO_MOVE_SLOW_SPEED)); // This is the real-world value
     	addSequential(new GrabGear());
     	addSequential(new Wait(0.25));
-    	addSequential(new AutoDriveDistance(-18.0, -0.4)); // This is the real-world value
+    	addSequential(new AutoDriveDistance(-18.0, -1 * RobotMap.AUTO_MOVE_SPEED)); // This is the real-world value
     }
 }

@@ -64,9 +64,9 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Test Mode 1", new TestMode1());
 		chooser.addObject("Test Mode 2", new TestMode2());
 		chooser.addObject("Test Mode 3", new TestMode3());
-		chooser.addObject("Auto Mode 1", new AutoMode1());
-		chooser.addObject("Auto Mode 2", new AutoMode2());
-		chooser.addObject("Auto Mode 3", new AutoMode3());
+		chooser.addObject("AM1: Center Start", new AutoMode1());
+		chooser.addObject("AM2: Right Start", new AutoMode2());
+		chooser.addObject("AM3: Left Start", new AutoMode3());
 		SmartDashboard.putData("Auto Chooser", chooser);
 		//autonomousCommand = chooser.getSelected();
 		oi = new OI();

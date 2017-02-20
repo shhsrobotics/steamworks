@@ -124,7 +124,7 @@ public class Chassis extends Subsystem {
     }
     
     public double gyro_angle(){
-    	return gyro.getAngle();
+    	return gyro.getAngle() * -1;
     }
     
     public void gyro_reset(){
