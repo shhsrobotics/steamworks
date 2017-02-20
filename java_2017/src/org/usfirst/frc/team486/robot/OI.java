@@ -35,9 +35,9 @@ public class OI {
 	// DEBUG BUTTONS
 	// ----------------------------------------------------------
 	public JoystickButton shootregdebug = new JoystickButton(opstick, RobotMap.SHOOT_REG_DEBUG);
-	public JoystickButton shootdebug30k = new JoystickButton(opstick, RobotMap.SHOOT_30K_DEBUG);
-	public JoystickButton shootdebug54k = new JoystickButton(opstick, RobotMap.SHOOT_54K_DEBUG);
-	public JoystickButton shootdebug67k = new JoystickButton(opstick, RobotMap.SHOOT_67K_DEBUG);
+	public JoystickButton shootauto1 = new JoystickButton(opstick, RobotMap.SHOOT_AUTO_1);
+	public JoystickButton shootauto2 = new JoystickButton(opstick, RobotMap.SHOOT_AUTO_2);
+	public JoystickButton shootauto3 = new JoystickButton(opstick, RobotMap.SHOOT_AUTO_3);
 	public JoystickButton resetbutton = new JoystickButton(opstick, RobotMap.RESET_BUTTON); 
 
 	// ----------------------------------------------------------
@@ -50,9 +50,9 @@ public class OI {
 		//trackbutton.whileHeld(new ShooterCommand());
 		//trackbutton.whenActive(new ShootAuto());
 		shootregdebug.whileActive(new Open());
-		shootdebug30k.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_1));
-		shootdebug54k.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_2));
-		shootdebug67k.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_3));
+		shootauto1.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_1));
+		shootauto2.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_2));
+		shootauto3.whenActive(new AutoShootPID(RobotMap.SHOOTSPEED_3));
 		winchbutton.whileActive(new Climb());
 		jostlebutton.whenActive(new JostleBalls(0.5, 1.0, 1));
 		jostlebutton2.whenActive(new JostleBalls(1.0, 1.0, 1));
