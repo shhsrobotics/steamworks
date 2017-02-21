@@ -36,7 +36,8 @@ public class AutoMode1 extends CommandGroup {
     	addSequential(new GrabGear(true));
     	addSequential(new Wait(0.25));
     	addSequential(new LiftGear(true));
-    	addSequential(new AutoDriveDistance(73.0, RobotMap.AUTO_MOVE_SPEED)); // This is the real-world value
+    	addSequential(new AutoDriveDistance(50.0, RobotMap.AUTO_MOVE_SPEED)); // This is the real-world value
+    	addSequential(new AutoDriveDistance(23.0, RobotMap.AUTO_MOVE_SLOW_SPEED)); // This is the real-world value
     	addSequential(new GrabGear(false));
     	addSequential(new Wait(0.25));
     	addSequential(new AutoDriveDistance(-35.0, -1 * RobotMap.AUTO_MOVE_SPEED)); // This is the real-world value

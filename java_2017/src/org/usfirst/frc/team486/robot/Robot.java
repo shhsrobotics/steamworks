@@ -33,25 +33,31 @@ import org.usfirst.frc.team486.robot.subsystems.AirCompressor;
 
 public class Robot extends IterativeRobot {
 
+	// ----------------------------------------------------------
+	// SUBSYSTEM INSTANTIATIONS
+	// ----------------------------------------------------------
 	public static final Camera camera = new Camera();
 	public static final Chassis drivechain = new Chassis();
 	public static final AirCompressor compressor = new AirCompressor();
 	public static final ShooterPID shooter = new ShooterPID();
 	public static final Winch winch = new Winch();
-	public static final Regulator regulator = new Regulator();
-	public static final Claw claw = new Claw();
-	public static OI oi;
+	public static final Regulator regulator = new Regulator(); // for letting balls into the shooter
+	public static final Claw claw = new Claw(); // for grabbing and lifting gears
+	public static OI oi; // for controlling the robot
 
-	private final OpenTrigger open_trigger = new OpenTrigger();
-	private final CloseTrigger close_trigger = new CloseTrigger(); 
-	private final LiftTrigger lift_trigger = new LiftTrigger();
-	private final LowerTrigger lower_trigger = new LowerTrigger();
+	// ----------------------------------------------------------
+	// TRIGGER INSTANTIATIONS
+	// ----------------------------------------------------------
+	private final OpenTrigger open_trigger = new OpenTrigger(); // for opening the claw to grab a gear
+	private final CloseTrigger close_trigger = new CloseTrigger(); // for closing the claw to grab a gear
+	private final LiftTrigger lift_trigger = new LiftTrigger(); // for lifting the claw to lift a gear
+	private final LowerTrigger lower_trigger = new LowerTrigger(); // for lowering the claw to lower a gear
 	
-	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
-	
-	//Thread visionThread;
-	//Thread encoderThread;
+	// ----------------------------------------------------------
+	// AUTONOMOUS COMMAND INSTANTIATIONS
+	// ----------------------------------------------------------
+	Command autonomousCommand; // empty variable for an autonomous command
+	SendableChooser<Command> chooser = new SendableChooser<>(); // the chooser on the smart dash-board that lets the user select autonomous
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -59,26 +65,41 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		CameraServer.getInstance().startAutomaticCapture();
-		chooser.addDefault("Just print debug statements", new AutoPrintDebugStatements(10.0));
-		chooser.addObject("Test Mode 1", new TestMode1());
-		chooser.addObject("Test Mode 2", new TestMode2());
-		chooser.addObject("Test Mode 3", new TestMode3());
-		chooser.addObject("AM1: Center Start", new AutoMode1());
-		chooser.addObject("AM2: Right Start", new AutoMode2());
-		chooser.addObject("AM3: Left Start", new AutoMode3());
-		SmartDashboard.putData("Auto Chooser", chooser);
-		//autonomousCommand = chooser.getSelected();
-		oi = new OI();
 		
-		//shooter.reset();
+		// ------------------------------------------------------
+		// CAMERA CODE
+		// ------------------------------------------------------
+		CameraServer.getInstance().startAutomaticCapture(); // Getting the camera feed and sending it to smart dash-board
 		
-		open_trigger.whileActive(new GrabGear(false));
-		close_trigger.whileActive(new GrabGear(true));
-		lift_trigger.whileActive(new LiftGear(true));
-		lower_trigger.whileActive(new LiftGear(false));
+		// ------------------------------------------------------
+		// AUTONOMOUS CHOOSER
+		// ------------------------------------------------------
+		chooser.addDefault("Just print debug statements", new AutoPrintDebugStatements(10.0)); // debug command
+		chooser.addObject("Test Mode 1", new TestMode1()); // copy of auto mode 1, but distances are lowered and the robot travels slower
+		chooser.addObject("Test Mode 2", new TestMode2()); // copy of auto mode 2, but distances are lowered and the robot travels slower
+		chooser.addObject("Test Mode 3", new TestMode3()); // copy of auto mode 3, but distances are lowered and the robot travels slower
+		chooser.addObject("AM1: Center Start", new AutoMode1()); // auto mode 1, code for a center start (relative to driver station)
+		chooser.addObject("AM2: Right Start", new AutoMode2()); // auto mode 2, code for a right sided start (relative to driver station)
+		chooser.addObject("AM3: Left Start", new AutoMode3()); // auto mode 3, code for a left sided start (relative to driver station)
+		SmartDashboard.putData("Auto Chooser", chooser); // puting the added auto modes onto the smart dash-board
 		
-		Robot.drivechain.gyro_start();
+		// ------------------------------------------------------
+		// OI INSTANTIATION
+		// ------------------------------------------------------
+		oi = new OI(); // instantiating OI
+		
+		// ------------------------------------------------------
+		// TRIGGER ASSIGNMENTS
+		// ------------------------------------------------------
+		open_trigger.whileActive(new GrabGear(false)); // while open_trigger is triggered, open the gear grabber
+		close_trigger.whileActive(new GrabGear(true)); // while close_trigger is triggered, close the gear grabber
+		lift_trigger.whileActive(new LiftGear(true)); // while lift_trigger is triggered, lift the gear grabber
+		lower_trigger.whileActive(new LiftGear(false)); // while lower_trigger is triggered, lower the gear grabber
+		
+		// ------------------------------------------------------
+		// GYROSCOPE CALIBRATION
+		// ------------------------------------------------------
+		Robot.drivechain.gyro_start(); // calibrating the gyroscope right as the robot starts up
 	}
 
 	
@@ -109,18 +130,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		
+		// ------------------------------------------------------
+		// AUTONOMOUS INITIATION
+		// ------------------------------------------------------
+		autonomousCommand = chooser.getSelected(); // get the command to use for autonomous from the smart dash-board selection
+		if (autonomousCommand != null) // if the autonomous command is not empty (i.e. if some command was selected)
+			autonomousCommand.start(); // start autonomous command
 	}
 
 	/**
@@ -133,12 +149,11 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
+		// ------------------------------------------------------
+		// AUTONOMOUS INITIATION
+		// ------------------------------------------------------
+		if (autonomousCommand != null) // if the autonomous command is not empty (i.e. if some command was selected)
+			autonomousCommand.cancel(); // end the autonomous as teleop begins
 	}
 
 	/**
