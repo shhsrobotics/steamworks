@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class Shoot extends Command {
+public class Shoot extends Command { // Not used in production
     public Shoot() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

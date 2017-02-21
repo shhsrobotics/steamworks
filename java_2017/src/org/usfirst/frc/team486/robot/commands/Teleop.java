@@ -29,6 +29,7 @@ public class Teleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	// Drive slower if either slow button is pressed
     	if (Robot.oi.left_slow.get() || Robot.oi.right_slow.get()){
     		Robot.drivechain.slow_drive_joystick(Robot.oi.leftstick, Robot.oi.rightstick);
     	} else {
@@ -40,6 +41,7 @@ public class Teleop extends Command {
     	SmartDashboard.putNumber("RIGHT RAW", Robot.drivechain.get_right_encoder_raw());
     	SmartDashboard.putNumber("RIGHT_RATE", Robot.drivechain.get_right_encoder_rate());
     	SmartDashboard.putNumber("Analog gyro angle", Robot.drivechain.gyro_angle());
+    	// Use the third axis on the operator stick as a switch for the camera light
     	if (Robot.oi.opstick.getRawAxis(2) > 0.5) {
     		Robot.camera.light_off();
     	} else {
