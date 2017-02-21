@@ -81,7 +81,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("AM1: Center Start", new AutoMode1()); // auto mode 1, code for a center start (relative to driver station)
 		chooser.addObject("AM2: Right Start", new AutoMode2()); // auto mode 2, code for a right sided start (relative to driver station)
 		chooser.addObject("AM3: Left Start", new AutoMode3()); // auto mode 3, code for a left sided start (relative to driver station)
-		SmartDashboard.putData("Auto Chooser", chooser); // puting the added auto modes onto the smart dash-board
+		SmartDashboard.putData("Auto Chooser", chooser); // putting the added auto modes onto the SmartDashboard
 		
 		// ------------------------------------------------------
 		// OI INSTANTIATION
