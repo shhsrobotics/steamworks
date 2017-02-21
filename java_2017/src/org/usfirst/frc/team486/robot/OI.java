@@ -52,12 +52,12 @@ public class OI {
 		// ------------------------------------------------------
 		// OPSTICK COMMANDS
 		// ------------------------------------------------------
-		ball_in.whileActive(new Open());
-		jostle.whenActive(new JostleBalls(0.5, 1.0, 1));
-		low_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_1));
-		mid_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_2));
-		high_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_3));
-		winch.whileActive(new Climb());
+		ball_in.whileActive(new Open()); // Retracts piston to let balls into shooter
+		jostle.whenActive(new JostleBalls(0.5, 1.0, 1)); // Jostles the robot so that any stuck balls can enter the shooter
+		low_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_1)); // Spin the shooter motors at the low preset speed
+		mid_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_2)); // Spin the shooter motors at the normal preset speed
+		high_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_3)); // Spin the shooter motors at the high preset speed
+		winch.whileActive(new Climb()); // Spin the winch to climb the rope
 		// Driver stick commands done with triggers, since all are two buttons (and duplicated)
 	}
 }
