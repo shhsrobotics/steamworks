@@ -2,12 +2,12 @@
 package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.LiftGear;
-import org.usfirst.frc.team486.robot.commands.groups.AutoMode1;
-import org.usfirst.frc.team486.robot.commands.groups.AutoMode2;
-import org.usfirst.frc.team486.robot.commands.groups.AutoMode3;
-import org.usfirst.frc.team486.robot.commands.groups.TestMode1;
-import org.usfirst.frc.team486.robot.commands.groups.TestMode2;
-import org.usfirst.frc.team486.robot.commands.groups.TestMode3;
+import org.usfirst.frc.team486.robot.commands.groups.AutoCenter;
+import org.usfirst.frc.team486.robot.commands.groups.AutoRight;
+import org.usfirst.frc.team486.robot.commands.groups.AutoLeft;
+import org.usfirst.frc.team486.robot.commands.groups.TestCenter;
+import org.usfirst.frc.team486.robot.commands.groups.TestRight;
+import org.usfirst.frc.team486.robot.commands.groups.TestLeft;
 import org.usfirst.frc.team486.robot.commands.AutoPrintDebugStatements;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 
@@ -75,12 +75,12 @@ public class Robot extends IterativeRobot {
 		// AUTONOMOUS CHOOSER
 		// ------------------------------------------------------
 		chooser.addDefault("Just print debug statements", new AutoPrintDebugStatements(10.0)); // debug command
-		chooser.addObject("Test Mode 1", new TestMode1()); // copy of auto mode 1, but distances are lowered and the robot travels slower
-		chooser.addObject("Test Mode 2", new TestMode2()); // copy of auto mode 2, but distances are lowered and the robot travels slower
-		chooser.addObject("Test Mode 3", new TestMode3()); // copy of auto mode 3, but distances are lowered and the robot travels slower
-		chooser.addObject("AM1: Center Start", new AutoMode1()); // auto mode 1, code for a center start (relative to driver station)
-		chooser.addObject("AM2: Right Start", new AutoMode2()); // auto mode 2, code for a right sided start (relative to driver station)
-		chooser.addObject("AM3: Left Start", new AutoMode3()); // auto mode 3, code for a left sided start (relative to driver station)
+		chooser.addObject("Test Mode 1", new TestCenter()); // copy of auto mode 1, but distances are lowered and the robot travels slower
+		chooser.addObject("Test Mode 2", new TestRight()); // copy of auto mode 2, but distances are lowered and the robot travels slower
+		chooser.addObject("Test Mode 3", new TestLeft()); // copy of auto mode 3, but distances are lowered and the robot travels slower
+		chooser.addObject("AM1: Center Start", new AutoCenter()); // auto mode 1, code for a center start (relative to driver station)
+		chooser.addObject("AM2: Right Start", new AutoRight()); // auto mode 2, code for a right sided start (relative to driver station)
+		chooser.addObject("AM3: Left Start", new AutoLeft()); // auto mode 3, code for a left sided start (relative to driver station)
 		SmartDashboard.putData("Auto Chooser", chooser); // putting the added auto modes onto the SmartDashboard
 		
 		// ------------------------------------------------------

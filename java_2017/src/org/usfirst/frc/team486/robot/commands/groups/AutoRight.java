@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoMode2 extends CommandGroup {
+public class AutoRight extends CommandGroup {
 
-    public AutoMode2() {
+    public AutoRight() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
