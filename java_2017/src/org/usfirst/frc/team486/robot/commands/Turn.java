@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Turn extends Command {
 
 	private double angle;
+	private double speed;
 	private double threshold = 3;
 	
-    public Turn(double angle_in) {
+    public Turn(double angle_in, double speed_in) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	this.angle = angle_in;
+    	this.speed = speed_in;
     	DriverStation.reportWarning("New Instance of Turn Command Created", true);
     }
 
@@ -30,7 +32,7 @@ public class Turn extends Command {
     protected void execute() {
     	if (angle < 0){
     		// Right
-    		Robot.drivechain.drive_value(0.48, -0.48);
+    		Robot.drivechain.drive_value(this.speed, -this.speed);
     		DriverStation.reportWarning("Turning Right", true);
     	} else {
     		// Left

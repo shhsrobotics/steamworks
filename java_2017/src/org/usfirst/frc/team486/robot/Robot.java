@@ -3,8 +3,10 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.LiftGear;
 import org.usfirst.frc.team486.robot.commands.groups.AutoCenter;
+import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShoot;
 import org.usfirst.frc.team486.robot.commands.groups.AutoRight;
 import org.usfirst.frc.team486.robot.commands.groups.AutoLeft;
+import org.usfirst.frc.team486.robot.commands.groups.AutoLeftShoot;
 import org.usfirst.frc.team486.robot.commands.groups.TestCenter;
 import org.usfirst.frc.team486.robot.commands.groups.TestRight;
 import org.usfirst.frc.team486.robot.commands.groups.TestLeft;
@@ -78,9 +80,11 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Test Mode 1", new TestCenter()); // copy of auto mode 1, but distances are lowered and the robot travels slower
 		chooser.addObject("Test Mode 2", new TestRight()); // copy of auto mode 2, but distances are lowered and the robot travels slower
 		chooser.addObject("Test Mode 3", new TestLeft()); // copy of auto mode 3, but distances are lowered and the robot travels slower
-		chooser.addObject("AM1: Center Start", new AutoCenter()); // auto mode 1, code for a center start (relative to driver station)
-		chooser.addObject("AM2: Right Start", new AutoRight()); // auto mode 2, code for a right sided start (relative to driver station)
-		chooser.addObject("AM3: Left Start", new AutoLeft()); // auto mode 3, code for a left sided start (relative to driver station)
+		chooser.addObject("Center Start", new AutoCenter()); // auto mode 1, code for a center start (relative to driver station)
+		chooser.addObject("Right Start", new AutoRight()); // auto mode 2, code for a right sided start (relative to driver station)
+		chooser.addObject("Left Start", new AutoLeft()); // auto mode 3, code for a left sided start (relative to driver station)
+		chooser.addObject("Center Shoot", new AutoCenterShoot());
+		chooser.addObject("Left Shoot", new AutoLeftShoot());
 		SmartDashboard.putData("Auto Chooser", chooser); // putting the added auto modes onto the SmartDashboard
 		
 		// ------------------------------------------------------
