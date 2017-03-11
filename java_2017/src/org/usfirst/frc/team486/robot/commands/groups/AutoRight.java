@@ -31,8 +31,6 @@ public class AutoRight extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new LiftGear(false)); // Lower the gear-grabber
-    	addSequential(new Wait(0.25)); // Wait for the previous command to complete
     	addSequential(new GrabGear(true)); // Grab the gear
     	addSequential(new Wait(0.25)); // Wait for the previous command to complete
     	addSequential(new LiftGear(true)); // Lift the gear-grabber

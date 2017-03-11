@@ -4,6 +4,7 @@ import org.usfirst.frc.team486.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -20,19 +21,21 @@ public class Claw extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     	}
     public void grab(){
-		claw.set(true);
+		claw.set(false);
+		SmartDashboard.putBoolean("Grabber", true);
 	}
 	public void release(){
-		claw.set(false);
+		claw.set(true);
+		SmartDashboard.putBoolean("Grabber", false);
 	}
 	public boolean get(){
 		return claw.get();
 	}
 	public void raise(){
-		lift.set(true);
+		lift.set(false);
 	}
 	public void lower(){
-		lift.set(false);
+		lift.set(true);
 	}
 	public boolean status(){
 		return lift.get();
