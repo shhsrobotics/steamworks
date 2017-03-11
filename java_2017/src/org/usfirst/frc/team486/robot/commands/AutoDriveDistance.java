@@ -3,6 +3,7 @@ package org.usfirst.frc.team486.robot.commands;
 import org.usfirst.frc.team486.robot.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -11,6 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutoDriveDistance extends Command {
 	
 	private double inches, speed;
+	private double x0_left = 0;
+	private double x0_right = 0;
+	private Timer time = new Timer();
 
     public AutoDriveDistance(double inches_in, double speed_in) {
         // Use requires() here to declare subsystem dependencies
@@ -26,48 +30,34 @@ public class AutoDriveDistance extends Command {
     	Robot.drivechain.drive_value(speed, speed);
     	DriverStation.reportWarning("Starting drive command: speed " + speed + ", distance " + inches, true);
     	Robot.drivechain.gyro_reset();
+    	this.time.start();
     }
-
-    // Called repeatedly when this Command is scheduled to run
-    /*protected void execute() {
-    	if (Robot.drivechain.get_left_encoder_rate_feet() < Robot.drivechain.get_right_encoder_rate_feet()) {
-    		rMod = Robot.drivechain.get_left_encoder_rate_feet() * rMod / Robot.drivechain.get_right_encoder_rate_feet() * lMod;
-    	} else if (Robot.drivechain.get_left_encoder_rate_feet() > Robot.drivechain.get_right_encoder_rate_feet()) {
-    		lMod = Robot.drivechain.get_right_encoder_rate_feet() * lMod / Robot.drivechain.get_left_encoder_rate_feet() * rMod;
-    	}
-    	if (rMod < 1.0 && lMod < 1.0) {
-    		if (rMod > lMod) {
-    			double scale = 1.0/rMod;
-    			rMod = 1.0;
-    			lMod = lMod * scale;
-    		} else {
-    			double scale = 1.0/lMod;
-    			lMod = 1.0;
-    			rMod = rMod * scale;
-    		}
-    	}
-    	Robot.drivechain.drive_value(lMod * speed, rMod * speed);
-    	hasRun = true;
-    }
-    */
     
     protected void execute() {
     	Robot.drivechain.drive_value(speed, speed);
     }
-
-    // Make this return true when this Command no longer needs to run execute()
-    /*protected boolean isFinished() {
-    	boolean val = ((Robot.drivechain.get_left_encoder_raw_feet() >= feet) && (Robot.drivechain.get_right_encoder_raw_feet() >= feet));
-    	DriverStation.reportWarning("Ran isFinished. Got result: " + val + ". Feet: " + feet + " LF: " + Robot.drivechain.get_left_encoder_raw_feet() + ". RF: " + Robot.drivechain.get_right_encoder_raw_feet(), true);
-        return (val || !hasRun);
-    }*/
     
     protected boolean isFinished() {
-    	if (inches >= 0) {
-    		return (Robot.drivechain.get_left_encoder_raw_inches() > inches);
-    	} else {
-    		return (Robot.drivechain.get_left_encoder_raw_inches() < inches);
+    	double x_left = Robot.drivechain.get_left_encoder_raw_inches();
+    	double x_right = Robot.drivechain.get_right_encoder_raw_inches();
+    	boolean stalled = false;
+    	boolean done = false;
+    	if (this.time.get() >= 1){
+    		this.time.reset();
+    		if ((Math.abs(x_left - this.x0_left) <= Math.abs(Robot.drivechain.INCH_LEFT)) |
+    			(Math.abs(x_right - this.x0_right) <= Math.abs(Robot.drivechain.INCH_RIGHT))){
+    			stalled = true;
+    		} else {
+    			this.x0_left = x_left;
+    			this.x0_right = x_right;
+    		}
     	}
+    	if (inches >= 0) {
+    		done = (Robot.drivechain.get_left_encoder_raw_inches() > inches);
+    	} else {
+    		done = (Robot.drivechain.get_left_encoder_raw_inches() < inches);
+    	}
+    	return (done | stalled);
     }
 
     // Called once after isFinished returns true

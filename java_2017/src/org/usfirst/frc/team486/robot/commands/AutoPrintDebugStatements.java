@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class AutoPrintDebugStatements extends Command {
+	
 	Timer time = new Timer();
 	double duration;
 
