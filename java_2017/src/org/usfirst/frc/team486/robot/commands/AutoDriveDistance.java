@@ -15,6 +15,7 @@ public class AutoDriveDistance extends Command {
 	private double x0_left = 0;
 	private double x0_right = 0;
 	private Timer time = new Timer();
+	private double limit = 2;
 
     public AutoDriveDistance(double inches_in, double speed_in) {
         // Use requires() here to declare subsystem dependencies
@@ -42,7 +43,7 @@ public class AutoDriveDistance extends Command {
     	double x_right = Robot.drivechain.get_right_encoder_raw_inches();
     	boolean stalled = false;
     	boolean done = false;
-    	if (this.time.get() >= 1){
+    	if (this.time.get() >= this.limit){
     		this.time.reset();
     		if ((Math.abs(x_left - this.x0_left) <= Math.abs(Robot.drivechain.INCH_LEFT)) |
     			(Math.abs(x_right - this.x0_right) <= Math.abs(Robot.drivechain.INCH_RIGHT))){
