@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoCenterShoot extends CommandGroup {
+public class AutoCenterShootBlue extends CommandGroup {
 
-    public AutoCenterShoot() {
+    public AutoCenterShootBlue() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -42,7 +42,6 @@ public class AutoCenterShoot extends CommandGroup {
     	addSequential(new Wait(0.25)); // Wait for the previous command to complete
     	addSequential(new AutoDriveDistance(-35.0, -1 * RobotMap.AUTO_MOVE_SPEED)); // Move away from the pin
     	addSequential(new Turn(-90, RobotMap.TURN_SLOW_SPEED)); // Turn towards the boiler
-    	
     	addSequential(new AutoDriveDistance(136.0, RobotMap.AUTO_MOVE_SPEED));
     	addSequential(new Turn(-45, RobotMap.TURN_SLOW_SPEED));
     	addSequential(new AutoDriveDistance(32.0,RobotMap.AUTO_MOVE_SPEED));

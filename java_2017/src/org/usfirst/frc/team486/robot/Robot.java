@@ -3,10 +3,12 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.LiftGear;
 import org.usfirst.frc.team486.robot.commands.groups.AutoCenter;
-import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShoot;
+import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShootBlue;
+import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShootRed;
 import org.usfirst.frc.team486.robot.commands.groups.AutoRight;
 import org.usfirst.frc.team486.robot.commands.groups.AutoLeft;
-import org.usfirst.frc.team486.robot.commands.groups.AutoLeftShoot;
+import org.usfirst.frc.team486.robot.commands.groups.AutoLeftShootBlue;
+import org.usfirst.frc.team486.robot.commands.groups.AutoLeftShootRed;
 import org.usfirst.frc.team486.robot.commands.groups.TestCenter;
 import org.usfirst.frc.team486.robot.commands.groups.TestRight;
 import org.usfirst.frc.team486.robot.commands.groups.TestLeft;
@@ -83,8 +85,10 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Center Start", new AutoCenter()); // auto mode 1, code for a center start (relative to driver station)
 		chooser.addObject("Right Start", new AutoRight()); // auto mode 2, code for a right sided start (relative to driver station)
 		chooser.addObject("Left Start", new AutoLeft()); // auto mode 3, code for a left sided start (relative to driver station)
-		chooser.addObject("Center Shoot", new AutoCenterShoot());
-		chooser.addObject("Left Shoot", new AutoLeftShoot());
+		chooser.addObject("Center Shoot Red", new AutoCenterShootRed());
+		chooser.addObject("Center Shoot Blue", new AutoCenterShootBlue());
+		chooser.addObject("Left Shoot Red", new AutoLeftShootRed());
+		chooser.addObject("Left Shoot Blue", new AutoLeftShootBlue());
 		SmartDashboard.putData("Auto Chooser", chooser); // putting the added auto modes onto the SmartDashboard
 		
 		// ------------------------------------------------------

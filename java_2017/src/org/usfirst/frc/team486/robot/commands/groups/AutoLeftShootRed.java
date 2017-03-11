@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoLeftShoot extends CommandGroup {
+public class AutoLeftShootRed extends CommandGroup {
 
-    public AutoLeftShoot() {
+    public AutoLeftShootRed() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
