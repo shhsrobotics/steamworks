@@ -57,6 +57,7 @@ public class RobotMap {
 	public static int LEFT_ENCODER_PIN_B = 3;
 	public static int RIGHT_ENCODER_PIN_A = 4;
 	public static int RIGHT_ENCODER_PIN_B = 5;
+	public static int COUNTER_PIN = 9;
 	
 	// ----------------------------------------------------------
 	// RELAYS

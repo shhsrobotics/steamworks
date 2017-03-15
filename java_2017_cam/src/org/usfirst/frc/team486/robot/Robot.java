@@ -2,6 +2,7 @@
 package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.LiftGear;
+import org.usfirst.frc.team486.robot.commands.ReadRPi;
 import org.usfirst.frc.team486.robot.commands.groups.AutoCenter;
 import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShootBlue;
 import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShootRed;
@@ -26,11 +27,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team486.robot.subsystems.Chassis;
 import org.usfirst.frc.team486.robot.subsystems.Winch;
 import org.usfirst.frc.team486.robot.triggers.CloseTrigger;
+import org.usfirst.frc.team486.robot.triggers.CounterTrigger;
 import org.usfirst.frc.team486.robot.triggers.LiftTrigger;
 import org.usfirst.frc.team486.robot.triggers.LowerTrigger;
 import org.usfirst.frc.team486.robot.triggers.OpenTrigger;
 import org.usfirst.frc.team486.robot.subsystems.Camera;
 import org.usfirst.frc.team486.robot.subsystems.Claw;
+import org.usfirst.frc.team486.robot.subsystems.RPiComm;
 import org.usfirst.frc.team486.robot.subsystems.Regulator;
 import org.usfirst.frc.team486.robot.subsystems.ShooterPID;
 import org.usfirst.frc.team486.robot.subsystems.AirCompressor;
@@ -47,6 +50,7 @@ public class Robot extends IterativeRobot {
 	public static final Winch winch = new Winch();
 	public static final Regulator regulator = new Regulator(); // for letting balls into the shooter
 	public static final Claw claw = new Claw(); // for grabbing and lifting gears
+	public static final RPiComm rpi_comm = new RPiComm();
 	public static OI oi; // for controlling the robot
 
 	// ----------------------------------------------------------
@@ -56,6 +60,7 @@ public class Robot extends IterativeRobot {
 	private final CloseTrigger close_trigger = new CloseTrigger(); // for closing the claw to grab a gear
 	private final LiftTrigger lift_trigger = new LiftTrigger(); // for lifting the claw to lift a gear
 	private final LowerTrigger lower_trigger = new LowerTrigger(); // for lowering the claw to lower a gear
+	private final CounterTrigger counter_trigger = new CounterTrigger();
 	
 	// ----------------------------------------------------------
 	// AUTONOMOUS COMMAND INSTANTIATIONS
@@ -108,6 +113,9 @@ public class Robot extends IterativeRobot {
 		// GYROSCOPE CALIBRATION
 		// ------------------------------------------------------
 		Robot.drivechain.gyro_start(); // calibrating the gyroscope right as the robot starts up
+		
+		Robot.rpi_comm.init();
+		counter_trigger.whileActive(new ReadRPi());
 	}
 
 	
