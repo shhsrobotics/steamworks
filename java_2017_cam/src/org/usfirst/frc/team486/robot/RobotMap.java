@@ -7,7 +7,7 @@ package org.usfirst.frc.team486.robot;
  * floating around.
  */
 public class RobotMap {
-	
+
 	// ----------------------------------------------------------
 	// USB PORTS
 	// ----------------------------------------------------------
@@ -18,11 +18,25 @@ public class RobotMap {
 	// ----------------------------------------------------------
 	// BUTTON NUMBERS
 	// ----------------------------------------------------------
-	public static int TRACK_BUTTON = 1;
-	public static int GRAB_BUTTON = 2;
-	public static int SHOOT_OVERRIDE = 3;
-	public static int SHOOT_REG_DEBUG = 11;
-	public static int WINCH_BUTTON = 1;
+	// OPSTICK
+	public static int BALL_IN_BUTTON= 1;
+	public static int JOSTLE_BUTTON = 2;
+	public static int LOW_SPEED_BUTTON = 4;
+	public static int MID_SPEED_BUTTON = 3;
+	public static int HIGH_SPEED_BUTTON = 5;
+	public static int WINCH_BUTTON = 6;
+	// LEFTSTICK
+	public static int LEFT_LIFT_BUTTON = 3;
+	public static int LEFT_LOWER_BUTTON = 2;
+	public static int LEFT_CLOSE_BUTTON = 5;
+	public static int LEFT_OPEN_BUTTON = 4;
+	public static int SLOW_DRIVE_LEFT = 1;
+	// RIGHTSTICK
+	public static int RIGHT_LIFT_BUTTON = 3;
+	public static int RIGHT_LOWER_BUTTON = 2;
+	public static int RIGHT_CLOSE_BUTTON = 4;
+	public static int RIGHT_OPEN_BUTTON = 5;
+	public static int SLOW_DRIVE_RIGHT = 1;
 	
 	// ----------------------------------------------------------
 	// PWM PORTS
@@ -37,8 +51,12 @@ public class RobotMap {
 	// ----------------------------------------------------------
 	// DIO PORTS
 	// ----------------------------------------------------------
-	public static int ENCODER_PIN_A = 0;
-	public static int ENCODER_PIN_B = 1;
+	public static int SHOOTER_ENCODER_PIN_A = 0;
+	public static int SHOOTER_ENCODER_PIN_B = 1;
+	public static int LEFT_ENCODER_PIN_A = 2;
+	public static int LEFT_ENCODER_PIN_B = 3;
+	public static int RIGHT_ENCODER_PIN_A = 4;
+	public static int RIGHT_ENCODER_PIN_B = 5;
 	
 	// ----------------------------------------------------------
 	// RELAYS
@@ -50,15 +68,24 @@ public class RobotMap {
 	// ----------------------------------------------------------
 	public static int COMPRESSOR_PIN = 0;
 	public static int LIFT_PIN = 0;
-	public static int GRAB_PIN = 1;
+	public static int CLAW_PIN = 1;
 	public static int SHOOTER_REG_PIN = 2;
 	
 	// ----------------------------------------------------------
 	// CONTROL VALUES
 	// ----------------------------------------------------------
 	public static double OPSTICK_THRESHOLD = 0.3;
+	public static double SHOOTSPEED_1 = 50000.0;
+	public static double SHOOTSPEED_2 = 54000.0;
+	public static double SHOOTSPEED_3 = 64000.0;
+	public static double AUTO_MOVE_SPEED = 0.6;
+	public static double AUTO_MOVE_SLOW_SPEED = 0.52;
+	public static double TURN_SLOW_SPEED = 0.52;
+	public static double TURN_MED_SPEED = 0.54;
+	public static double TURN_FAST_SPEED = 0.56;
+	
 	//-----------------------------------------------------------
-	//ANALOG
+	// ANALOG
 	//-----------------------------------------------------------
 	public static int GYRO_PIN = 0;
 }

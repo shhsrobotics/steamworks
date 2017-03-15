@@ -1,53 +1,67 @@
 
 package org.usfirst.frc.team486.robot;
 
-import org.usfirst.frc.team486.robot.camera.Status;
-import org.usfirst.frc.team486.robot.commands.GearLiftCommand;
-import org.usfirst.frc.team486.robot.commands.ShooterCommand;
+import org.usfirst.frc.team486.robot.commands.LiftGear;
+import org.usfirst.frc.team486.robot.commands.groups.AutoCenter;
+import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShootBlue;
+import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShootRed;
+import org.usfirst.frc.team486.robot.commands.groups.AutoRight;
+import org.usfirst.frc.team486.robot.commands.groups.AutoLeft;
+import org.usfirst.frc.team486.robot.commands.groups.AutoLeftShootBlue;
+import org.usfirst.frc.team486.robot.commands.groups.AutoLeftShootRed;
+import org.usfirst.frc.team486.robot.commands.groups.TestCenter;
+import org.usfirst.frc.team486.robot.commands.groups.TestRight;
+import org.usfirst.frc.team486.robot.commands.groups.TestLeft;
+import org.usfirst.frc.team486.robot.commands.AutoPrintDebugStatements;
+import org.usfirst.frc.team486.robot.commands.GrabGear;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team486.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team486.robot.subsystems.GearGrabSubsystem;
-import org.usfirst.frc.team486.robot.subsystems.GearLiftSubsystem;
-import org.usfirst.frc.team486.robot.subsystems.ShooterSubsystem;
-import org.usfirst.frc.team486.robot.subsystems.WinchSubsystem;
-import org.usfirst.frc.team486.robot.triggers.OpstickBackTrigger;
-import org.usfirst.frc.team486.robot.triggers.OpstickForwardTrigger;
-import org.usfirst.frc.team486.robot.triggers.Opstick_1_3_Trigger;
-import org.usfirst.frc.team486.robot.subsystems.CameraSubsystem;
-import org.usfirst.frc.team486.robot.subsystems.CompressorSubsystem;
+import org.usfirst.frc.team486.robot.subsystems.Chassis;
+import org.usfirst.frc.team486.robot.subsystems.Winch;
+import org.usfirst.frc.team486.robot.triggers.CloseTrigger;
+import org.usfirst.frc.team486.robot.triggers.LiftTrigger;
+import org.usfirst.frc.team486.robot.triggers.LowerTrigger;
+import org.usfirst.frc.team486.robot.triggers.OpenTrigger;
+import org.usfirst.frc.team486.robot.subsystems.Camera;
+import org.usfirst.frc.team486.robot.subsystems.Claw;
+import org.usfirst.frc.team486.robot.subsystems.Regulator;
+import org.usfirst.frc.team486.robot.subsystems.ShooterPID;
+import org.usfirst.frc.team486.robot.subsystems.AirCompressor;
 
 public class Robot extends IterativeRobot {
 
-	public static final CameraSubsystem camera = new CameraSubsystem();
-	public static final DriveSubsystem drivechain = new DriveSubsystem();
-	public static final CompressorSubsystem compressor = new CompressorSubsystem();
-	public static final GearGrabSubsystem gear_grab = new GearGrabSubsystem();
-	public static final GearLiftSubsystem gear_lift = new GearLiftSubsystem();
-	public static final ShooterSubsystem shooter = new ShooterSubsystem();
-	public static final WinchSubsystem winch = new WinchSubsystem();
-	public static OI oi;
-	
-	private final OpstickBackTrigger opstickbacktrigger = new OpstickBackTrigger();
-	private final OpstickForwardTrigger opstickforwardtrigger = new OpstickForwardTrigger();
-//	private final Opstick_1_3_Trigger opstick_1_3_trigger = new Opstick_1_3_Trigger();
-	
-//	private Status current_status;
-//	private int width = Robot.camera.get_frame().get_width();
-//	private int height = Robot.camera.get_frame().get_height();
+	// ----------------------------------------------------------
+	// SUBSYSTEM INSTANTIATIONS
+	// ----------------------------------------------------------
+	public static final Camera camera = new Camera();
+	public static final Chassis drivechain = new Chassis();
+	public static final AirCompressor compressor = new AirCompressor();
+	public static final ShooterPID shooter = new ShooterPID();
+	public static final Winch winch = new Winch();
+	public static final Regulator regulator = new Regulator(); // for letting balls into the shooter
+	public static final Claw claw = new Claw(); // for grabbing and lifting gears
+	public static OI oi; // for controlling the robot
 
-	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	// ----------------------------------------------------------
+	// TRIGGER INSTANTIATIONS
+	// ----------------------------------------------------------
+	private final OpenTrigger open_trigger = new OpenTrigger(); // for opening the claw to grab a gear
+	private final CloseTrigger close_trigger = new CloseTrigger(); // for closing the claw to grab a gear
+	private final LiftTrigger lift_trigger = new LiftTrigger(); // for lifting the claw to lift a gear
+	private final LowerTrigger lower_trigger = new LowerTrigger(); // for lowering the claw to lower a gear
 	
-	//Thread visionThread;
-	Thread encoderThread;
+	// ----------------------------------------------------------
+	// AUTONOMOUS COMMAND INSTANTIATIONS
+	// ----------------------------------------------------------
+	Command autonomousCommand; // empty variable for an autonomous command
+	SendableChooser<Command> chooser = new SendableChooser<>(); // the chooser on the smart dash-board that lets the user select autonomous
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -55,90 +69,45 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		
-		shooter.reset();
-		shooter.start_encoder();
+		// ------------------------------------------------------
+		// CAMERA CODE
+		// ------------------------------------------------------
+		CameraServer.getInstance().startAutomaticCapture(); // Getting the camera feed and sending it to smart dash-board
 		
-		opstickbacktrigger.whileActive(new GearLiftCommand(true));
-		opstickforwardtrigger.whileActive(new GearLiftCommand(false));
-//		opstick_1_3_trigger.whileActive(new ShooterCommand());
-		encoderThread = new Thread(() -> {
-			double time = 0;
-			while(!Thread.interrupted()){
-				double r1 = shooter.get_raw();
-				Timer.delay(0.25);
-				double r2 = shooter.get_raw();
-				Timer.delay(0.25);
-				double rate = (r1-r2)/(0.25);
-				SmartDashboard.putNumber("shooter_rpm", rate);
-				SmartDashboard.putNumber("shooter_distance", r2);
-				time += 0.5;
-				SmartDashboard.putNumber("correction", time);
-			}
-		});
-		encoderThread.setDaemon(true);
-		encoderThread.start();
-//		visionThread = new Thread(() -> {
-//			
-//			// Get the UsbCamera from CameraServer
-//			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-//			// Set the resolution
-//			camera.setResolution(width, height);
-//
-//			// Get a CvSink. This will capture Mats from the camera
-//			CvSink cvSink = CameraServer.getInstance().getVideo();
-//			// Setup a CvSource. This will send images back to the Dashboard
-//			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", width, height);
-//
-//			// Mats are very memory expensive.
-//			Mat source = new Mat();
-//			Mat hsv = new Mat();
-//			Mat filtered = new Mat();
-//			
-//			// Define camera package classes necessary
-//			Track track = new Track();
-//			Display display = new Display();
-//			
-//			// Define variables necessary for tracking
-//			List<MatOfPoint> contours;
-//			
-//			// Define filters from filter package
-//			Green green_prep = new Green();
-//
-//			// This cannot be 'true'. The program will never exit if it is. This
-//			// lets the robot stop this thread when restarting robot code or
-//			// deploying.
-//			while (!Thread.interrupted()) {
-//				// Tell the CvSink to grab a frame from the camera and put it
-//				// in the source mat.  If there is an error notify the output.
-//				if (cvSink.grabFrame(source) == 0) {
-//					// Send the output the error.
-//					outputStream.notifyError(cvSink.getError());
-//					// skip the rest of the current iteration
-//					continue;
-//				}
-//				// Convert color data type
-//				Imgproc.cvtColor(source, hsv, Imgproc.COLOR_BGR2HSV);
-//				//filter
-//				green_prep.filter_hsv(hsv,filtered);
-//				// find contours
-//				contours = track.find_blobs(filtered);
-//				// evaluates and updates current status, but does not update camera status
-//				current_status = track.find_center(contours);
-//				// display status
-////				SmartDashboard.putNumber("center_x", current_status.get_center().x);
-////				SmartDashboard.putNumber("center_y", current_status.get_center().y);
-//				// if found, draw target center
-//				if (current_status.get_distance() != -1){
-//					display.draw_point(source, current_status.get_center(), "red");
-//				}
-//				// Give the output stream a new image to display
-//				outputStream.putFrame(source);
-//			}
-//		});
-//		visionThread.setDaemon(true);
-//		visionThread.start();
+		// ------------------------------------------------------
+		// AUTONOMOUS CHOOSER
+		// ------------------------------------------------------
+		chooser.addDefault("Just print debug statements", new AutoPrintDebugStatements(10.0)); // debug command
+		chooser.addObject("Test Mode 1", new TestCenter()); // copy of auto mode 1, but distances are lowered and the robot travels slower
+		chooser.addObject("Test Mode 2", new TestRight()); // copy of auto mode 2, but distances are lowered and the robot travels slower
+		chooser.addObject("Test Mode 3", new TestLeft()); // copy of auto mode 3, but distances are lowered and the robot travels slower
+		chooser.addObject("Center Start", new AutoCenter()); // auto mode 1, code for a center start (relative to driver station)
+		chooser.addObject("Right Start", new AutoRight()); // auto mode 2, code for a right sided start (relative to driver station)
+		chooser.addObject("Left Start", new AutoLeft()); // auto mode 3, code for a left sided start (relative to driver station)
+		chooser.addObject("Center Shoot Red", new AutoCenterShootRed());
+		chooser.addObject("Center Shoot Blue", new AutoCenterShootBlue());
+		chooser.addObject("Left Shoot Red", new AutoLeftShootRed());
+		chooser.addObject("Left Shoot Blue", new AutoLeftShootBlue());
+		SmartDashboard.putData("Auto Chooser", chooser); // putting the added auto modes onto the SmartDashboard
+		
+		// ------------------------------------------------------
+		// OI INSTANTIATION
+		// ------------------------------------------------------
+		oi = new OI(); // instantiating OI
+		
+		// ------------------------------------------------------
+		// TRIGGER ASSIGNMENTS
+		// ------------------------------------------------------
+		open_trigger.whileActive(new GrabGear(false)); // while open_trigger is triggered, open the gear grabber
+		close_trigger.whileActive(new GrabGear(true)); // while close_trigger is triggered, close the gear grabber
+		lift_trigger.whileActive(new LiftGear(true)); // while lift_trigger is triggered, lift the gear grabber
+		lower_trigger.whileActive(new LiftGear(false)); // while lower_trigger is triggered, lower the gear grabber
+		
+		// ------------------------------------------------------
+		// GYROSCOPE CALIBRATION
+		// ------------------------------------------------------
+		Robot.drivechain.gyro_start(); // calibrating the gyroscope right as the robot starts up
 	}
 
 	
@@ -169,18 +138,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		
+		// ------------------------------------------------------
+		// AUTONOMOUS INITIATION
+		// ------------------------------------------------------
+		autonomousCommand = chooser.getSelected(); // get the command to use for autonomous from the smart dash-board selection
+		if (autonomousCommand != null) // if the autonomous command is not empty (i.e. if some command was selected)
+			autonomousCommand.start(); // start autonomous command
 	}
 
 	/**
@@ -193,12 +157,11 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
+		// ------------------------------------------------------
+		// AUTONOMOUS INITIATION
+		// ------------------------------------------------------
+		if (autonomousCommand != null) // if the autonomous command is not empty (i.e. if some command was selected)
+			autonomousCommand.cancel(); // end the autonomous as teleop begins
 	}
 
 	/**

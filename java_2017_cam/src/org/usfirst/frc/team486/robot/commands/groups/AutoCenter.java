@@ -1,4 +1,4 @@
-  package org.usfirst.frc.team486.robot.commands.groups;
+package org.usfirst.frc.team486.robot.commands.groups;
 
 import org.usfirst.frc.team486.robot.RobotMap;
 import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoRight extends CommandGroup {
+public class AutoCenter extends CommandGroup {
 
-    public AutoRight() {
+    public AutoCenter() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -34,12 +34,12 @@ public class AutoRight extends CommandGroup {
     	addSequential(new GrabGear(true)); // Grab the gear
     	addSequential(new Wait(0.25)); // Wait for the previous command to complete
     	addSequential(new LiftGear(true)); // Lift the gear-grabber
-    	addSequential(new AutoDriveDistance(81.632, RobotMap.AUTO_MOVE_SPEED)); // Move toward the pin
-    	addSequential(new Turn(-60.0,RobotMap.TURN_SLOW_SPEED)); // Turn toward the pin
-    	addSequential(new AutoDriveDistance(42.0, RobotMap.AUTO_MOVE_SLOW_SPEED)); // Place the gear
-    	//addSequential(new AutoDriveDistance(2.0, 0.4));
+    	addSequential(new AutoDriveDistance(50.0, RobotMap.AUTO_MOVE_SPEED)); // Move toward the pin
+    	addSequential(new AutoDriveDistance(23.0, RobotMap.AUTO_MOVE_SLOW_SPEED)); // Slow down to place the gear
     	addSequential(new GrabGear(false)); // Release the gear
     	addSequential(new Wait(0.25)); // Wait for the previous command to complete
-    	addSequential(new AutoDriveDistance(-18.0, -1 * RobotMap.AUTO_MOVE_SPEED)); // Move away from the pin
+    	addSequential(new AutoDriveDistance(-35.0, -1 * RobotMap.AUTO_MOVE_SPEED)); // Move away from the pin
+    	addSequential(new Turn(-60.0,RobotMap.TURN_SLOW_SPEED)); // Turn towards the auto zone line
+    	addSequential(new AutoDriveDistance(83.0, RobotMap.AUTO_MOVE_SPEED)); // Move far enough to break the plane
     }
 }
