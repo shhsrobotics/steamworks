@@ -24,7 +24,7 @@ public class Turn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivechain.gyro_reset();
+    	Robot.chassis.gyro_reset();
     	DriverStation.reportWarning("Reset Gyro in Turn Command", true);
     }
 
@@ -32,31 +32,31 @@ public class Turn extends Command {
     protected void execute() {
     	if (angle < 0){
     		// Right
-    		Robot.drivechain.drive_value(this.speed, -this.speed);
+    		Robot.chassis.drive_value(this.speed, -this.speed);
     		DriverStation.reportWarning("Turning Right", true);
     	} else {
     		// Left
-    		Robot.drivechain.drive_value(-0.48, 0.48);
+    		Robot.chassis.drive_value(-this.speed, this.speed);
     		DriverStation.reportWarning("Turning Left", true);
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double offset = Math.abs(this.angle - Robot.drivechain.gyro_angle());
+    	double offset = Math.abs(this.angle - Robot.chassis.gyro_angle());
         return (offset < threshold);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivechain.drive_value(0, 0);
+    	Robot.chassis.drive_value(0, 0);
     	DriverStation.reportWarning("Done Turning", true);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.drivechain.drive_value(0, 0);
+    	Robot.chassis.drive_value(0, 0);
     	DriverStation.reportWarning("Done Turning", true);
     }
 }

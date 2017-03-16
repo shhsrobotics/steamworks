@@ -14,14 +14,14 @@ public class Teleop extends Command {
     public Teleop() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivechain);
+    	requires(Robot.chassis);
     	requires(Robot.compressor);
     	requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivechain.initdrive();
+    	Robot.chassis.initdrive();
     	Robot.compressor.on();
     	Robot.camera.light_on();
 		DriverStation.reportWarning("Starting Teleop command", true);
@@ -31,16 +31,16 @@ public class Teleop extends Command {
     protected void execute() {
     	// Drive slower if either slow button is pressed
     	if (Robot.oi.left_slow.get() || Robot.oi.right_slow.get()){
-    		Robot.drivechain.slow_drive_joystick(Robot.oi.leftstick, Robot.oi.rightstick);
+    		Robot.chassis.slow_drive_joystick(Robot.oi.leftstick, Robot.oi.rightstick);
     	} else {
-    		Robot.drivechain.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
+    		Robot.chassis.drive_joystick(Robot.oi.rightstick, Robot.oi.leftstick);
     	}
     		
-    	SmartDashboard.putNumber("LEFT_RAW", Robot.drivechain.get_left_encoder_raw());
-    	SmartDashboard.putNumber("LEFT_RATE", Robot.drivechain.get_left_encoder_rate());
-    	SmartDashboard.putNumber("RIGHT RAW", Robot.drivechain.get_right_encoder_raw());
-    	SmartDashboard.putNumber("RIGHT_RATE", Robot.drivechain.get_right_encoder_rate());
-    	SmartDashboard.putNumber("Analog gyro angle", Robot.drivechain.gyro_angle());
+    	SmartDashboard.putNumber("LEFT_RAW", Robot.chassis.get_left_encoder_raw());
+    	SmartDashboard.putNumber("LEFT_RATE", Robot.chassis.get_left_encoder_rate());
+    	SmartDashboard.putNumber("RIGHT RAW", Robot.chassis.get_right_encoder_raw());
+    	SmartDashboard.putNumber("RIGHT_RATE", Robot.chassis.get_right_encoder_rate());
+    	SmartDashboard.putNumber("Analog gyro angle", Robot.chassis.gyro_angle());
     	// Use the third axis on the operator stick as a switch for the camera light
     	if (Robot.oi.opstick.getRawAxis(2) > 0.5) {
     		Robot.camera.light_off();

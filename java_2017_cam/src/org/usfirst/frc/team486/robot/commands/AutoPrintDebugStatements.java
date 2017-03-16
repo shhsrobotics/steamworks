@@ -17,7 +17,7 @@ public class AutoPrintDebugStatements extends Command {
     public AutoPrintDebugStatements(double duration) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivechain);
+    	requires(Robot.chassis);
     	this.duration = duration;
     }
 

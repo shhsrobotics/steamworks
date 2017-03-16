@@ -6,8 +6,10 @@ public class Packet {
 	private boolean horizontal;
 	private boolean vertical;
 	private double percentage;
+	private double value;
 	
 	public Packet(double val){
+		this.value = val;
 		double offset = 0;
 		// light off, horizontal
 		if ((val > 0) && (val < 50)){
@@ -42,5 +44,25 @@ public class Packet {
 		double shifted = new_val/25.0;
 		double percentage = shifted * 100.0;
 		return percentage;
+	}
+	
+	public boolean get_light(){
+		return this.light;
+	}
+	
+	public boolean get_horizontal(){
+		return this.horizontal;
+	}
+	
+	public boolean get_vertical(){
+		return this.vertical;
+	}
+	
+	public double get_percentage(){
+		return this.percentage;
+	}
+	
+	public double get_value(){
+		return this.value;
 	}
 }
