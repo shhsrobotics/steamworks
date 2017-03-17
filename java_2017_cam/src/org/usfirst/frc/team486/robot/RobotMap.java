@@ -32,12 +32,24 @@ public class RobotMap {
 	public static int LEFT_CLOSE_BUTTON = 5;
 	public static int LEFT_OPEN_BUTTON = 4;
 	public static int SLOW_DRIVE_LEFT = 1;
+	public static int LEFT_6 = 6;
+	public static int LEFT_7 = 7;
+	public static int LEFT_8 = 8;
+	public static int LEFT_9 = 9;
+	public static int LEFT_10 = 10;
+	public static int LEFT_11 = 11;
 	// RIGHTSTICK
 	public static int RIGHT_LIFT_BUTTON = 3;
 	public static int RIGHT_LOWER_BUTTON = 2;
 	public static int RIGHT_CLOSE_BUTTON = 4;
 	public static int RIGHT_OPEN_BUTTON = 5;
 	public static int SLOW_DRIVE_RIGHT = 1;
+	public static int RIGHT_6 = 6;
+	public static int RIGHT_7 = 7;
+	public static int RIGHT_8 = 8;
+	public static int RIGHT_9 = 9;
+	public static int RIGHT_10 = 10;
+	public static int RIGHT_11 = 11;
 	
 	// ----------------------------------------------------------
 	// PWM PORTS

@@ -38,6 +38,12 @@ public class OI {
 	public JoystickButton left_lift = new JoystickButton(leftstick, RobotMap.LEFT_LIFT_BUTTON);
 	public JoystickButton left_open = new JoystickButton(leftstick, RobotMap.LEFT_OPEN_BUTTON);
 	public JoystickButton left_close = new JoystickButton(leftstick, RobotMap.LEFT_CLOSE_BUTTON);
+	public JoystickButton left_6 = new JoystickButton(leftstick, RobotMap.LEFT_6);
+	public JoystickButton left_7 = new JoystickButton(leftstick, RobotMap.LEFT_7);
+	public JoystickButton left_8 = new JoystickButton(leftstick, RobotMap.LEFT_8);
+	public JoystickButton left_9 = new JoystickButton(leftstick, RobotMap.LEFT_9);
+	public JoystickButton left_10 = new JoystickButton(leftstick, RobotMap.LEFT_10);
+	public JoystickButton left_11 = new JoystickButton(leftstick, RobotMap.LEFT_11);
 	
 	// ----------------------------------------------------------
 	// RIGHTSTICK BUTTONS
@@ -47,6 +53,12 @@ public class OI {
 	public JoystickButton right_lift = new JoystickButton(rightstick, RobotMap.RIGHT_LIFT_BUTTON);
 	public JoystickButton right_open = new JoystickButton(rightstick, RobotMap.RIGHT_OPEN_BUTTON);
 	public JoystickButton right_close = new JoystickButton(rightstick, RobotMap.RIGHT_CLOSE_BUTTON);
+	public JoystickButton right_6 = new JoystickButton(rightstick, RobotMap.RIGHT_6);
+	public JoystickButton right_7 = new JoystickButton(rightstick, RobotMap.RIGHT_7);
+	public JoystickButton right_8 = new JoystickButton(rightstick, RobotMap.RIGHT_8);
+	public JoystickButton right_9 = new JoystickButton(rightstick, RobotMap.RIGHT_9);
+	public JoystickButton right_10 = new JoystickButton(rightstick, RobotMap.RIGHT_10);
+	public JoystickButton right_11 = new JoystickButton(rightstick, RobotMap.RIGHT_11);
 
 	// ----------------------------------------------------------
 	// OI METHOD FOR BUTTON TRIGGERS

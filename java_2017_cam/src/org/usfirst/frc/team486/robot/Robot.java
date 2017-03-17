@@ -3,16 +3,15 @@ package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.LiftGear;
 import org.usfirst.frc.team486.robot.commands.groups.AutoCenter;
-import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShootBlue;
-import org.usfirst.frc.team486.robot.commands.groups.AutoCenterShootRed;
 import org.usfirst.frc.team486.robot.commands.groups.AutoRight;
+import org.usfirst.frc.team486.robot.commands.groups.AutoRightCam;
 import org.usfirst.frc.team486.robot.commands.groups.AutoLeft;
-import org.usfirst.frc.team486.robot.commands.groups.AutoLeftShootBlue;
-import org.usfirst.frc.team486.robot.commands.groups.AutoLeftShootRed;
+import org.usfirst.frc.team486.robot.commands.groups.AutoLeftCam;
 import org.usfirst.frc.team486.robot.commands.groups.TestCenter;
 import org.usfirst.frc.team486.robot.commands.groups.TestRight;
 import org.usfirst.frc.team486.robot.commands.groups.TestLeft;
 import org.usfirst.frc.team486.robot.commands.AutoPrintDebugStatements;
+import org.usfirst.frc.team486.robot.commands.DeliverGear;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -25,6 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team486.robot.subsystems.Chassis;
 import org.usfirst.frc.team486.robot.subsystems.Winch;
+import org.usfirst.frc.team486.robot.triggers.CamOverrideTrigger;
 import org.usfirst.frc.team486.robot.triggers.CloseTrigger;
 import org.usfirst.frc.team486.robot.triggers.LiftTrigger;
 import org.usfirst.frc.team486.robot.triggers.LowerTrigger;
@@ -58,6 +58,7 @@ public class Robot extends IterativeRobot {
 	private final CloseTrigger close_trigger = new CloseTrigger(); // for closing the claw to grab a gear
 	private final LiftTrigger lift_trigger = new LiftTrigger(); // for lifting the claw to lift a gear
 	private final LowerTrigger lower_trigger = new LowerTrigger(); // for lowering the claw to lower a gear
+	private final CamOverrideTrigger cam_override_trigger = new CamOverrideTrigger();
 	
 	// ----------------------------------------------------------
 	// AUTONOMOUS COMMAND INSTANTIATIONS
@@ -81,16 +82,14 @@ public class Robot extends IterativeRobot {
 		// AUTONOMOUS CHOOSER
 		// ------------------------------------------------------
 		chooser.addDefault("Just print debug statements", new AutoPrintDebugStatements(10.0)); // debug command
-		chooser.addObject("Test Mode 1", new TestCenter()); // copy of auto mode 1, but distances are lowered and the robot travels slower
-		chooser.addObject("Test Mode 2", new TestRight()); // copy of auto mode 2, but distances are lowered and the robot travels slower
-		chooser.addObject("Test Mode 3", new TestLeft()); // copy of auto mode 3, but distances are lowered and the robot travels slower
+		chooser.addObject("Center Test", new TestCenter()); // copy of auto mode 1, but distances are lowered and the robot travels slower
+		chooser.addObject("Right Test", new TestRight()); // copy of auto mode 2, but distances are lowered and the robot travels slower
+		chooser.addObject("Left Test", new TestLeft()); // copy of auto mode 3, but distances are lowered and the robot travels slower
 		chooser.addObject("Center Start", new AutoCenter()); // auto mode 1, code for a center start (relative to driver station)
 		chooser.addObject("Right Start", new AutoRight()); // auto mode 2, code for a right sided start (relative to driver station)
 		chooser.addObject("Left Start", new AutoLeft()); // auto mode 3, code for a left sided start (relative to driver station)
-		chooser.addObject("Center Shoot Red", new AutoCenterShootRed());
-		chooser.addObject("Center Shoot Blue", new AutoCenterShootBlue());
-		chooser.addObject("Left Shoot Red", new AutoLeftShootRed());
-		chooser.addObject("Left Shoot Blue", new AutoLeftShootBlue());
+		chooser.addObject("Right Start Cam", new AutoRightCam());
+		chooser.addObject("Left Start Cam", new AutoLeftCam());
 		SmartDashboard.putData("Auto Chooser", chooser); // putting the added auto modes onto the SmartDashboard
 		
 		// ------------------------------------------------------
@@ -105,6 +104,7 @@ public class Robot extends IterativeRobot {
 		close_trigger.whileActive(new GrabGear(true)); // while close_trigger is triggered, close the gear grabber
 		lift_trigger.whileActive(new LiftGear(true)); // while lift_trigger is triggered, lift the gear grabber
 		lower_trigger.whileActive(new LiftGear(false)); // while lower_trigger is triggered, lower the gear grabber
+		cam_override_trigger.whileActive(new DeliverGear(RobotMap.TURN_SLOW_SPEED));
 		
 		// ------------------------------------------------------
 		// GYROSCOPE CALIBRATION
