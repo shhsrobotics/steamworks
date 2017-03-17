@@ -2,6 +2,7 @@
 
 import org.usfirst.frc.team486.robot.RobotMap;
 import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
+import org.usfirst.frc.team486.robot.commands.CamTurn;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 import org.usfirst.frc.team486.robot.commands.LiftGear;
 import org.usfirst.frc.team486.robot.commands.Turn;
@@ -36,6 +37,7 @@ public class AutoRight extends CommandGroup {
     	addSequential(new LiftGear(true)); // Lift the gear-grabber
     	addSequential(new AutoDriveDistance(81.632, RobotMap.AUTO_MOVE_SPEED)); // Move toward the pin
     	addSequential(new Turn(-60.0,RobotMap.TURN_SLOW_SPEED)); // Turn toward the pin
+    	addSequential(new CamTurn(RobotMap.TURN_SUPER_SLOW_SPEED));
     	addSequential(new AutoDriveDistance(42.0, RobotMap.AUTO_MOVE_SLOW_SPEED)); // Place the gear
     	//addSequential(new AutoDriveDistance(2.0, 0.4));
     	addSequential(new GrabGear(false)); // Release the gear

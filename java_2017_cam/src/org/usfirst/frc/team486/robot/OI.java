@@ -1,8 +1,10 @@
 package org.usfirst.frc.team486.robot;
 
 import org.usfirst.frc.team486.robot.commands.Open;
+import org.usfirst.frc.team486.robot.commands.ReadRPi;
 import org.usfirst.frc.team486.robot.commands.groups.JostleBalls;
 import org.usfirst.frc.team486.robot.commands.AutoShootPID;
+import org.usfirst.frc.team486.robot.commands.DeliverGear;
 import org.usfirst.frc.team486.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -26,6 +28,7 @@ public class OI {
 	public JoystickButton mid_speed = new JoystickButton(opstick, RobotMap.MID_SPEED_BUTTON);
 	public JoystickButton high_speed = new JoystickButton(opstick, RobotMap.HIGH_SPEED_BUTTON);
 	public JoystickButton winch = new JoystickButton(opstick, RobotMap.WINCH_BUTTON);
+	public JoystickButton rpi_debug = new JoystickButton(opstick, RobotMap.RPi_DEBUG_BUTTON);
 	
 	// ----------------------------------------------------------
 	// LEFTSTICK BUTTONS
@@ -58,6 +61,8 @@ public class OI {
 		mid_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_2)); // Spin the shooter motors at the normal preset speed
 		high_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_3)); // Spin the shooter motors at the high preset speed
 		winch.whileActive(new Climb()); // Spin the winch to climb the rope
+		rpi_debug.whileActive(new DeliverGear(RobotMap.TURN_SLOW_SPEED));
+		//rpi_debug.whileActive(new ReadRPi());
 		// Driver stick commands done with triggers, since all are two buttons (and duplicated)
 	}
 }

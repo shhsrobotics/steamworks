@@ -29,7 +29,7 @@ import org.usfirst.frc.team486.robot.triggers.CloseTrigger;
 import org.usfirst.frc.team486.robot.triggers.LiftTrigger;
 import org.usfirst.frc.team486.robot.triggers.LowerTrigger;
 import org.usfirst.frc.team486.robot.triggers.OpenTrigger;
-import org.usfirst.frc.team486.robot.subsystems.Camera;
+import org.usfirst.frc.team486.robot.subsystems.LED;
 import org.usfirst.frc.team486.robot.subsystems.Claw;
 import org.usfirst.frc.team486.robot.subsystems.RPiComm;
 import org.usfirst.frc.team486.robot.subsystems.Regulator;
@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
 	// ----------------------------------------------------------
 	// SUBSYSTEM INSTANTIATIONS
 	// ----------------------------------------------------------
-	public static final Camera camera = new Camera();
+	public static final LED led = new LED();
 	public static final Chassis chassis = new Chassis();
 	public static final AirCompressor compressor = new AirCompressor();
 	public static final ShooterPID shooter = new ShooterPID();

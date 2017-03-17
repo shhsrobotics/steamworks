@@ -25,6 +25,7 @@ public class RobotMap {
 	public static int MID_SPEED_BUTTON = 3;
 	public static int HIGH_SPEED_BUTTON = 5;
 	public static int WINCH_BUTTON = 6;
+	public static int RPi_DEBUG_BUTTON = 7;
 	// LEFTSTICK
 	public static int LEFT_LIFT_BUTTON = 3;
 	public static int LEFT_LOWER_BUTTON = 2;
@@ -81,6 +82,7 @@ public class RobotMap {
 	public static double SHOOTSPEED_3 = 64000.0;
 	public static double AUTO_MOVE_SPEED = 0.6;
 	public static double AUTO_MOVE_SLOW_SPEED = 0.52;
+	public static double TURN_SUPER_SLOW_SPEED = 0.45;
 	public static double TURN_SLOW_SPEED = 0.52;
 	public static double TURN_MED_SPEED = 0.54;
 	public static double TURN_FAST_SPEED = 0.56;

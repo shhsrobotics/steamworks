@@ -2,6 +2,7 @@ package org.usfirst.frc.team486.robot.commands.groups;
 
 import org.usfirst.frc.team486.robot.RobotMap;
 import org.usfirst.frc.team486.robot.commands.AutoDriveDistance;
+import org.usfirst.frc.team486.robot.commands.CamTurn;
 import org.usfirst.frc.team486.robot.commands.GrabGear;
 import org.usfirst.frc.team486.robot.commands.LiftGear;
 import org.usfirst.frc.team486.robot.commands.Turn;
@@ -38,6 +39,7 @@ public class TestRight extends CommandGroup {
     	addSequential(new LiftGear(true));
     	addSequential(new AutoDriveDistance(83.632/3, 0.4)); // This is the real-world value
     	addSequential(new Turn(-60.0, RobotMap.TURN_SLOW_SPEED));
+    	addSequential(new CamTurn(RobotMap.TURN_SUPER_SLOW_SPEED));
     	addSequential(new AutoDriveDistance(33.5/3, 0.4)); // This is the real-world value
     	addSequential(new GrabGear());
     	addSequential(new Wait(0.25));

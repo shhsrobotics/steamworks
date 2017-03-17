@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Camera extends Subsystem {
+public class LED extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

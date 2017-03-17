@@ -16,14 +16,14 @@ public class Teleop extends Command {
         // eg. requires(chassis);
     	requires(Robot.chassis);
     	requires(Robot.compressor);
-    	requires(Robot.camera);
+    	requires(Robot.led);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.initdrive();
     	Robot.compressor.on();
-    	Robot.camera.light_on();
+    	Robot.led.light_on();
 		DriverStation.reportWarning("Starting Teleop command", true);
     }
 
@@ -43,9 +43,9 @@ public class Teleop extends Command {
     	SmartDashboard.putNumber("Analog gyro angle", Robot.chassis.gyro_angle());
     	// Use the third axis on the operator stick as a switch for the camera light
     	if (Robot.oi.opstick.getRawAxis(2) > 0.5) {
-    		Robot.camera.light_off();
+    		Robot.led.light_off();
     	} else {
-    		Robot.camera.light_on();
+    		Robot.led.light_on();
     	}
     	//DriverStation.reportWarning("Just put SmartDashboard values", true);
     	SmartDashboard.putNumber("SHOOTER_RATE", Robot.shooter.get_rate());
@@ -60,7 +60,7 @@ public class Teleop extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.compressor.off();
-    	Robot.camera.light_off();
+    	Robot.led.light_off();
     	DriverStation.reportWarning("Ending Teleop command", true);
     }
 
@@ -68,7 +68,6 @@ public class Teleop extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.compressor.off();
-    	Robot.camera.light_off();
     	DriverStation.reportWarning("Teleop command interrupted", true);
     }
 }
