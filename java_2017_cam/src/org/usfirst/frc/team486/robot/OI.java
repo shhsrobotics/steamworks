@@ -73,8 +73,8 @@ public class OI {
 		mid_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_2)); // Spin the shooter motors at the normal preset speed
 		high_speed.whileActive(new AutoShootPID(RobotMap.SHOOTSPEED_3)); // Spin the shooter motors at the high preset speed
 		winch.whileActive(new Climb()); // Spin the winch to climb the rope
-		rpi_debug.whileActive(new DeliverGear(RobotMap.TURN_SLOW_SPEED));
-		//rpi_debug.whileActive(new ReadRPi());
+		// rpi_debug.whileActive(new DeliverGear(RobotMap.TURN_SLOW_SPEED));
+		// rpi_debug.whileActive(new ReadRPi());
 		// Driver stick commands done with triggers, since all are two buttons (and duplicated)
 	}
 }
