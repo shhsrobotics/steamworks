@@ -16,6 +16,7 @@ public class OI {
 	public Joystick leftstick = new Joystick(RobotMap.LEFT_STICK_PORT);
 	public Joystick rightstick = new Joystick(RobotMap.RIGHT_STICK_PORT);
 	public Joystick opstick = new Joystick(RobotMap.OP_STICK_PORT);
+	public Joystick station = new Joystick(RobotMap.STATION_PORT);
 	
 	// ----------------------------------------------------------
 	// OPSTICK BUTTONS
@@ -25,7 +26,14 @@ public class OI {
 	public JoystickButton low_speed = new JoystickButton(opstick, RobotMap.LOW_SPEED_BUTTON);
 	public JoystickButton mid_speed = new JoystickButton(opstick, RobotMap.MID_SPEED_BUTTON);
 	public JoystickButton high_speed = new JoystickButton(opstick, RobotMap.HIGH_SPEED_BUTTON);
-	public JoystickButton winch = new JoystickButton(opstick, RobotMap.WINCH_BUTTON);
+	//public JoystickButton winch = new JoystickButton(opstick, RobotMap.WINCH_BUTTON);
+	
+	// ----------------------------------------------------------
+	// OPSTICK BUTTONS
+	// ----------------------------------------------------------
+	public JoystickButton top = new JoystickButton(station, RobotMap.TOP_BUTTON);
+	public JoystickButton mid = new JoystickButton(station, RobotMap.MID_BUTTON);
+	public JoystickButton winch = new JoystickButton(station, RobotMap.BOT_BUTTON);
 	
 	// ----------------------------------------------------------
 	// LEFTSTICK BUTTONS

@@ -34,12 +34,10 @@ public class AutoCenter extends CommandGroup {
     	addSequential(new GrabGear(true)); // Grab the gear
     	addSequential(new Wait(0.25)); // Wait for the previous command to complete
     	addSequential(new LiftGear(true)); // Lift the gear-grabber
-    	addSequential(new AutoDriveDistance(50.0, RobotMap.AUTO_MOVE_SPEED)); // Move toward the pin
+    	addSequential(new AutoDriveDistance(50.0, RobotMap.AUTO_MOVE_SLOW_SPEED)); // Move toward the pin
     	addSequential(new AutoDriveDistance(23.0, RobotMap.AUTO_MOVE_SLOW_SPEED)); // Slow down to place the gear
     	addSequential(new GrabGear(false)); // Release the gear
     	addSequential(new Wait(0.25)); // Wait for the previous command to complete
-    	addSequential(new AutoDriveDistance(-35.0, -1 * RobotMap.AUTO_MOVE_SPEED)); // Move away from the pin
-    	addSequential(new Turn(-60.0,RobotMap.TURN_SLOW_SPEED)); // Turn towards the auto zone line
-    	addSequential(new AutoDriveDistance(83.0, RobotMap.AUTO_MOVE_SPEED)); // Move far enough to break the plane
+    	addSequential(new AutoDriveDistance(-5.0, -1 * RobotMap.AUTO_MOVE_SPEED)); // Move away from the pin
     }
 }

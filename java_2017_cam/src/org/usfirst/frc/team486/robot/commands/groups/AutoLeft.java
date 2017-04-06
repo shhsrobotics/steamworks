@@ -35,11 +35,11 @@ public class AutoLeft extends CommandGroup {
     	addSequential(new GrabGear(true)); // Grab the gear
     	addSequential(new Wait(0.25));// Wait for the previous command to complete
     	addSequential(new LiftGear(true)); // Lift the gear-grabber
-    	addSequential(new AutoDriveDistance(95.0, RobotMap.AUTO_MOVE_SPEED)); // Move toward the pin
+    	addSequential(new AutoDriveDistance(92.1, RobotMap.AUTO_MOVE_SLOW_SPEED)); // Move toward the pin
     	addSequential(new Turn(60.0,RobotMap.TURN_SLOW_SPEED)); // Turn toward the pin
-    	addSequential(new AutoDriveDistance(10.0, RobotMap.AUTO_MOVE_SLOW_SPEED)); // Place the gear
+    	addSequential(new AutoDriveDistance(15.0, RobotMap.AUTO_MOVE_SLOW_SPEED)); // Place the gear
     	addSequential(new GrabGear(false)); // Release the gear
     	addSequential(new Wait(0.25));// Wait for the previous command to complete
-    	addSequential(new AutoDriveDistance(-10.0, -1 * RobotMap.AUTO_MOVE_SPEED)); // Move away from the pin
+    	addSequential(new AutoDriveDistance(-15.0, -1 * RobotMap.AUTO_MOVE_SPEED)); // Move away from the pin
     }
 }

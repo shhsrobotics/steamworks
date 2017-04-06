@@ -14,6 +14,9 @@ public class RobotMap {
 	public static int LEFT_STICK_PORT = 0;
 	public static int RIGHT_STICK_PORT = 1;
 	public static int OP_STICK_PORT = 2;
+	public static int STATION_PORT = 3;
+	
+	// NOTES BUTTONS 3,5,6 top is 6 mid is 5 bot is 3 for the new joystick
 	
 	// ----------------------------------------------------------
 	// BUTTON NUMBERS
@@ -24,7 +27,11 @@ public class RobotMap {
 	public static int LOW_SPEED_BUTTON = 4;
 	public static int MID_SPEED_BUTTON = 3;
 	public static int HIGH_SPEED_BUTTON = 5;
-	public static int WINCH_BUTTON = 6;
+	//public static int WINCH_BUTTON = 6;
+	// STATION
+	public static int TOP_BUTTON = 6;
+	public static int MID_BUTTON = 5;
+	public static int BOT_BUTTON = 3;
 	// LEFTSTICK
 	public static int LEFT_LIFT_BUTTON = 3;
 	public static int LEFT_LOWER_BUTTON = 2;
