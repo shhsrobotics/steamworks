@@ -1,4 +1,4 @@
-[![IMAGE ALT TEXT HERE](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/game-and-season-info/competition-manual/2018/18-frc-logo-power-up-bc.jpg)](https://www.youtube.com/watch?v=EMiNmJW7enI)
+[![IMAGE ALT TEXT HERE](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/game-and-season-info/competition-manual/2018/18-frc-logo-power-up-bc.jpg)]
 
 # **steamworks**
 486's 2017 code
