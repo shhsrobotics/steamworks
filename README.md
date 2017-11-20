@@ -3,7 +3,7 @@
 # **steamworks**
 486's 2017 code
 
-##Authors:
+## Authors:
 
 #### Daniel Rostovtsev
 <img src="https://avatars0.githubusercontent.com/u/5702902?v=3&s=460"
